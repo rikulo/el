@@ -34,5 +34,7 @@ If you are new to Git or GitHub, please read [this guide](https://help.github.co
 ##Development Notes
 
 ###Directories
-el/src -- API interfaces
-el/impl/src -- API implementations
+
+`el/src` -- API interfaces
+
+`el/impl/src` -- API implementations
