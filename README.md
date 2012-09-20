@@ -12,12 +12,12 @@ Rikulo-el is distributed under the Apache 2.0 License.
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
 #History
-1. Sep. 20, 2012: alpha version
-	1.1. Porting EL 2.2 from Java implementation of Tomcat 7 to Dart language(in brutal way :-)).
-	1.2. Some Java specific functions are removed(e.g. There is no BigDecimal in Dart; thus not in Rikulo-el, either).
-	1.3. It uses Dart Mirror a lot.
-	1.4. EL parser seems work great.
-	1.5. This is based on the Java EL 2.2 specifications; there must be rooms for extra features in Dart(e.g. named optional arguments for function).
+* Sep. 20, 2012: alpha version
+ * Porting EL 2.2 from Java implementation of Tomcat 7 to Dart language(in brutal way :-)).
+ * Some Java specific functions are removed(e.g. There is no BigDecimal in Dart; thus not in Rikulo-el, either).
+	* It uses Dart Mirror a lot.
+	* EL parser seems work great.
+	* There must be rooms for extra features in Dart specifically(e.g. named optional arguments for function).
 
 ##Notes to Contributors
 
@@ -33,6 +33,6 @@ If you are new to Git or GitHub, please read [this guide](https://help.github.co
 
 ##Development Notes
 
-###Directorys
+###Directories
 el/src -- API interfaces
 el/impl/src -- API implementations
