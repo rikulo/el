@@ -18,8 +18,8 @@
 //History: Wed, Sep 26, 2012  09:58:41 AM
 // Author: hernichen
 #import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
-#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
 #import("dart:mirrors");
 
 final String a = "1.1";

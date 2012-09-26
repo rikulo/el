@@ -1,5 +1,6 @@
 debug
 codegen
+packages
 *.local
 *.class
 docs

@@ -1,0 +1,10 @@
+name: rikulo_el
+version: 0.5.0
+description: > 
+  Rikulo EL is an implementation of the Unified Expression Language specification in Dart. While the EL specification is originally designed for Java language, it serves as a powerful tool to embed expressions into web pages; thus we port it to Dart.
+authors:
+- Henri Chen <henrichen@rikulo.org>
+homepage: http://www.rikulo.org
+dependencies:
+  unittest:
+    sdk: unittest
