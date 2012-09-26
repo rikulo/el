@@ -32,12 +32,12 @@ class AstAnd extends BooleanNode {
     //@Override
     Object getValue(EvaluationContext ctx) {
         Object obj = children_[0].getValue(ctx);
-        bool b = coerceToBoolean(obj);
+        bool b = ELSupport.coerceToBoolean(obj);
         if (!b) {
             return b;
         }
         obj = children_[1].getValue(ctx);
-        b = coerceToBoolean(obj);
+        b = ELSupport.coerceToBoolean(obj);
         return b;
     }
 }

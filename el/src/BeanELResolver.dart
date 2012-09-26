@@ -218,20 +218,20 @@ class BeanProperty {
     MethodMirror _getWriteMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
         MethodMirror m = clz.setters[propertyName];
-        while(clz != null && (m == null || m.isPrivate)) {
+        while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
             m = clz.setters[propertyName];
         }
-        return m;
+        return m == null || m.isPrivate ? null : m;
     }
 
     MethodMirror _getReadMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
         MethodMirror m = clz.getters[propertyName];
-        while(clz != null && (m == null || m.isPrivate)) {
+        while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
             m = clz.getters[propertyName];
         }
-        return m;
+        return m == null || m.isPrivate ? null : m;
     }
 }

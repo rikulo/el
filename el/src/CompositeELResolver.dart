@@ -26,12 +26,17 @@ class CompositeELResolver extends ELResolver {
 
     CompositeELResolver() {
         this._size = 0;
-        this._resolvers = new List();
+        this._resolvers = new List(8);
     }
 
     void add(ELResolver elResolver) {
         if (elResolver == null) {
             throw const NullPointerException();
+        }
+        if (this._size >= this._resolvers.length) {
+            List<ELResolver> nr = new List(this._size * 2);
+            Arrays.copy(this._resolvers, 0, nr, 0, this._size);
+            this._resolvers = nr;
         }
         this._resolvers[this._size++] = elResolver;
     }
@@ -41,6 +46,7 @@ class CompositeELResolver extends ELResolver {
         context.setPropertyResolved(false);
         int sz = this._size;
         Object result = null;
+
         for (int i = 0; i < sz; i++) {
             result = this._resolvers[i].getValue(context, base, property);
             if (context.isPropertyResolved()) {
@@ -108,12 +114,13 @@ class CompositeELResolver extends ELResolver {
      * @since EL 2.2
      */
     //@Override
-    Object invoke(ELContext context, Object base, Object method, List params) {
+    Object invoke(ELContext context, Object base, Object method,
+        List params, [Map<String, Object> namedArgs]) {
         context.setPropertyResolved(false);
         int sz = this._size;
         Object obj;
         for (int i = 0; i < sz; i++) {
-            obj = this._resolvers[i].invoke(context, base, method, params);
+            obj = this._resolvers[i].invoke(context, base, method, params, namedArgs);
             if (context.isPropertyResolved()) {
                 return obj;
             }

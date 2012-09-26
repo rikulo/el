@@ -86,12 +86,16 @@ class ReflectionUtil {
 
   static MethodMirror _getMethod0(ClassMirror owner, String methodName) {
     ClassMirror clz = owner;
-    MethodMirror m = clz.setters[methodName];
-    while(clz != null && (m == null || m.isPrivate)) {
+    MethodMirror m = clz.methods[methodName];
+    if (m == null)
+      m = clz.getters[methodName];
+    while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
         clz = owner.superclass;
         m = clz.methods[methodName];
+        if (m == null)
+          m = clz.getters[methodName];
     }
-    return m;
+    return m == null || m.isPrivate ? null : m;
   }
 
   /**
@@ -111,7 +115,12 @@ class ReflectionUtil {
     String methodName = (property is String) ? property
             : property.toString();
 
-    return _getMethod0(reflect(base).type, methodName);
+    MethodMirror m =_getMethod0(reflect(base).type, methodName);
+    if (m == null)
+      throw new MethodNotFoundException(
+          MessageFactory.getString("error.method.notfound", [base, property, ""]));
+
+    return m;
   }
 
   // src will always be an object
@@ -122,7 +131,7 @@ class ReflectionUtil {
     // TODO: This isn't pretty but it works. Significant refactoring would
     //       be required to avoid the exception.
     try {
-        ELSupport.coerceToType(src, target);
+      ELSupport.coerceToType(src, target);
     } on ELException catch (e) {
         return false;
     }

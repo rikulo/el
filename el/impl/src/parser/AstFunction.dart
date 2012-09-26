@@ -84,23 +84,24 @@ class AstFunction extends SimpleNode {
                     [this.getOutputName()]));
         }
 
-        List<ClassMirror> paramTypes = ClassUtil.getParameterTypes(m);
-        List<Object> params = null;
-        Object result = null;
+        List values = null;
         int numParams = this.jjtGetNumChildren(); //TODO(henri): namedArgs not supported yet
         if (numParams > 0) {
-            params = new List(numParams);
+            values = new List(numParams);
             try {
                 for (int i = 0; i < numParams; i++) {
-                    params[i] = this.children_[i].getValue(ctx);
-                    params[i] = coerceToType(params[i], paramTypes[i]);
+                    values[i] = this.children_[i].getValue(ctx);
                 }
             } on ELException catch (ele) {
                 throw new ELException(MessageFactory.getString("error.function", [this
                         .getOutputName()]), ele);
             }
+        } else {
+          values = new List(0);
         }
-        result = ClassUtil.apply(fn, params);
+        List params = ELSupport.convertArgs(values, m, this);
+
+        Object result = ClassUtil.apply(fn, params);
 //        try {
 //            result = m.invoke(null, params);
 //        } on IllegalAccessException catch (iae) {

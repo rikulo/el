@@ -34,7 +34,8 @@ class MapELResolver extends ELResolver {
 
         if (base is Map) {
             context.setPropertyResolved(true);
-            return base[property];
+            //henrichen@rikulo.org: handle special suffix "length"
+            return "length" == property ? base.length : base[property];
         }
 
         return null;
@@ -99,5 +100,12 @@ class MapELResolver extends ELResolver {
         }
         return null;
     }
+
+    /**
+     * @since EL 2.2
+     */
+    //@Override
+    Object invoke(ELContext context, Object base, Object method,
+                  List params, [Map<String, Object> namedArgs]) => null;
 
 }

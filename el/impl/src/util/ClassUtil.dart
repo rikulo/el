@@ -37,10 +37,15 @@ class ClassUtil {
 
   /** Returns whether a source ClassMirror is assignable to target ClassMirror */
   static bool isAssignableFrom(ClassMirror tgt, ClassMirror src) {
-    if (src == null)
-      return null;
-
     if (tgt.qualifiedName == src.qualifiedName)
+      return true;
+
+    if (isObjectClass(src)) //no more super class
+      return false;
+
+    //PATCH(henri): reflect(new List()).qualifiedName is "dart:coreimpl.List"
+    if ("dart:coreimpl" == src.owner.qualifiedName &&
+        tgt.qualifiedName == "dart:core.${src.simpleName}")
       return true;
 
     for (ClassMirror inf in src.superinterfaces)
@@ -80,24 +85,33 @@ class ClassUtil {
 
   static Map _splitQualifiedName(String qname) {
     int j = qname.lastIndexOf(".");
-    return j < 1 || j >= (qname.length - 1) ? null :
+    return j < 1 || j >= (qname.length - 1) ?
+      {"libName" : null, "clsName" : qname} :
       {"libName" : qname.substring(0, j), "clsName" : qname.substring(j+1)};
   }
 
-  static List<ClassMirror> getParameterTypes(MethodMirror m) {
-    List<ParameterMirror> params = m.parameters;
+  static List<ClassMirror> getParameterTypes(List<ParameterMirror> params) {
     List<ClassMirror> types = new List();
     for (ParameterMirror param in params) {
-      if (param.isNamed) { //TODO(henri) : we have not supported named parameter
-        continue;
-      }
+//TODO(henri) : we have not supported named parameter
+//      if (param.isNamed) {
+//        continue;
+//      }
       types.add(getCorrespondingClassMirror(param.type));
     }
     return types;
   }
 
   static Object invoke(Object inst, MethodMirror m, List<Object> params, [Map<String, Object> namedArgs]) {
-    Future<InstanceMirror> result = reflect(inst).invoke(m.simpleName, params, namedArgs);
+    Future<InstanceMirror> result;
+    if (m.isGetter)
+      result = reflect(inst).getField(m.simpleName);
+    else {
+      params = _convertParams(params);
+      namedArgs = _convertNamedArgs(namedArgs);
+
+      result = reflect(inst).invoke(m.simpleName, params, namedArgs);
+    }
     while(!result.isComplete) //wait until complete
       ;
     return result.value.reflectee;
@@ -136,4 +150,7 @@ class ClassUtil {
       return v;
     return reflect(v);
   }
+
+  static bool isObjectClass(ClassMirror clz)
+    => "dart:core.Object" == clz.qualifiedName;
 }

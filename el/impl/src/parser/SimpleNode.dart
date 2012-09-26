@@ -24,7 +24,7 @@
  * @author Jacob Hookom [jacob@hookom.net]
  * @version $Id: SimpleNode.java 1060907 2011-01-19 19:08:36Z markt $
  */
-abstract class SimpleNode extends ELSupport implements Node {
+abstract class SimpleNode implements Node {
     Node parent_;
 
     List<Node> children_;

@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,7 +24,7 @@
  *
  */
 abstract class ELResolver {
-    
+
     static String message(ELContext context, String name, List props) {
         String locale = context.getLocale();
         if (locale == null) {
@@ -39,21 +39,22 @@ abstract class ELResolver {
     }
 
     static final String RESOLVABLE_AT_DESIGN_TIME = "resolvableAtDesignTime";
-    
+
     static final String TYPE = "type";
-    
+
     abstract Object getValue(ELContext context, Object base, Object property);
-    
+
     abstract ClassMirror getType(ELContext context, Object base, Object property);
-    
+
     abstract void setValue(ELContext context, Object base, Object property, Object value);
 
     abstract bool isReadOnly(ELContext context, Object base, Object property);
-        
+
     abstract ClassMirror getCommonPropertyType(ELContext context, Object base);
-    
+
     /**
      * @since EL 2.2
      */
-    abstract Object invoke(ELContext context, Object base, Object method, List params);
+    abstract Object invoke(ELContext context, Object base, Object method,
+                           List params, [Map<String, Object> namedArgs]);
 }

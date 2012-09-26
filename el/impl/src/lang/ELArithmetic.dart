@@ -321,11 +321,10 @@ class DoubleDelegate extends ELArithmetic {
 
   //@Override
   bool matches_(Object obj0, Object obj1) {
-    return (obj0 is double
+    return obj0 is double
         || obj1 is double
-        || (obj0 is String && ELSupport
-            .isStringFloat(obj0)) || (obj1 is String && ELSupport
-        .isStringFloat(obj1)));
+        || (obj0 is String && ELSupport.isStringFloat(obj0))
+        || (obj1 is String && ELSupport.isStringFloat(obj1));
   }
 }
 

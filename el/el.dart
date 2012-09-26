@@ -24,7 +24,7 @@
 #source("src/Expression.dart");
 #source("src/ExpressionFactory.dart");
 #source("src/FunctionMapper.dart");
-#source("src/ListELResolver.dart");
+//#source("src/ListELResolver.dart"); //duplicate with ArrayELResolver in dart
 #source("src/LocalStrings.dart");
 #source("src/MapELResolver.dart");
 #source("src/MethodExpression.dart");

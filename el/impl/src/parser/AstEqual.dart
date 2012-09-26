@@ -33,6 +33,6 @@ class AstEqual extends BooleanNode {
     Object getValue(EvaluationContext ctx) {
         Object obj0 = this.children_[0].getValue(ctx);
         Object obj1 = this.children_[1].getValue(ctx);
-        return areEqual(obj0, obj1);
+        return ELSupport.areEqual(obj0, obj1);
     }
 }

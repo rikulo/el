@@ -46,7 +46,7 @@ class AstNegative extends SimpleNode {
 //            return obj.negate();
 //        }
         if (obj is String) {
-            if (isStringFloat(obj)) {
+            if (ELSupport.isStringFloat(obj)) {
                 return -double.parse(obj);
             }
             return -int.parse(obj);
@@ -57,7 +57,7 @@ class AstNegative extends SimpleNode {
         if (obj is int) {
             return -obj.toInt();
         }
-        int num0 = coerceToNumber(obj, ClassUtil.INT_MIRROR);
+        int num0 = ELSupport.coerceToNumber(obj, ClassUtil.INT_MIRROR);
         return -num0.toInt();
     }
 }

@@ -14,6 +14,9 @@
 #source("src/ValueExpressionImpl.dart");
 #source("src/ValueExpressionLiteral.dart");
 
+#source("src/ELContextImpl.dart");
+#source("src/ELContextWrapper.dart");
+
 //lang
 #source("src/lang/ELArithmetic.dart");
 #source("src/lang/ELSupport.dart");
@@ -83,3 +86,5 @@
 #source("src/parser/SimpleNode.dart");
 #source("src/parser/Token.dart");
 #source("src/parser/TokenMgrError.dart");
+
+#source("src/parser/ParameterInfo.dart");

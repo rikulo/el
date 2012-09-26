@@ -26,9 +26,6 @@
  * @version $Id: ELSupport.java 1244574 2012-02-15 16:30:37Z markt $
  */
 class ELSupport {
-
-    static final int _ZERO = 0;
-
     /**
      * Compare two objects, after coercing to the same type if appropriate.
      *
@@ -234,7 +231,7 @@ class ELSupport {
     static num coerceToNumber(Object obj,
             ClassMirror type) {
         if (obj == null || "" == obj) {
-            return coerceNumberToNumber_(_ZERO, type);
+            return coerceNumberToNumber_(0, type);
         }
         if (obj is String) {
             return coerceStringToNumber_(obj, type);
@@ -347,5 +344,48 @@ class ELSupport {
             }
         }
         return false;
+    }
+
+    static List<Object> convertArgs(List<Object> src, MethodMirror m, Node node) {
+      List<ParameterMirror> params = m.parameters;
+      int paramCount = params.length;
+      if (paramCount == 0) {
+        return new List(0);
+      }
+
+      ParameterInfo pinfo = new ParameterInfo(params);
+      int sCount = src == null ? 0 : src.length;
+      int pCount = pinfo.positionals.length;
+      int oCount = pinfo.optionals.length;
+      if (pCount > sCount || sCount > (pCount + oCount)) { //incorrect argument count
+        throw new ELException(MessageFactory.getString("error.method.arguments",
+                                                       [pCount, oCount, sCount, node.getImage()]));
+      }
+
+      List<ClassMirror> ptypes = ClassUtil.getParameterTypes(pinfo.positionals);
+      List<ClassMirror> otypes = ClassUtil.getParameterTypes(pinfo.optionals);
+
+      List<Object> dest = new List(pCount + oCount);
+
+      //positional arguments
+      int desti = 0;
+      for (int i = 0; i < pCount; i++, desti++) {
+        dest[desti] = coerceToType(src[desti], ptypes[i]);
+      }
+
+      //optional arguments
+      int oi = 0;
+      for (; oi < oCount && desti < sCount; oi++, desti++) {
+        dest[desti] = coerceToType(src[desti], otypes[oi]);
+      }
+
+//TODO(henri): dartbug.org, defaultValue is not supported yet in mirror
+      //default value for arguments
+//      for (; oi < oCount; oi++, desti++) {
+//        ParameterMirror pm = pinfo.optionals[oi];
+//        dest[desti] = coerceToType(pm.defaultValue, otypes[oi]);
+//      }
+
+      return dest;
     }
 }

@@ -40,6 +40,6 @@ class AstGreaterThanEqual extends BooleanNode {
         if (obj0 == null || obj1 == null) {
             return false;
         }
-        return (compare(obj0, obj1) >= 0);
+        return (ELSupport.compare(obj0, obj1) >= 0);
     }
 }

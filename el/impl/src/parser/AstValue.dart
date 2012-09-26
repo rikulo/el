@@ -59,37 +59,52 @@ class AstValue extends SimpleNode {
         Object property = null;
         int propCount = this.jjtGetNumChildren();
 
-        if (propCount > 2 &&
-            this.jjtGetChild(propCount - 1) is AstMethodParameters) {
-            // MethodMirror call with paramaters.
-            propCount-=2;
-        } else {
-            propCount--;
-        }
         int i = 1;
-
-        // evaluate any properties before our target
+        // evaluate any properties or methods before our target
         ELResolver resolver = ctx.getELResolver();
-        if (propCount > 1) {
-            while (base != null && i < propCount) {
+        while (i < propCount) {
+            if (i + 2 < propCount &&
+                    this.children_[i + 1] is AstMethodParameters) {
+                // Method call not at end of expression
+              //TODO(henri): namedArgs is not supported yet
+                Map<String, Object> namedArgs = null;
+                base = resolver.invoke(ctx, base,
+                        this.children_[i].getValue(ctx),
+                        (this.children_[i + 1] as AstMethodParameters).getParameters(ctx), namedArgs);
+                i += 2;
+            } else if (i + 2 == propCount &&
+                    this.children_[i + 1] is AstMethodParameters) {
+                // Method call at end of expression
+                ctx.setPropertyResolved(false);
+                property = this.children_[i].getValue(ctx);
+                i += 2;
+
+                if (property == null) {
+                    throw new PropertyNotFoundException(MessageFactory.getString(
+                            "error.unreachable.property", [property]));
+                }
+            } else if (i + 1 < propCount) {
+                // Object with property not at end of expression
                 property = this.children_[i].getValue(ctx);
                 ctx.setPropertyResolved(false);
                 base = resolver.getValue(ctx, base, property);
                 i++;
+
+            } else {
+                // Object with property at end of expression
+                ctx.setPropertyResolved(false);
+                property = this.children_[i].getValue(ctx);
+                i++;
+
+                if (property == null) {
+                    throw new PropertyNotFoundException(MessageFactory.getString(
+                            "error.unreachable.property", [property]));
+                }
             }
-            // if we are in this block, we have more properties to resolve,
-            // but our base was null
-            if (base == null || property == null) {
+            if (base == null) {
                 throw new PropertyNotFoundException(MessageFactory.getString(
                         "error.unreachable.property", [property]));
             }
-        }
-
-        property = this.children_[i].getValue(ctx);
-
-        if (property == null) {
-            throw new PropertyNotFoundException(MessageFactory.getString(
-                    "error.unreachable.property", [this.children_[i]]));
         }
 
         Target_ t = new Target_();
@@ -158,7 +173,7 @@ class AstValue extends SimpleNode {
         if (COERCE_TO_ZERO == true
                 || !_isAssignable(value, targetClass)) {
             resolver.setValue(ctx, t.base_, t.property_,
-                    ELSupport.coerceToType(value, targetClass));
+                ELSupport.coerceToType(value, targetClass));
         } else {
             resolver.setValue(ctx, t.base_, t.property_, value);
         }
@@ -208,10 +223,8 @@ class AstValue extends SimpleNode {
             //types = paramTypes;
         }
         m = ReflectionUtil.getMethod(t.base_, t.property_);
-
         // Handle varArgs and any co-ercion required
-        values = _convertArgs(values, m);
-
+        values = ELSupport.convertArgs(values, m, this);
         Object result = null;
         result = ClassUtil.invoke(t.base_, m, values, namedArgs);
 //        try {
@@ -225,23 +238,6 @@ class AstValue extends SimpleNode {
 //            throw new ELException(cause);
 //        }
         return result;
-    }
-
-    List<Object> _convertArgs(List<Object> src, MethodMirror m) {
-        List<ClassMirror> types = ClassUtil.getParameterTypes(m);
-        if (types.length == 0) {
-            return new List(0);
-        }
-
-        int paramCount = types.length;
-
-        List<Object> dest = new List(paramCount);
-
-        for (int i = 0; i < paramCount; i++) {
-            dest[i] = ELSupport.coerceToType(src[i], types[i]);
-        }
-
-        return dest;
     }
 
 //    List<ClassMirror> _getTypesFromValues(List<Object> values) {

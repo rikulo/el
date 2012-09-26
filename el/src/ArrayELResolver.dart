@@ -34,6 +34,8 @@ class ArrayELResolver extends ELResolver {
 
         if (base != null && base is List) {
             context.setPropertyResolved(true);
+            if ("length" == property) //henerichen@rikulo.org: special suffix
+              return base.length;
             int idx = _coerce(property);
             if (idx < 0 || idx >= base.length) {
                 return null;
@@ -72,7 +74,7 @@ class ArrayELResolver extends ELResolver {
 
             if (this._readOnly) {
                 throw new PropertyNotWritableException(message(context,
-                        "resolverNotWriteable", const [reflect(base).type.qualifiedName]));
+                        "resolverNotWriteable", [reflect(base).type.qualifiedName]));
             }
 
             int idx = _coerce(property);
@@ -109,9 +111,16 @@ class ArrayELResolver extends ELResolver {
         return null;
     }
 
+    /**
+     * @since EL 2.2
+     */
+    //@Override
+    Object invoke(ELContext context, Object base, Object method,
+                  List params, [Map<String, Object> namedArgs]) => null;
+
     static void _checkBounds(Object base, int idx) {
         if (idx < 0 || idx >= (base as List).length) {
-            throw new PropertyNotFoundException(const IndexOutOfRangeException(idx).toString());
+            throw new PropertyNotFoundException(new IndexOutOfRangeException(idx).toString());
         }
     }
 

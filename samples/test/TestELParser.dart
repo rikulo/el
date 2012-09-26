@@ -1,38 +1,127 @@
-//#import("../../el/el.dart");
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+//Copyright (C) 2012 Potix Corporation. All Rights Reserved.
+//History: Wed, Sep 26, 2012  09:44:11 AM
+// Author: hernichen
+#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
+#import("../../el/el.dart");
 #import("../../el/impl/impl.dart");
+#import("dart:mirrors");
 
-class ShowVisitor implements NodeVisitor {
-  StringBuffer sb = new StringBuffer();
-  void visit(Node node, int index, int level) {
-    StringBuffer space = new StringBuffer();
-    while(level-- > 0) {
-      space.add("  ");
-    }
+//@Test
+void testBug49081() {
+    // OP's report
+    _testExpression("#\${1+1}", "#2");
 
-    sb.add(space).add(node).add("\n");
-    //sb.add("(").add(node).add(")");
-  }
-  void after(Node node, int index, int level) {
-    //do nothing
-  }
-  String result() => sb.toString();
-  void clear() {sb = new StringBuffer();}
+    // Variations on a theme
+    _testExpression("#", "#");
+    _testExpression("##", "##");
+    _testExpression("###", "###");
+    _testExpression("\$", "\$");
+    _testExpression("\$\$", "\$\$");
+    _testExpression("\$\$\$", "\$\$\$");
+    _testExpression("#\$", "#\$");
+    _testExpression("#\$#", "#\$#");
+    _testExpression("\$#", "\$#");
+    _testExpression("\$#\$", "\$#\$");
+
+    _testExpression("#{1+1}", "2");
+    _testExpression("##{1+1}", "#2");
+    _testExpression("###{1+1}", "##2");
+    _testExpression("\${1+1}", "2");
+    _testExpression("\$\${1+1}", "\$2");
+    _testExpression("\$\$\${1+1}", "\$\$2");
+    _testExpression("#\${1+1}", "#2");
+    _testExpression("#\$#{1+1}", "#\$2");
+    _testExpression("\$#{1+1}", "\$2");
+    _testExpression("\$#\${1+1}", "\$#2");
 }
 
-String show(String script) {
-  Node node = ELParser.parse(script);
-  ShowVisitor visitor = new ShowVisitor();
-  node.accept(visitor, 0, 0);
-  print("\"$script\" --->");
-  print(visitor.result());
+//@Test
+void testJavaKeyWordSuffix() {
+    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ELContext context = new ELContextImpl();
+
+    TesterBeanA beanA = new TesterBeanA();
+    beanA.setInt("five");
+    ValueExpression var0 =
+        elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type);
+    context.getVariableMapper().setVariable("beanA", var0);
+
+    // Should fail
+    Exception e = null;
+    try {
+        elfactory.createValueExpression(context, "\${beanA.int}",
+                ClassUtil.STRING_MIRROR);
+    } on ELException catch (ele) {
+        e = ele;
+    }
+    expect(e, isNotNull);
+}
+
+//@Test
+void testJavaKeyWordIdentifier() {
+    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ELContext context = new ELContextImpl();
+
+    TesterBeanA beanA = new TesterBeanA();
+    beanA.setInt("five");
+    ValueExpression var0 =
+        elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type);
+    context.getVariableMapper().setVariable("this", var0);
+
+    // Should fail
+    Exception e = null;
+    try {
+        elfactory.createValueExpression(context, "\${this}", ClassUtil.STRING_MIRROR);
+    } on ELException catch (ele) {
+        e = ele;
+    }
+    expect(e, isNotNull);
+}
+
+
+void _testExpression(String expression, String expected) {
+    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ELContext context = new ELContextImpl();
+
+    ValueExpression ve = elfactory.createValueExpression(
+            context, expression, ClassUtil.STRING_MIRROR);
+
+    String result = ve.getValue(context);
+    expect(result, equals(expected));
+}
+
+//---------------------
+class TesterBeanA {
+    String _keywordInt;
+
+    String getInt() {
+        return _keywordInt;
+    }
+
+    void setInt(String keywordInt) {
+        this._keywordInt = keywordInt;
+    }
 }
 
 void main() {
-  show("a + b - c * d / e");
-  show("xyz #{a + b - c * d / e} #{i0} j k");
-  show("ijk  \${a + b - c * d / e} x + y - z 123");
-  show("#{empty x0 ? a + b : c * d / e}");
-  show("你好, 謝謝! #{empty x0 ? a + b : c * d / e mod f}");
-  show("#{x0 and y0 or z0 <= 1 ? a + b : c * d / e mod f}");
-  show("#{x0 ? a.b(p1, p2, p3) : x(v1, 2, v3)}");
+  test('testBug49081', testBug49081);
+  test('testJavaKeyWordSuffix', testJavaKeyWordSuffix);
+  test('testJavaKeyWordIdentifier', testJavaKeyWordIdentifier);
 }

@@ -147,11 +147,14 @@ class ExpressionBuilder implements NodeVisitor {
                 throw new ELException(MessageFactory.getString(
                         "error.fnMapper.method", [funcNode.getOutputName()]));
             }
-            int pcnt = ClassUtil.getParameterTypes(m).length;
-            if (node.jjtGetNumChildren() != pcnt) {
+            ParameterInfo pinfo = new ParameterInfo(m.parameters);
+            int pCount = pinfo.positionals.length; //positinal count
+            int oCount = pinfo.optionals.length; //optional count
+            int aCount = node.jjtGetNumChildren(); //given arguments
+            if (aCount < pCount || aCount > (pCount + oCount)) {
                 throw new ELException(MessageFactory.getString(
                         "error.fnMapper.paramcount", [funcNode.getOutputName(),
-                        "$pcnt", "${node.jjtGetNumChildren()}"]));
+                        "$pCount", "$oCount", "$aCount"]));
             }
         } else if (node is AstIdentifier && this._varMapper != null) {
             String variable = node.getImage();

@@ -37,7 +37,7 @@ class AstNot extends SimpleNode {
     //@Override
     Object getValue(EvaluationContext ctx) {
         Object obj = this.children_[0].getValue(ctx);
-        bool b = coerceToBoolean(obj);
+        bool b = ELSupport.coerceToBoolean(obj);
         return !b;
     }
 }

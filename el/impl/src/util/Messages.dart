@@ -42,7 +42,7 @@ class Messages extends PropertiesBundle {
       // ValidatingVisitor
       "error.fnMapper.null" : "Expression uses functions, but no FunctionMapper was provided",
       "error.fnMapper.method" : "Function ''{0}'' not found",
-      "error.fnMapper.paramcount" : "Function ''{0}'' specifies {1} params, but {2} were declared",
+      "error.fnMapper.paramcount" : "Function ''{0}'' specifies {1} positional params plus {2} optional positional params, but {3} were declared",
 
       // ExpressionImpl
       "error.context.null" : "ELContext was null",
@@ -60,7 +60,10 @@ class Messages extends PropertiesBundle {
       "error.property.notwritable" : "Property ''{1}'' doesn't have a 'set' specified on type: {0}",
 
       // Parser
-      "error.identifier.notdart" : "The identifier [{0}] is a keyword or not a valid Dart identifier."
+      "error.identifier.notdart" : "The identifier [{0}] is a keyword or not a valid Dart identifier.",
+
+      // MethodExpression
+      "error.method.arguments" : "Expect [{0}] positional arguments plus [{1}] optional positional arguments but found [{2}] in method ''{3}''."
     },
     "es" : const {
       "error.convert" : "No puedo convertir {0} desde tipo {1} a {2}",
@@ -83,15 +86,20 @@ class Messages extends PropertiesBundle {
       "error.property.notfound" : "Propiedad ''{1}'' no hallada en tipo\: {0}",
       "error.fnMapper.null" : "La expresi\u00F3n usa funciones, pero no se ha suministrado FunctionMapper",
       "error.fnMapper.method" : "Funci\u00F3n ''{0}'' no hallada",
-      "error.fnMapper.paramcount" : "La funci\u00F3n ''{0}'' especifica {1} par\u00E9metros, pero {2} fueron declarados",
+      //need translation
+      "error.fnMapper.paramcount" : "Function ''{0}'' specifies {1} positional params plus {2} optional positional params, but {3} were declared",
+
       "error.context.null" : "ELContext era nulo",
       "error.array.outofbounds" : "\u00CDndice {0} fuera de l\u00EDmites para arreglo de medida {1}",
       "error.list.outofbounds" : "\u00CDndice {0} fuera de l\u00EDmites para lista de medida {1}",
       "error.property.invocation" : "Propiedad ''{1}'' lanz\u00F3 una excepci\u00F3n desde tipo\: {0}",
       "error.property.notreadable" : "La propiedad ''{1}'' no tiene un 'get' especificado en el tipo\: {0}",
       "error.property.notwritable" : "La propiedad ''{1}'' no tiene un 'set' especificado en el tipo\: {0}",
-      "error.identifier.notdart" : "El identificador [{0}] es una palabra clave o un identificador no válido Dart."
-    }
+      "error.identifier.notdart" : "El identificador [{0}] es una palabra clave o un identificador no válido Dart.",
+
+      //need translation
+      "error.method.arguments" : "Expect [{0}] positional arguments plus [{1}] optional positional arguments but found [{2}] in method ''{3}''."
+  }
   };
 
   Messages(String locale)
