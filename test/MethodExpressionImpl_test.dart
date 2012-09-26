@@ -17,12 +17,13 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  11:53:01 AM
 // Author: hernichen
-#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
-#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
 #import("dart:mirrors");
 
-#source("TestBeans.dart");
+#import("package:unittest/unittest.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
+
+#source("TesterBeans.dart");
 
 final String _BUG53792 = "TEST_PASS";
 
@@ -32,7 +33,7 @@ TesterBeanB _beanB;
 
 //@Before
 void setUp() {
-    _elfactory = new ExpressionFactoryImpl();
+    _elfactory = ExpressionFactory.newInstance();
     _context = new ELContextImpl();
 
     TesterBeanA beanA = new TesterBeanA();
@@ -541,15 +542,15 @@ void main() {
   test('testInvokeWithSuperAAAB', testInvokeWithSuperAAAB);
   test('testInvokeWithSuperAAABB', testInvokeWithSuperAAABB);
   test('testInvokeWithSuperAAABBB', testInvokeWithSuperAAABBB);
-//  test('testInvokeWithVarArgsAB', testInvokeWithVarArgsAB);
-//  test('testInvokeWithVarArgsABB', testInvokeWithVarArgsABB);
-//  test('testInvokeWithVarArgsABBB', testInvokeWithVarArgsABBB);
-//  test('testInvokeWithVarArgsAAB', testInvokeWithVarArgsAAB);
-//  test('testInvokeWithVarArgsAABB', testInvokeWithVarArgsAABB);
-//  test('testInvokeWithVarArgsAABBB', testInvokeWithVarArgsAABBB);
-//  test('testInvokeWithVarArgsAAAB', testInvokeWithVarArgsAAAB);
-//  test('testInvokeWithVarArgsAAABB', testInvokeWithVarArgsAAABB);
-//  test('testInvokeWithVarArgsAAABBB', testInvokeWithVarArgsAAABBB);
+  //test('testInvokeWithVarArgsAB', testInvokeWithVarArgsAB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsABB', testInvokeWithVarArgsABB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsABBB', testInvokeWithVarArgsABBB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsAAB', testInvokeWithVarArgsAAB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsAABB', testInvokeWithVarArgsAABB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsAABBB', testInvokeWithVarArgsAABBB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsAAAB', testInvokeWithVarArgsAAAB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsAAABB', testInvokeWithVarArgsAAABB); //TODO(henri): not support [a1,a2,a3] expression yet
+  //test('testInvokeWithVarArgsAAABBB', testInvokeWithVarArgsAAABBB); //TODO(henri): not support [a1,a2,a3] expression yet
   test('testBug49655', testBug49655);
   test('testBugPrimitives', testBugPrimitives);
   test('testBug50449a', testBug50449a);
@@ -557,7 +558,7 @@ void main() {
   test('testBug50790a', testBug50790a);
   test('testBug50790b', testBug50790b);
   test('testBug52445a', testBug52445a);
-  //test('testBug52970', testBug52970); //enum test
+  //test('testBug52970', testBug52970); //TODO(henri): not support Enum yet
   test('testBug53792a', testBug53792a);
   test('testBug53792b', testBug53792b);
   test('testBug53792c', testBug53792c);

@@ -1,5 +1,9 @@
 //#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
+#import("dart:mirrors");
+
+#import("package:unittest/unittest.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
 
 class ShowVisitor implements NodeVisitor {
   StringBuffer sb = new StringBuffer();

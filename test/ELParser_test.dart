@@ -18,10 +18,11 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 26, 2012  09:44:11 AM
 // Author: hernichen
-#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
-#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
 #import("dart:mirrors");
+
+#import("package:unittest/unittest.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
 
 //@Test
 void testBug49081() {
@@ -54,7 +55,7 @@ void testBug49081() {
 
 //@Test
 void testJavaKeyWordSuffix() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     TesterBeanA beanA = new TesterBeanA();
@@ -76,7 +77,7 @@ void testJavaKeyWordSuffix() {
 
 //@Test
 void testJavaKeyWordIdentifier() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     TesterBeanA beanA = new TesterBeanA();
@@ -97,7 +98,7 @@ void testJavaKeyWordIdentifier() {
 
 
 void _testExpression(String expression, String expected) {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     ValueExpression ve = elfactory.createValueExpression(

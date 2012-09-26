@@ -17,16 +17,17 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Mon, Sep 03, 2012  02:51:12 PM
 // Author: hernichen
-#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
-#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
 #import("dart:mirrors");
 
-#source("TestBeans.dart");
+#import("package:unittest/unittest.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
+
+#source("TesterBeans.dart");
 
 //@Test
 void testGetValueReference() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
 
     ELContext context = new ELContextImpl();
 
@@ -53,7 +54,7 @@ void testGetValueReference() {
 
 //@Test
 void testGetValueReferenceVariable() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     TesterBeanB beanB = new TesterBeanB();
@@ -81,7 +82,7 @@ void testGetValueReferenceVariable() {
 
 //@Test
 void testBug49345() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     TesterBeanA beanA = new TesterBeanA();
@@ -134,7 +135,7 @@ void testBug49345() {
 
 //@Test
 void testBug51177ObjectMap() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     Object o1 = "String value";
@@ -161,7 +162,7 @@ void testBug51177ObjectMap() {
 
 //@Test
 void testBug51177ObjectList() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     Object o1 = "String value";
@@ -196,7 +197,7 @@ void testBug51177ObjectList() {
  */
 //@Test
 void testBug51544Bean() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     TesterBeanA beanA = new TesterBeanA();
@@ -219,7 +220,7 @@ void testBug51544Bean() {
  */
 //@Test
 void testBug51544Direct() {
-    ExpressionFactory elfactory = new ExpressionFactoryImpl();
+    ExpressionFactory elfactory = ExpressionFactory.newInstance();
     ELContext context = new ELContextImpl();
 
     List list = new List();

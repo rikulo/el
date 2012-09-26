@@ -17,10 +17,11 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 26, 2012  11:13:24 AM
 // Author: hernichen
-#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
-#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
 #import("dart:mirrors");
+
+#import("package:unittest/unittest.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
 
 //@Test
 void testEquals() {

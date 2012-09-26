@@ -1,7 +1,11 @@
-#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
-#import("../../el/el.dart");
-#import("../../el/impl/impl.dart");
+//Copyright (C) 2012 Potix Corporation. All Rights Reserved.
+//History: Tue, Sep 25, 2012  11:15:34 AM
+// Author: hernichen
 #import("dart:mirrors");
+
+#import("package:unittest/unittest.dart");
+#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/el/impl.dart");
 
 void testBug42565() {
   expect(evaluateExpression("\${false?true:false}"), equals("false"));
@@ -144,7 +148,7 @@ void testMixedTypes() {
 String evaluateExpression(String expression) {
   ELContextImpl ctx = new ELContextImpl();
   ctx.setFunctionMapper(new FMapper());
-  ExpressionFactoryImpl exprFactory = new ExpressionFactoryImpl();
+  ExpressionFactoryImpl exprFactory = ExpressionFactory.newInstance();
   ValueExpression ve = exprFactory.createValueExpression(ctx, expression,
       ClassUtil.STRING_MIRROR);
   return ve.getValue(ctx);

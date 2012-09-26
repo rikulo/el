@@ -17,10 +17,11 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 26, 2012  09:58:41 AM
 // Author: hernichen
-#import("file:///D:/Program/dart/dart-sdk/pkg/unittest/unittest.dart");
+#import("dart:mirrors");
+
+#import("package:unittest/unittest.dart");
 #import("package:rikulo_el/el.dart");
 #import("package:rikulo_el/el/impl.dart");
-#import("dart:mirrors");
 
 final String a = "1.1";
 final int b = 1000000000000000000000;

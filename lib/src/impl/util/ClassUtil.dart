@@ -153,4 +153,12 @@ class ClassUtil {
 
   static bool isObjectClass(ClassMirror clz)
     => "dart:core.Object" == clz.qualifiedName;
+
+  static Object newInstance(String className) {
+    ClassMirror clz = forName(className);
+    Future<InstanceMirror> inst = clz.newInstance("", []); //unamed constructor
+    while(!inst.isComplete)
+      ; //wait until created
+    return inst.value.reflectee;
+  }
 }

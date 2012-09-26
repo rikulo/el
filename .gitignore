@@ -1,6 +1,7 @@
 debug
 codegen
 packages
+pubspec.lock
 *.local
 *.class
 docs
