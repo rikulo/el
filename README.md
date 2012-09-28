@@ -25,8 +25,8 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	  rikulo_el:
 	  
 ##Libraries
- * `rikulo:el` -- library of Rikulo EL APIs
- * `rikulo:el/impl` -- library of Rikulo EL APIs implementations
+ * `rikulo_el:el.dart` -- library of Rikulo EL APIs
+ * `rikulo_el:impl.dart` -- library of Rikulo EL APIs implementations
 
 ##History
 * Sep. 27, 2012:
@@ -54,9 +54,3 @@ You are welcome to submit bugs and feature requests. Or even better if you can f
 If you'd like to contribute back to the core, you can [fork this repository](https://help.github.com/articles/fork-a-repo) and send us a pull request, when it is ready.
 
 If you are new to Git or GitHub, please read [this guide](https://help.github.com/) first.
-
-##Development Notes
-
-###Directories
-  * `lib/src` -- source code of Rikulo EL APIs
-  * `lib/src/impl` -- source code of Rikulo EL APIs implementations
