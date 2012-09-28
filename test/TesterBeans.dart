@@ -1,7 +1,7 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  11:50:01 AM
 // Author: hernichen
-//-----------------------------------
+
 class TesterBeanA {
     TesterBeanB bean;
     String name;

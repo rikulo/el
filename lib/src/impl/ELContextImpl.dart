@@ -1,29 +1,8 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Mon, Sep 24, 2012  12:31:05 PM
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-/**
- * Implementation of ELContext
- *
- * @author Jacob Hookom
- */
 class ELContextImpl extends ELContext {
   static final FunctionMapper _NULL_FUNCTION_MAPPER = const _NullFunctionMapper();
   static final ELResolver _DefaultResolver =
@@ -41,7 +20,8 @@ class ELContextImpl extends ELContext {
     VariableMapper _variableMapper;
 
     ELContextImpl([ELResolver resolver])
-      : this._resolver = resolver == null ? getDefaultResolver() : resolver;
+      : this._resolver = resolver == null ? getDefaultResolver() : resolver,
+        super.init();
 
     //@Override
     ELResolver getELResolver() {

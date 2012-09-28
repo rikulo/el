@@ -2,16 +2,10 @@
 //History: Fri, Aug 24, 2012  02:08:31 PM
 // Author: hernichen
 
-#library("rikulo_el");
+#library("rikulo:el");
 
 #import("dart:coreimpl");
 #import("dart:mirrors");
-
-#import("el/impl.dart");
-
-#source("src/MessageFormat.dart");
-#source("src/PropertiesBundle.dart");
-#source("src/NoSuchClassException.dart");
 
 #source("src/ArrayELResolver.dart");
 #source("src/BeanELResolver.dart");
@@ -36,3 +30,8 @@
 #source("src/ValueExpression.dart");
 #source("src/ValueReference.dart");
 #source("src/VariableMapper.dart");
+
+#source("src/MessageFormat.dart");
+#source("src/PropertiesBundle.dart");
+#source("src/NoSuchClassException.dart");
+#source("src/ClassUtil.dart");

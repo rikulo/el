@@ -1,7 +1,6 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  04:15:10 PM
 // Author: hernichen
-//Port from Tomcat 7.0.x (java -> dart)
 
 class ParameterInfo {
   List<ParameterMirror> positionals = new List();

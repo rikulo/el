@@ -1,41 +1,19 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 12, 2012  11:36:10 AM
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-/**
- *
- */
-interface ValueExpression extends Expression {
+abstract class ValueExpression extends Expression {
 
     ClassMirror getExpectedType();
-    
+
     ClassMirror getType(ELContext context);
-    
+
     bool isReadOnly(ELContext context);
-    
+
     void setValue(ELContext context, Object value);
-    
+
     Object getValue(ELContext context);
 
-    /**
-     * @since EL 2.2
-     */
     ValueReference getValueReference(ELContext context);
 }

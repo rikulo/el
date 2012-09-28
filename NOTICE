@@ -1,0 +1,15 @@
+Rikulo EL
+Copyright (C) 2012 Potix Corporation
+
+This product includes software developed by
+Potix Corporation (http://www.potix.com/).
+
+Rikulo EL is an implementation of the [Unified Expression Language]
+(http://en.wikipedia.org/wiki/Unified_Expression_Language) specification plus
+some enhancements for and in Dart language. 
+
+Rikulo EL is implemented in Dart language based on 'el' part of the Apache 
+Tomcat version 7.0.x which is implemented in Java.
+  
+el of Apache Tomcat
+Copyright 1999-2012 The Apache Software Foundation

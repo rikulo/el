@@ -20,7 +20,11 @@ class ClassUtil {
   static final ClassMirror SET_MIRROR = ClassUtil.forName("dart:core.Set");
   static final ClassMirror COLLECTION_MIRROR = ClassUtil.forName("dart:core.Collection");
 
-  /** Return the ClassMirror of the qualified class name */
+  /**
+   * Return the ClassMirror of the qualified class name
+   *
+   * + [qname] - qulified class name (libname.classname)
+   */
   static ClassMirror forName(String qname) {
     Map splited = _splitQualifiedName(qname);
     if (splited != null) {
@@ -35,7 +39,12 @@ class ClassUtil {
     throw new NoSuchClassException(qname);
   }
 
-  /** Returns whether a source ClassMirror is assignable to target ClassMirror */
+  /**
+   * Returns whether a source class is assignable to target class.
+   *
+   * + [tgt] - target class
+   * + [src] - source class
+   */
   static bool isAssignableFrom(ClassMirror tgt, ClassMirror src) {
     if (tgt.qualifiedName == src.qualifiedName)
       return true;
@@ -54,10 +63,17 @@ class ClassUtil {
     return isAssignableFrom(tgt, src.superclass); //recursive
   }
 
-  /** Returns the corresponding ClassMirror of a given TypeMirror. */
+  /** Returns the corresponding ClassMirror of a given TypeMirror.
+   */
   static ClassMirror getCorrespondingClassMirror(TypeMirror type)
     => type is ClassMirror ? type : forName(type.qualifiedName);
 
+  /**
+   * Returns whether the specified class is a simple class;
+   * i.e. num, bool, Date, String.
+   *
+   * + [cls] - the class
+   */
   static bool isSimple(ClassMirror cls) {
     String qname = cls.qualifiedName;
     return qname == "dart:core.int" ||
@@ -67,11 +83,17 @@ class ClassUtil {
            qname == "dart:core.bool";
   }
 
+  /**
+   * Returns the generic element class of the collection class.
+   */
   static ClassMirror getElementClassMirror(ClassMirror collection) {
     int idx = isAssignableFrom(MAP_MIRROR, collection) ? 1 : 0;
     return _getElementClassMirror0(collection, idx);
   }
 
+  /**
+   * Returns the generic key class of the map class.
+   */
   static ClassMirror getKeyClassMirror(ClassMirror map)
     => _getElementClassMirror0(map, 0);
 
@@ -80,8 +102,14 @@ class ClassUtil {
     return getCorrespondingClassMirror(vars[idx].upperBound);
   }
 
-  static bool isInstance(ClassMirror cls, Object val)
-    => isAssignableFrom(cls, reflect(val).type);
+  /**
+   * Returns whether the specified object is an instance of the specified class.
+   *
+   * + [cls] - the class
+   * + [obj] - the object
+   */
+  static bool isInstance(ClassMirror cls, Object obj)
+    => isAssignableFrom(cls, reflect(obj).type);
 
   static Map _splitQualifiedName(String qname) {
     int j = qname.lastIndexOf(".");
@@ -90,6 +118,9 @@ class ClassUtil {
       {"libName" : qname.substring(0, j), "clsName" : qname.substring(j+1)};
   }
 
+  /**
+   * Returns the types of the specified parameters
+   */
   static List<ClassMirror> getParameterTypes(List<ParameterMirror> params) {
     List<ClassMirror> types = new List();
     for (ParameterMirror param in params) {
@@ -102,6 +133,14 @@ class ClassUtil {
     return types;
   }
 
+  /**
+   * Invoke a method of the specified instance.
+   *
+   * + [inst] - the object
+   * + [m] - the method
+   * + [params] - the positional + optional parameters.
+   * + [nameArgs] - the optional named arguments.
+   */
   static Object invoke(Object inst, MethodMirror m, List<Object> params, [Map<String, Object> namedArgs]) {
     Future<InstanceMirror> result;
     if (m.isGetter)
@@ -117,6 +156,13 @@ class ClassUtil {
     return result.value.reflectee;
   }
 
+  /**
+   * apply a closure function.
+   *
+   * + [fn] - the closure function.
+   * + [params] - the positional + optional parameters.
+   * + [nameArgs] - the optional named arguments.
+   */
   static Object apply(Function fn, List<Object> params, [Map<String, Object> namedArgs]) {
     ClosureMirror closure = reflect(fn);
     params = _convertParams(params);
@@ -151,9 +197,15 @@ class ClassUtil {
     return reflect(v);
   }
 
+  /**
+   * Returns whether the specified class is the top Object class.
+   */
   static bool isObjectClass(ClassMirror clz)
     => "dart:core.Object" == clz.qualifiedName;
 
+  /**
+   * Create a new instance of the specified class name.
+   */
   static Object newInstance(String className) {
     ClassMirror clz = forName(className);
     Future<InstanceMirror> inst = clz.newInstance("", []); //unamed constructor

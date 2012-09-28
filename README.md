@@ -1,8 +1,11 @@
 #Rikulo EL
 
-[Rikulo EL](http://rikulo.org) is an implementation of the [Unified Expression Language](http://en.wikipedia.org/wiki/Unified_Expression_Language) specification in Dart.
-While the EL specification is originally designed for Java language, it serves as a powerful tool to embed expressions into web pages; thus we port it to Dart.
-
+[Rikulo EL](http://rikulo.org) is an implementation of the [Unified Expression
+ Language](http://en.wikipedia.org/wiki/Unified_Expression_Language) 
+ specification plus some enhancements for and in Dart. While the EL specification
+ is originally designed for Java language, it serves as a powerful tool to embed 
+ expressions into web pages.
+ 
 Rikulo EL is distributed under the Apache 2.0 License.
 
 * [Home](http://rikulo.org)
@@ -11,15 +14,28 @@ Rikulo EL is distributed under the Apache 2.0 License.
 * [Discussion](http://stackoverflow.com/questions/tagged/rikulo)
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
-##Pub Packages
-`#import("package:rikulo_el/el.dart");`
-`#import("package:rikulo_el/el/impl.dart");`
+##Pub Package
+    #import("package:rikulo_el/el.dart");
+    #import("package:rikulo_el/impl.dart");
 
-#History
+##pubspec.yaml
+    name: ...
+	...
+	dependencies:
+	  rikulo_el:
+	  
+##Libraries
+ * `rikulo:el` -- library of Rikulo EL APIs
+ * `rikulo:el/impl` -- library of Rikulo EL APIs implementations
+
+##History
+* Sep. 27, 2012:
+ * [issue1](https://github.com/rikulo/rikulo-el/issues/1) Support Dart array expression
+ * [issue2](https://github.com/rikulo/rikulo-el/issues/2) Support Dart map expression
+ * Add more testing cases.
 * Sep. 26, 2012: 
  * Fix some bugs.
  * Change file structure to match "pub" specification.
-
 * Sep. 20, 2012: alpha version
  * Porting EL 2.2 from Java implementation of Tomcat 7 to Dart language(in brutal way :-)).
  * Some Java specific functions are removed(e.g. There is no BigDecimal in Dart; thus not in Rikulo-el, either).
@@ -42,7 +58,5 @@ If you are new to Git or GitHub, please read [this guide](https://help.github.co
 ##Development Notes
 
 ###Directories
-
-`lib/src` -- API interfaces
-
-`lib/src/impl` -- API implementations
+  * `lib/src` -- source code of Rikulo EL APIs
+  * `lib/src/impl` -- source code of Rikulo EL APIs implementations

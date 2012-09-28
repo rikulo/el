@@ -1,81 +1,138 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Fri, Aug 24, 2012  02:08:31 PM
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
 /**
- *
+ * Context used in EL expression parsing and evaluation.
  */
 abstract class ELContext {
+  String _locale;
+  Map<ClassMirror, Object> _map;
+  bool _resolved;
 
-    String _locale;
+  /**
+   * Returns an associated object of the class.
+   *
+   * + [key] - the ClassMirror as a key.
+   */
+  Object getContext(ClassMirror key) {
+      if (this._map == null) {
+          return null;
+      }
+      return this._map[key];
+  }
 
-    Map<ClassMirror, Object> _map;
+  /**
+   * Put an object of the specified class.
+   *
+   * + [key] - the ClassMirror as a key.
+   * + [contextObject] - the associated object of the class.
+   */
+  void putContext(ClassMirror key, Object contextObject) {
+      if (key == null || contextObject == null) {
+          throw const NullPointerException();
+      }
 
-    bool _resolved;
+      if (this._map == null) {
+          this._map = new Map();
+      }
 
-    /**
-     *
-     */
-    ELContext() : this._resolved = false;
+      this._map[key] = contextObject;
+  }
 
-    // Can't use ClassMirror because API needs to match specification
-    Object getContext(ClassMirror key) {
-        if (this._map == null) {
-            return null;
-        }
-        return this._map[key];
-    }
+  /**
+   * Set flags to indicate whether the EL expression has been resolveed.
+   *
+   * + [resolved] - true to indicate the EL expression has been resolved.
+   */
+  void setPropertyResolved(bool resolved) {
+      this._resolved = resolved;
+  }
 
-    // Can't use ClassMirror because API needs to match specification
-    void putContext(ClassMirror key, Object contextObject) {
-        if (key == null || contextObject == null) {
-            throw const NullPointerException();
-        }
+  /**
+   * Returns whether the EL expression has been resolveed.
+   */
+  bool isPropertyResolved() {
+      return this._resolved;
+  }
 
-        if (this._map == null) {
-            this._map = new Map();
-        }
+  /**
+   * Returns the ELResolver for evaluating the EL expression.
+   */
+  ELResolver getELResolver();
 
-        this._map[key] = contextObject;
-    }
+  /**
+   * Returns the FunctionMapper that help resolving a function when evaluating
+   * the EL expression.
+   */
+  FunctionMapper getFunctionMapper();
 
-    void setPropertyResolved(bool resolved) {
-        this._resolved = resolved;
-    }
+  /**
+   * Returns the [VariableMapper] that help resolving a varaible when
+   * evaluating the EL expression.
+   */
+  VariableMapper getVariableMapper();
 
-    bool isPropertyResolved() {
-        return this._resolved;
-    }
+  /**
+   * Return the associate locale string of the ISO
+   * format (lang_COUNTRY_variant).
+   */
+  String getLocale() {
+      return this._locale;
+  }
 
-    abstract ELResolver getELResolver();
+  /**
+   * Sets the locale string of the ISO format (lang_COUNTRY_variant).
+   *
+   * + [locale] - the associated locale string when evaluating the EL
+   *              expression.
+   */
+  void setLocale(String locale) {
+      this._locale = locale;
+  }
 
-    abstract FunctionMapper getFunctionMapper();
+  /**
+   * Create a new [ELContext].
+   *
+   * By default, an instance of [ELContextImpl] will be returned.
+   * Note you can configure the static field ELContext.CREATOR
+   * to make this constructor return your own ELContext implementation.
+   *
+   *     ELContext.CREATOR =
+   *        () => new MyELContextImpl();
+   *
+   *     ...
+   *
+   *     ELContext myctx = new ELContext();
+   *
+   * ELContext.CREATOR is an [ELContextCreator] function that
+   * should return an instance of ELContext.
+   */
+  factory ELContext()
+      => CREATOR != null ? CREATOR() :
+         ClassUtil.newInstance("rikulo:el/impl.ELContextImpl");
 
-    abstract VariableMapper getVariableMapper();
+  /** Constructor to be called by subclass */
+  ELContext.init()
+      : this._resolved = false;
 
-    String getLocale() {
-        return this._locale;
-    }
-
-    /** The ISO format for lang_COUNTRY_variant */
-    void setLocale(String locale) {
-        this._locale = locale;
-    }
+  /**
+   * Function that return a new ELContext instance. You can configure
+   * this static field to make `new ELContext()` return your own
+   * ELContext implementation (System default will return an instance
+   * of [ELContextImpl]).
+   *
+   *     ELContext.CREATOR =
+   *        () => new MyELContextImpl();
+   *
+   *     ...
+   *
+   *     ELContext myctx = new ELContext();
+   *
+   */
+  static ELContextCreator CREATOR;
 }
+
+/** A function that return an ELContext */
+typedef ELContext ELContextCreator();

@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Mon, Sep 03, 2012  02:51:12 PM
 // Author: hernichen
@@ -21,15 +5,15 @@
 
 #import("package:unittest/unittest.dart");
 #import("package:rikulo_el/el.dart");
-#import("package:rikulo_el/el/impl.dart");
+#import("package:rikulo_el/impl.dart");
 
 #source("TesterBeans.dart");
 
 //@Test
 void testGetValueReference() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
+    ExpressionFactory elfactory = new ExpressionFactory();
 
-    ELContext context = new ELContextImpl();
+    ELContext context = new ELContext();
 
     TesterBeanB beanB = new TesterBeanB();
     beanB.name = "Tomcat";
@@ -54,8 +38,8 @@ void testGetValueReference() {
 
 //@Test
 void testGetValueReferenceVariable() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-    ELContext context = new ELContextImpl();
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
 
     TesterBeanB beanB = new TesterBeanB();
     beanB.name = "Tomcat";
@@ -82,8 +66,8 @@ void testGetValueReferenceVariable() {
 
 //@Test
 void testBug49345() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-    ELContext context = new ELContextImpl();
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
 
     TesterBeanA beanA = new TesterBeanA();
     TesterBeanB beanB = new TesterBeanB();
@@ -112,8 +96,8 @@ void testBug49345() {
 //@Test
 //Enum is not supported yet
 //void testBug50105() {
-//    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-//    ELContext context = new ELContextImpl();
+//    ExpressionFactory elfactory = new ExpressionFactory();
+//    ELContext context = new ELContext();
 //
 //    TesterEnum testEnum = TesterEnum.APPLE;
 //
@@ -135,8 +119,8 @@ void testBug49345() {
 
 //@Test
 void testBug51177ObjectMap() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-    ELContext context = new ELContextImpl();
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
 
     Object o1 = "String value";
     Object o2 = 32;
@@ -162,8 +146,8 @@ void testBug51177ObjectMap() {
 
 //@Test
 void testBug51177ObjectList() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-    ELContext context = new ELContextImpl();
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
 
     Object o1 = "String value";
     Object o2 = 32;
@@ -197,8 +181,8 @@ void testBug51177ObjectList() {
  */
 //@Test
 void testBug51544Bean() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-    ELContext context = new ELContextImpl();
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
 
     TesterBeanA beanA = new TesterBeanA();
     beanA.valList = new List();
@@ -220,8 +204,8 @@ void testBug51544Bean() {
  */
 //@Test
 void testBug51544Direct() {
-    ExpressionFactory elfactory = ExpressionFactory.newInstance();
-    ELContext context = new ELContextImpl();
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
 
     List list = new List();
 

@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  11:53:01 AM
 // Author: hernichen
@@ -21,7 +5,7 @@
 
 #import("package:unittest/unittest.dart");
 #import("package:rikulo_el/el.dart");
-#import("package:rikulo_el/el/impl.dart");
+#import("package:rikulo_el/impl.dart");
 
 #source("TesterBeans.dart");
 
@@ -33,8 +17,8 @@ TesterBeanB _beanB;
 
 //@Before
 void setUp() {
-    _elfactory = ExpressionFactory.newInstance();
-    _context = new ELContextImpl();
+    _elfactory = new ExpressionFactory();
+    _context = new ELContext();
 
     TesterBeanA beanA = new TesterBeanA();
     beanA.setName("A");
@@ -278,14 +262,8 @@ void testInvokeWithVarArgsAB() {
 
     MethodExpression me1 = _elfactory.createMethodExpression(_context,
             "\${beanC.sayHelloA2BBs(beanA,[_beanB,_beanB])}", null);
-    Exception e = null;
-    try {
-        me1.invoke(_context, null);
-    } on Exception catch (e1) {
-        e = e1;
-    }
-    // Expected to fail
-    expect(e, isNotNull);
+    Object r = me1.invoke(_context, null);
+    expect(r.toString(), equals("ABB[]: Hello A from B, B"));
 }
 
 //@Test
@@ -314,14 +292,8 @@ void testInvokeWithVarArgsAAB() {
 
     MethodExpression me4 = _elfactory.createMethodExpression(_context,
             "\${beanC.sayHelloA2BBs(beanAA,[_beanB,_beanB])}", null);
-    Exception e = null;
-    try {
-        me4.invoke(_context, null);
-    } on Exception catch (e1) {
-        e = e1;
-    }
-    // Expected to fail
-    expect(e, isNotNull);
+    Object r = me4.invoke(_context, null);
+    expect(r.toString(), equals('ABB[]: Hello AA from B, B'));
 }
 
 //@Test
@@ -350,14 +322,8 @@ void testInvokeWithVarArgsAAAB() {
 
     MethodExpression me7 = _elfactory.createMethodExpression(_context,
             "\${beanC.sayHelloA2BBs(beanAAA,[_beanB,_beanB])}", null);
-    Exception e = null;
-    try {
-        me7.invoke(_context, null);
-    } on Exception catch (e1) {
-        e = e1;
-    }
-    // Expected to fail
-    expect(e, isNotNull);
+    Object r = me7.invoke(_context, null);
+    expect(r.toString(), equals('ABB[]: Hello AAA from B, B'));
 }
 
 //@Test
@@ -527,40 +493,40 @@ void testBug53792c() {
 
 //--------------------
 void main() {
-  test('testIsParametersProvided', testIsParametersProvided);
-  test('testInvoke', testInvoke);
-  test('testInvokeWithSuper', testInvokeWithSuper);
-  test('testInvokeWithSuperABNoReturnTypeNoParamTypes', testInvokeWithSuperABNoReturnTypeNoParamTypes);
-  test('testInvokeWithSuperABReturnTypeNoParamTypes', testInvokeWithSuperABReturnTypeNoParamTypes);
-  test('testInvokeWithSuperABNoReturnTypeParamTypes', testInvokeWithSuperABNoReturnTypeParamTypes);
-  test('testInvokeWithSuperABReturnTypeParamTypes', testInvokeWithSuperABReturnTypeParamTypes);
-  test('testInvokeWithSuperABB', testInvokeWithSuperABB);
-  test('testInvokeWithSuperABBB', testInvokeWithSuperABBB);
-  test('testInvokeWithSuperAAB', testInvokeWithSuperAAB);
-  test('testInvokeWithSuperAABB', testInvokeWithSuperAABB);
-  test('testInvokeWithSuperAABBB', testInvokeWithSuperAABBB);
-  test('testInvokeWithSuperAAAB', testInvokeWithSuperAAAB);
-  test('testInvokeWithSuperAAABB', testInvokeWithSuperAAABB);
-  test('testInvokeWithSuperAAABBB', testInvokeWithSuperAAABBB);
-  //test('testInvokeWithVarArgsAB', testInvokeWithVarArgsAB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsABB', testInvokeWithVarArgsABB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsABBB', testInvokeWithVarArgsABBB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsAAB', testInvokeWithVarArgsAAB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsAABB', testInvokeWithVarArgsAABB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsAABBB', testInvokeWithVarArgsAABBB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsAAAB', testInvokeWithVarArgsAAAB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsAAABB', testInvokeWithVarArgsAAABB); //TODO(henri): not support [a1,a2,a3] expression yet
-  //test('testInvokeWithVarArgsAAABBB', testInvokeWithVarArgsAAABBB); //TODO(henri): not support [a1,a2,a3] expression yet
-  test('testBug49655', testBug49655);
-  test('testBugPrimitives', testBugPrimitives);
-  test('testBug50449a', testBug50449a);
-  test('testBug50449b', testBug50449b);
-  test('testBug50790a', testBug50790a);
-  test('testBug50790b', testBug50790b);
-  test('testBug52445a', testBug52445a);
-  //test('testBug52970', testBug52970); //TODO(henri): not support Enum yet
-  test('testBug53792a', testBug53792a);
-  test('testBug53792b', testBug53792b);
-  test('testBug53792c', testBug53792c);
+//  test('testIsParametersProvided', testIsParametersProvided);
+//  test('testInvoke', testInvoke);
+//  test('testInvokeWithSuper', testInvokeWithSuper);
+//  test('testInvokeWithSuperABNoReturnTypeNoParamTypes', testInvokeWithSuperABNoReturnTypeNoParamTypes);
+//  test('testInvokeWithSuperABReturnTypeNoParamTypes', testInvokeWithSuperABReturnTypeNoParamTypes);
+//  test('testInvokeWithSuperABNoReturnTypeParamTypes', testInvokeWithSuperABNoReturnTypeParamTypes);
+//  test('testInvokeWithSuperABReturnTypeParamTypes', testInvokeWithSuperABReturnTypeParamTypes);
+//  test('testInvokeWithSuperABB', testInvokeWithSuperABB);
+//  test('testInvokeWithSuperABBB', testInvokeWithSuperABBB);
+//  test('testInvokeWithSuperAAB', testInvokeWithSuperAAB);
+//  test('testInvokeWithSuperAABB', testInvokeWithSuperAABB);
+//  test('testInvokeWithSuperAABBB', testInvokeWithSuperAABBB);
+//  test('testInvokeWithSuperAAAB', testInvokeWithSuperAAAB);
+//  test('testInvokeWithSuperAAABB', testInvokeWithSuperAAABB);
+//  test('testInvokeWithSuperAAABBB', testInvokeWithSuperAAABBB);
+  test('testInvokeWithVarArgsAB', testInvokeWithVarArgsAB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsABB', testInvokeWithVarArgsABB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsABBB', testInvokeWithVarArgsABBB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsAAB', testInvokeWithVarArgsAAB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsAABB', testInvokeWithVarArgsAABB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsAABBB', testInvokeWithVarArgsAABBB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsAAAB', testInvokeWithVarArgsAAAB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsAAABB', testInvokeWithVarArgsAAABB); //TODO(henri): not support [a1,a2,a3] expression yet
+  test('testInvokeWithVarArgsAAABBB', testInvokeWithVarArgsAAABBB); //TODO(henri): not support [a1,a2,a3] expression yet
+//  test('testBug49655', testBug49655);
+//  test('testBugPrimitives', testBugPrimitives);
+//  test('testBug50449a', testBug50449a);
+//  test('testBug50449b', testBug50449b);
+//  test('testBug50790a', testBug50790a);
+//  test('testBug50790b', testBug50790b);
+//  test('testBug52445a', testBug52445a);
+//  //test('testBug52970', testBug52970); //TODO(henri): not support Enum yet
+//  test('testBug53792a', testBug53792a);
+//  test('testBug53792b', testBug53792b);
+//  test('testBug53792c', testBug53792c);
 }
 

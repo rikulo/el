@@ -1,9 +1,12 @@
-//#import("../../el/el.dart");
+//Copyright (C) 2012 Potix Corporation. All Rights Reserved.
+//History: Wed, Sep 26, 2012  09:44:11 AM
+// Author: hernichen
+
 #import("dart:mirrors");
 
 #import("package:unittest/unittest.dart");
 #import("package:rikulo_el/el.dart");
-#import("package:rikulo_el/el/impl.dart");
+#import("package:rikulo_el/impl.dart");
 
 class ShowVisitor implements NodeVisitor {
   StringBuffer sb = new StringBuffer();
@@ -39,4 +42,22 @@ void main() {
   show("你好, 謝謝! #{empty x0 ? a + b : c * d / e mod f}");
   show("#{x0 and y0 or z0 <= 1 ? a + b : c * d / e mod f}");
   show("#{x0 ? a.b(p1, p2, p3) : x(v1, 2, v3)}");
+
+  //ARRAY
+  show("#{[]}");
+  show("#{[a]}");
+  show("#{f([a,b,c])}");
+  show("#{[a,[b,c]]}");
+  show("#{[[a,b],c]}");
+  show("#{[[a,b,c]]}");
+  show("#{a.b.c([x,y])}");
+
+  //MAP
+  show("#{{}}");
+  show("#{{k1:v1}}");
+  show("#{f({k1:v1,k2:v2,k3:v3})}");
+  show("#{{k1:v1,x:{k2:v2,k3:v3}}}");
+  show("#{{x:{k1:v1,k2:v2},k3:v3}}");
+  show("#{a.b.c(x, y, {k1:v1,k2:v2})}");
+
 }

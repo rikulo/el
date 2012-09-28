@@ -5,7 +5,7 @@
 
 #import("package:unittest/unittest.dart");
 #import("package:rikulo_el/el.dart");
-#import("package:rikulo_el/el/impl.dart");
+#import("package:rikulo_el/impl.dart");
 
 void testBug42565() {
   expect(evaluateExpression("\${false?true:false}"), equals("false"));
@@ -146,9 +146,9 @@ void testMixedTypes() {
 
 //----------------
 String evaluateExpression(String expression) {
-  ELContextImpl ctx = new ELContextImpl();
+  ELContextImpl ctx = new ELContext();
   ctx.setFunctionMapper(new FMapper());
-  ExpressionFactoryImpl exprFactory = ExpressionFactory.newInstance();
+  ExpressionFactoryImpl exprFactory = new ExpressionFactory();
   ValueExpression ve = exprFactory.createValueExpression(ctx, expression,
       ClassUtil.STRING_MIRROR);
   return ve.getValue(ctx);

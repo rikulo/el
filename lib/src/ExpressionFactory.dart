@@ -1,56 +1,91 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 12, 2012  11:10:10 AM
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
 /**
- *
- * @since 2.1
+ * ExpressionFactory to create proper [ValueExpression] and [MethodExpression].
  */
-class ExpressionFactory {
-    Object coerceToType(Object obj, ClassMirror expectedType);
+abstract class ExpressionFactory {
+  /**
+   * Used to coerce a specified object to the specified expected type.
+   *
+   * + [obj] - the object
+   * + [expectedType] - ClassMirror of a specified class
+   */
+  Object coerceToType(Object obj, ClassMirror expectedType);
 
-    ValueExpression createValueExpression(ELContext context,
-            String expression, ClassMirror expectedType);
+  /**
+   * Create a [ValueExpression] of the specified EL script.
+   *
+   * + [context] - the ELContext used when create and parse the
+   *               [ValueExpression].
+   * + [expression] - the EL expression script to be parsed.
+   * + [expectedType] - the expected type when eval the created
+   *                    [ValueExpression].
+   */
+  ValueExpression createValueExpression(ELContext context,
+          String expression, ClassMirror expectedType);
 
-    ValueExpression createValueExpressionByInstance(Object instance,
-            ClassMirror expectedType);
+  /**
+   * Create a [ValueExpression] of the specified object instance.
+   *
+   * + [instance] - the instance object to be wrapped as a [ValueExpression].
+   * + [expectedType] - the expected type when eval the created
+   *                    [ValueExpression].
+   */
+  ValueExpression createValueExpressionByInstance(Object instance,
+          ClassMirror expectedType);
 
-    MethodExpression createMethodExpression(ELContext context,
-            String expression, ClassMirror expectedReturnType);
+  /**
+   * Create a [MethodExpression] of the specified EL script.
+   *
+   * + [context] - the ELContext used when create and parse the
+   *               [MethodExpression].
+   * + [expression] - the EL expression script to be parsed.
+   * + [expectedType] - the expected return type when eval the created
+   *                    [MethodExpression].
+   */
+  MethodExpression createMethodExpression(ELContext context,
+          String expression, ClassMirror expectedReturnType);
 
-    /**
-     * Create a new {@link ExpressionFactory}. The class to use is determined by
-     * the following search order:
-     * <ol>
-     * <li>services API (META-INF/services/javax.el.ExpressionFactory)</li>
-     * <li>$JRE_HOME/lib/el.properties - key javax.el.ExpressionFactory</li>
-     * <li>javax.el.ExpressionFactory</li>
-     * <li>Platform default implementation -
-     *     org.apache.el.ExpressionFactoryImpl</li>
-     * </ol>
-     * @return the new ExpressionFactory
-     */
-    static ExpressionFactory newInstance([String className])
-        => className != null ?
-           ClassUtil.newInstance(className) :
-           ClassUtil.newInstance(EXPRESSION_FACTORY_CLASS);
+  /**
+   * Create a new [ExpressionFactory].
+   *
+   * By default an instance of [ExpressionFactoryImpl] will be returned.
+   * Note you can configure the static field ExpressionFactory.CREATOR
+   * to make this constructor return your own ExpressionFactory implementation.
+   *
+   *     ExpressionFactory.CREATOR =
+   *        () => new MyExpressionFactoryImpl();
+   *
+   *     ...
+   *
+   *     ExpressionFactory myef = new ExpressionFactory();
+   *
+   * ExpressionFactory.CREATOR is an [ExpressionFactoryCreator] function that
+   * should return an instance of ExpressionFactory.
+   */
+  factory ExpressionFactory()
+      => CREATOR != null ? CREATOR() :
+         ClassUtil.newInstance("rikulo:el/impl.ExpressionFactoryImpl");
 
-    static String EXPRESSION_FACTORY_CLASS = "rikulo_el/impl.ExpressionFactoryImpl";
+  /**
+   * Function that return a new ExpressionFactory instance. You can configure
+   * this static field to make `new ExpressionFactory()` return your own
+   * ExpressionFactory implementation (System default will return an instance
+   * of [ExpressionFactoryImpl]).
+   *
+   *     ExpressionFactory.CREATOR =
+   *        () => new MyExpressionFactoryImpl();
+   *
+   *     ...
+   *
+   *     ExpressionFactory myef = new ExpressionFactory();
+   *
+   */
+  static ExpressionFactoryCreator CREATOR;
 }
+
+/** A function that return an ExprssionFactory */
+typedef ExpressionFactory ExpressionFactoryCreator();
