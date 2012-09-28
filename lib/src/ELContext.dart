@@ -92,6 +92,24 @@ abstract class ELContext {
       this._locale = locale;
   }
 
+  //20120928, henrichen: provide a general attribute carrier
+  /**
+   * Returns a general attribute of the associated key in this context.
+   *
+   * + [key] - the key
+   */
+  getAttribute(var key);
+
+  //20120928, henrichen: provide a general attribute carrier
+  /**
+   * Set a general attribute of the associated key in this context and return
+   * the original one that was associated with the specified key.
+   *
+   * + [key] - the key
+   * + [val] - the value
+   */
+  setAttribute(var key, Object val);
+
   /**
    * Create a new [ELContext].
    *

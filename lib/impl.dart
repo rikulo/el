@@ -6,7 +6,7 @@
 
 #import("dart:coreimpl");
 #import("dart:mirrors");
-#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/api.dart");
 
 #source("src/impl/ExpressionFactoryImpl.dart");
 #source("src/impl/MethodExpressionImpl.dart");

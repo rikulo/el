@@ -4,7 +4,7 @@
 #import("dart:mirrors");
 
 #import("package:unittest/unittest.dart");
-#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/api.dart");
 #import("package:rikulo_el/impl.dart");
 
 #source("TesterBeans.dart");
@@ -220,6 +220,71 @@ void testBug51544Direct() {
     expect(result, 0);
 }
 
+//issue2
+//@Test
+void testMapExpression() {
+  ExpressionFactory elfactory = new ExpressionFactory();
+  ELContext context = new ELContext();
+
+  Object o1 = "String value";
+  Object o2 = 32;
+
+  ValueExpression o1ve =
+      elfactory.createValueExpressionByInstance(o1, ClassUtil.STRING_MIRROR);
+  context.getVariableMapper().setVariable("o1", o1ve);
+
+  ValueExpression o2ve =
+      elfactory.createValueExpressionByInstance(o2, ClassUtil.INT_MIRROR);
+  context.getVariableMapper().setVariable("o2", o2ve);
+
+  ValueExpression ve1 = elfactory.createValueExpression(
+      context, "#{{'key1':o1,'key2':o2}.key1}", ClassUtil.OBJECT_MIRROR);
+  expect(ve1.getValue(context), equals(o1));
+
+  ValueExpression ve2 = elfactory.createValueExpression(
+      context, "#{{'key1':o1,'key2':o2}.key2}", ClassUtil.OBJECT_MIRROR);
+  expect(ve2.getValue(context), equals(o2));
+
+  ve1.setValue(context, o2);
+  expect(ve1.getValue(context), equals(o2));
+
+  ve2.setValue(context, o1);
+  expect(ve2.getValue(context), equals(o1));
+
+}
+
+//issue1
+//@Test
+void testListExpression() {
+    ExpressionFactory elfactory = new ExpressionFactory();
+    ELContext context = new ELContext();
+
+    Object o1 = "String value";
+    Object o2 = 32;
+
+    ValueExpression o1ve  =
+        elfactory.createValueExpressionByInstance(o1, ClassUtil.STRING_MIRROR);
+    context.getVariableMapper().setVariable("o1", o1ve);
+
+    ValueExpression o2ve  =
+        elfactory.createValueExpressionByInstance(o2, ClassUtil.INT_MIRROR);
+    context.getVariableMapper().setVariable("o2", o2ve);
+
+    ValueExpression ve1 = elfactory.createValueExpression(
+            context, "#{[o1, o2][0]}", ClassUtil.OBJECT_MIRROR);
+    expect(ve1.getValue(context), equals(o1));
+
+    ValueExpression ve2 = elfactory.createValueExpression(
+        context, "\${[o1, o2][1]}", ClassUtil.OBJECT_MIRROR);
+    expect(ve2.getValue(context), equals(o2));
+
+    ve1.setValue(context, o2);
+    expect(ve1.getValue(context), equals(o2));
+
+    ve2.setValue(context, o1);
+    expect(ve2.getValue(context), equals(o1));
+}
+
 //--------------------
 void main() {
   test('testGetValueReference', testGetValueReference);
@@ -230,5 +295,7 @@ void main() {
   test('testBug51177ObjectList', testBug51177ObjectList);
   test('testBug51544Bean', testBug51544Bean);
   test('testBug51544Direct', testBug51544Direct);
+  test('testListExpression', testListExpression);
+  test('testMapExpression', testMapExpression);
 }
 

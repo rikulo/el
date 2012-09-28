@@ -139,19 +139,19 @@ abstract class SimpleNode implements Node {
       return 0;
     }
 
-    //@Override
-    int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + _arrayHashCode(children_);
-        result = prime * result + id_;
-        result = prime * result + ((image_ == null) ? 0 : image_.hashCode());
-        return result;
-    }
+//    //@Override
+//    int hashCode() {
+//        final int prime = 31;
+//        int result = 1;
+//        result = prime * result + _arrayHashCode(children_);
+//        result = prime * result + id_;
+//        result = prime * result + ((image_ == null) ? 0 : image_.hashCode());
+//        return result;
+//    }
 
     //@Override
     bool operator ==(Object obj) {
-        if (this == obj) {
+        if (identical(this, obj)) {
             return true;
         }
         if (!(obj is SimpleNode)) {

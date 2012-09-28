@@ -21,7 +21,7 @@ abstract class ExpressionFactory {
    * + [context] - the ELContext used when create and parse the
    *               [ValueExpression].
    * + [expression] - the EL expression script to be parsed.
-   * + [expectedType] - the expected type when eval the created
+   * + [expectedType] - the expected type when evaluate the created
    *                    [ValueExpression].
    */
   ValueExpression createValueExpression(ELContext context,
@@ -31,7 +31,7 @@ abstract class ExpressionFactory {
    * Create a [ValueExpression] of the specified object instance.
    *
    * + [instance] - the instance object to be wrapped as a [ValueExpression].
-   * + [expectedType] - the expected type when eval the created
+   * + [expectedType] - the expected type when evaluate the created
    *                    [ValueExpression].
    */
   ValueExpression createValueExpressionByInstance(Object instance,
@@ -43,7 +43,7 @@ abstract class ExpressionFactory {
    * + [context] - the ELContext used when create and parse the
    *               [MethodExpression].
    * + [expression] - the EL expression script to be parsed.
-   * + [expectedType] - the expected return type when eval the created
+   * + [expectedType] - the expected return type when evaluate the created
    *                    [MethodExpression].
    */
   MethodExpression createMethodExpression(ELContext context,

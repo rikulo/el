@@ -5,7 +5,7 @@
 #import("dart:mirrors");
 
 #import("package:unittest/unittest.dart");
-#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/api.dart");
 #import("package:rikulo_el/impl.dart");
 
 class ShowVisitor implements NodeVisitor {
@@ -59,5 +59,6 @@ void main() {
   show("#{{k1:v1,x:{k2:v2,k3:v3}}}");
   show("#{{x:{k1:v1,k2:v2},k3:v3}}");
   show("#{a.b.c(x, y, {k1:v1,k2:v2})}");
+  show("#{{'key1':o1,'key2':o2}.key1}");
 
 }

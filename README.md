@@ -15,7 +15,7 @@ Rikulo EL is distributed under the Apache 2.0 License.
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
 ##Pub Package
-    #import("package:rikulo_el/el.dart");
+    #import("package:rikulo_el/api.dart");
     #import("package:rikulo_el/impl.dart");
 
 ##pubspec.yaml
@@ -25,8 +25,8 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	  rikulo_el:
 	  
 ##Libraries
- * `rikulo:el` -- library of Rikulo EL APIs
- * `rikulo:el/impl` -- library of Rikulo EL APIs implementations
+ * `rikulo:el/api` -- library of Rikulo EL APIs
+ * `rikulo:el/impl` -- library of Rikulo EL implementations
 
 ##History
 * Sep. 27, 2012:
@@ -59,4 +59,5 @@ If you are new to Git or GitHub, please read [this guide](https://help.github.co
 
 ###Directories
   * `lib/src` -- source code of Rikulo EL APIs
-  * `lib/src/impl` -- source code of Rikulo EL APIs implementations
+  * `lib/src/impl` -- source code of Rikulo EL implementations
+  * `test` -- testing codes

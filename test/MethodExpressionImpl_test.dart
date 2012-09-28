@@ -4,7 +4,7 @@
 #import("dart:mirrors");
 
 #import("package:unittest/unittest.dart");
-#import("package:rikulo_el/el.dart");
+#import("package:rikulo_el/api.dart");
 #import("package:rikulo_el/impl.dart");
 
 #source("TesterBeans.dart");
