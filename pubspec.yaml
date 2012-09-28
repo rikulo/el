@@ -7,7 +7,7 @@ description: >
   a powerful tool to embed expressions into web pages.
 authors:
 - Henri Chen <henrichen@rikulo.org>
-homepage: http://www.rikulo.org
+homepage: http://rikulo.org
 dependencies:
   unittest:
     sdk: unittest

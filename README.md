@@ -15,8 +15,11 @@ Rikulo EL is distributed under the Apache 2.0 License.
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
 ##Pub Package
+
     #import("package:rikulo_el/el.dart");
+    //EL API interfaces
     #import("package:rikulo_el/impl.dart");
+    //EL implementation
 
 ##pubspec.yaml
     name: ...
@@ -24,10 +27,6 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	dependencies:
 	  rikulo_el:
 	  
-##Libraries
- * `rikulo_el:el.dart` -- library of Rikulo EL APIs
- * `rikulo_el:impl.dart` -- library of Rikulo EL APIs implementations
-
 ##History
 * Sep. 27, 2012:
  * [issue1](https://github.com/rikulo/rikulo-el/issues/1) Support Dart array expression
