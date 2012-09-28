@@ -7,12 +7,6 @@ class FunctionMapperImpl extends FunctionMapper {
 
     Map<String, ELFunction> functions_ = null;
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.el.FunctionMapper#resolveFunction(java.lang.String,
-     *      java.lang.String)
-     */
     //@Override
     Function resolveFunction(String prefix, String localName) {
         if (this.functions_ != null) {
@@ -58,9 +52,6 @@ class ELFunction {
         return this.m_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     //@Override
     bool equals(Object obj) {
         if (obj is ELFunction) {
@@ -69,11 +60,8 @@ class ELFunction {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     //@Override
     int hashCode() {
-        return "${this.prefix_}${this.localName_}".hashCode();
+        return "${this.prefix_}:${this.localName_}".hashCode();
     }
 }

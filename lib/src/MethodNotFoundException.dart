@@ -7,10 +7,6 @@
  *
  */
 class MethodNotFoundException extends ELException {
-    /**
-     * @param message
-     * @param cause
-     */
     MethodNotFoundException([String message, Exception cause])
       : super(message, cause);
 }

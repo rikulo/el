@@ -26,11 +26,6 @@ class ValueExpressionImpl implements ValueExpression {
               this._varMapper = varMapper,
               this._expectedType = expectedType;
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     //@Override
     bool operator ==(ValueExpression other) =>
         other is ValueExpressionImpl && (other as ValueExpressionImpl).hashCode() == this.hashCode();
@@ -99,11 +94,6 @@ class ValueExpressionImpl implements ValueExpression {
         return value;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#hashCode()
-     */
     //@Override
     int hashCode() {
         return this._getNode().hashCode();
@@ -135,12 +125,6 @@ class ValueExpressionImpl implements ValueExpression {
         return this._getNode().isReadOnly(ctx);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.el.ValueExpression#setValue(javax.el.ELContext,
-     *      java.lang.Object)
-     */
     //@Override
     void setValue(ELContext context, Object value) {
         EvaluationContext ctx = new EvaluationContext(context, this._fnMapper,

@@ -3,7 +3,7 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-class FunctionMapperFactory extends FunctionMapper {
+class FunctionMapperFactory implements FunctionMapper {
 
     FunctionMapperImpl memento_ = null;
     FunctionMapper target_;
@@ -16,9 +16,6 @@ class FunctionMapperFactory extends FunctionMapper {
     }
 
 
-    /* (non-Javadoc)
-     * @see javax.el.FunctionMapper#resolveFunction(java.lang.String, java.lang.String)
-     */
     //@Override
     Function resolveFunction(String prefix, String localName) {
         if (this.memento_ == null) {

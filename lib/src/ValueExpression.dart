@@ -5,15 +5,15 @@
 
 abstract class ValueExpression extends Expression {
 
-    ClassMirror getExpectedType();
+  ClassMirror getExpectedType();
 
-    ClassMirror getType(ELContext context);
+  ClassMirror getType(ELContext context);
 
-    bool isReadOnly(ELContext context);
+  bool isReadOnly(ELContext context);
 
-    void setValue(ELContext context, Object value);
+  void setValue(ELContext context, Object value);
 
-    Object getValue(ELContext context);
+  Object getValue(ELContext context);
 
-    ValueReference getValueReference(ELContext context);
+  ValueReference getValueReference(ELContext context);
 }

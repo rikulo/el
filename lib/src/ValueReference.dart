@@ -5,14 +5,14 @@
 
 class ValueReference {
 
-    final Object _base;
-    final Object _property;
+  final Object _base;
+  final Object _property;
 
-    ValueReference(Object base, Object property)
-        : this._base = base,
-          this._property = property;
+  ValueReference(Object base, Object property)
+      : this._base = base,
+        this._property = property;
 
-    Object getBase() => _base;
+  Object getBase() => _base;
 
-    Object getProperty() => _property;
+  Object getProperty() => _property;
 }

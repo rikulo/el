@@ -3,8 +3,9 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+/**
+ * An event listener called back when an ELContext has been created.
+ */
 abstract class ELContextListener {
-
-    void contextCreated(ELContextEvent event);
-
+  void contextCreated(ELContextEvent event);
 }

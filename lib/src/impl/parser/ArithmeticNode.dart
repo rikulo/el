@@ -5,9 +5,6 @@
 
 class ArithmeticNode extends SimpleNode {
 
-    /**
-     * @param i
-     */
     ArithmeticNode(int i)
         : super(i);
 

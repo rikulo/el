@@ -5,7 +5,7 @@
 
 abstract class VariableMapper {
 
-    ValueExpression resolveVariable(String variable);
+  ValueExpression resolveVariable(String variable);
 
-    ValueExpression setVariable(String variable, ValueExpression expression);
+  ValueExpression setVariable(String variable, ValueExpression expression);
 }

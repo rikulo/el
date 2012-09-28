@@ -5,15 +5,13 @@
 
 class ELException extends ExceptionImplementation {
   final Exception cause;
-    /**
-     * Creates an ELException with the given detail message and root cause.
-     *
-     * @param message
-     *            the detail message
-     * @param cause
-     *            the originating cause of this exception
-     */
-    const ELException([String message, Exception cause])
+  /**
+   * Creates an ELException with the given detail message and root cause.
+   *
+   * + [message] - the detail message
+   * + [cause] - the originating cause of this exception
+   */
+  const ELException([String message, Exception cause])
       : this.cause = cause,
         super(message);
 }

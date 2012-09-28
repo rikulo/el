@@ -17,15 +17,15 @@ class ExpressionBuilder implements NodeVisitor {
      */
     ExpressionBuilder(String expression, ELContext ctx)
         : this._expression = expression {
-        FunctionMapper ctxFn = ctx.getFunctionMapper();
-        VariableMapper ctxVar = ctx.getVariableMapper();
+      FunctionMapper ctxFn = ctx.getFunctionMapper();
+      VariableMapper ctxVar = ctx.getVariableMapper();
 
-        if (ctxFn != null) {
-            this._fnMapper = new FunctionMapperFactory(ctxFn);
-        }
-        if (ctxVar != null) {
-            this._varMapper = new VariableMapperFactory(ctxVar);
-        }
+      if (ctxFn != null) {
+          this._fnMapper = new FunctionMapperFactory(ctxFn);
+      }
+      if (ctxVar != null) {
+          this._varMapper = new VariableMapperFactory(ctxVar);
+      }
     }
 
     static Node createNode(String expr) {

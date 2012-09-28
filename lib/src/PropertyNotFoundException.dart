@@ -4,10 +4,6 @@
 //Port from Tomcat 7.0.x (java -> dart)
 
 class PropertyNotFoundException extends ELException {
-    /**
-     * @param message
-     * @param cause
-     */
-    PropertyNotFoundException([String message, Exception cause])
-        : super(message, cause);
+  PropertyNotFoundException([String message, Exception cause])
+      : super(message, cause);
 }
