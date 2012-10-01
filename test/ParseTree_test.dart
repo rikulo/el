@@ -61,4 +61,5 @@ void main() {
   show("#{a.b.c(x, y, {k1:v1,k2:v2})}");
   show("#{{'key1':o1,'key2':o2}.key1}");
 
+  show('Hello, #{aaa().person.name}!');
 }

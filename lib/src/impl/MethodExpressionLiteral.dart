@@ -5,50 +5,46 @@
 
 class MethodExpressionLiteral implements MethodExpression {
 
-    ClassMirror _expectedType;
+  ClassMirror _expectedType;
 
-    String _expr;
+  String _expr;
 
-    MethodExpressionLiteral(String expr, ClassMirror expectedType)
-        : this._expr = expr,
-          this._expectedType = expectedType;
+  MethodExpressionLiteral(String expr, ClassMirror expectedType)
+      : this._expr = expr,
+        this._expectedType = expectedType;
 
-    //@Override
-    MethodInfo getMethodInfo(ELContext context) {
-        return new MethodInfo(this._expr, this._expectedType);
-    }
+  //@Override
+  MethodInfo getMethodInfo(ELContext context)
+    => new MethodInfo(this._expr, this._expectedType);
 
-    //@Override
-    Object invoke(ELContext context, List<Object> params, [Map<String, Object> namedArgs]) {
-        if (this._expectedType != null) {
-            return ELSupport.coerceToType(this._expr, this._expectedType);
-        } else {
-            return this._expr;
-        }
-    }
+  //@Override
+  Object invoke(ELContext context, List<Object> params,
+                [Map<String, Object> namedArgs])
+    => this._expectedType != null ?
+       ELSupport.coerceToType(this._expr, this._expectedType) : this._expr;
 
-    //@Override
-    String getExpressionString() {
-        return this._expr;
-    }
+  //@Override
+  String getExpressionString()
+    => this._expr;
 
-    //@Override
-    bool operator ==(MethodExpression other) =>
-        other is MethodExpressionLiteral && this.hashCode() == (other as MethodExpressionLiteral).hashCode();
+  //@Override
+  bool operator ==(MethodExpression other)
+    => other is MethodExpressionLiteral
+       && this.hashCode() == (other as MethodExpressionLiteral).hashCode();
 
-    //@Override
-    int hashCode() {
-        return this._expr.hashCode();
-    }
+  //@Override
+  int hashCode()
+    => this._expr.hashCode();
 
-    //@Override
-    bool isLiteralText() {
-        return true;
-    }
+  //@Override
+  bool isLiteralText()
+    => true;
 
-    //@Override
-    ValueReference getValueReference(ELContext context) => null;
+  //@Override
+  ValueReference getValueReference(ELContext context)
+    => null;
 
-    //@Override
-    bool isParametersProvided() => false;
+  //@Override
+  bool isParametersProvided()
+    => false;
 }

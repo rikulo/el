@@ -10,62 +10,60 @@
  * @version $Id: ReflectionUtil.java 1304933 2012-03-24 21:33:47Z markt $
  */
 class ReflectionUtil {
-  static Map<String, ClassMirror> _PRIMITIVE_NAMES;
-  static ClassMirror forName(String name) {
-    if (_PRIMITIVE_NAMES == null) {
-      _PRIMITIVE_NAMES = new Map();
-      _PRIMITIVE_NAMES["bool"] = ClassUtil.BOOL_MIRROR;
-      _PRIMITIVE_NAMES["num"] = ClassUtil.NUM_MIRROR;
-      _PRIMITIVE_NAMES["int"] = ClassUtil.INT_MIRROR;
-      _PRIMITIVE_NAMES["double"] = ClassUtil.DOUBLE_MIRROR;
-      _PRIMITIVE_NAMES["Date"] = ClassUtil.DATE_MIRROR;
-      _PRIMITIVE_NAMES["String"] = ClassUtil.STRING_MIRROR;
-      _PRIMITIVE_NAMES["Object"] = ClassUtil.OBJECT_MIRROR;
-      _PRIMITIVE_NAMES["Map"] = ClassUtil.MAP_MIRROR;
-      _PRIMITIVE_NAMES["List"] = ClassUtil.LIST_MIRROR;
-      _PRIMITIVE_NAMES["Queue"] = ClassUtil.QUEUE_MIRROR;
-      _PRIMITIVE_NAMES["Set"] = ClassUtil.SET_MIRROR;
-      _PRIMITIVE_NAMES["Collection"] = ClassUtil.COLLECTION_MIRROR;
+  static Map<String, ClassMirror> _PRIMITIVE_NAMES = _initPrimitiveNames();
 
-//      _PRIMITIVE_NAMES["Enum"] = ClassUtil.ENUM_MIRROR;
-    }
-      if (null == name || "" == name) {
-          return null;
-      }
-      ClassMirror c = _PRIMITIVE_NAMES[name];
-      if (c == null) {
-        c = ClassUtil.forName(name);
-      }
-      return c;
+  static Map<String, ClassMirror> _initPrimitiveNames() {
+    Map<String, ClassMirror> map = new Map();
+    map["bool"] = ClassUtil.BOOL_MIRROR;
+    map["num"] = ClassUtil.NUM_MIRROR;
+    map["int"] = ClassUtil.INT_MIRROR;
+    map["double"] = ClassUtil.DOUBLE_MIRROR;
+    map["Date"] = ClassUtil.DATE_MIRROR;
+    map["String"] = ClassUtil.STRING_MIRROR;
+    map["Object"] = ClassUtil.OBJECT_MIRROR;
+    map["Map"] = ClassUtil.MAP_MIRROR;
+    map["List"] = ClassUtil.LIST_MIRROR;
+    map["Queue"] = ClassUtil.QUEUE_MIRROR;
+    map["Set"] = ClassUtil.SET_MIRROR;
+    map["Collection"] = ClassUtil.COLLECTION_MIRROR;
+    //map["Enum"] = ClassUtil.ENUM_MIRROR;;
+    return map;
+  }
+
+  static ClassMirror forName(String name) {
+    if (null == name || "" == name)
+        return null;
+
+    ClassMirror c = _PRIMITIVE_NAMES[name];
+    if (c == null)
+      c = ClassUtil.forName(name);
+    return c;
   }
 
   /**
-   * Converts an array of Class names to Class types
-   * @param s
-   * @throws ClassNotFoundException
+   * Converts an array of qulified class names to class types.
    */
   static List<ClassMirror> toTypeArray(List<String> s) {
-      if (s == null)
-          return null;
-      List<ClassMirror> c = new List();
-      for (int i = 0; i < s.length; i++) {
-          c[i] = forName(s[i]);
-      }
-      return c;
+    if (s == null)
+        return null;
+
+    List<ClassMirror> c = new List();
+    for (int i = 0; i < s.length; i++)
+        c[i] = forName(s[i]);
+    return c;
   }
 
   /**
-   * Converts an array of Class types to Class names
-   * @param c
+   * Converts an array of class types to class qualified names
    */
   static List<String> toTypeNameArray(List<ClassMirror> c) {
-      if (c == null)
-          return null;
-      List<String> s = new List();
-      for (int i = 0; i < c.length; i++) {
-          s[i] = c[i].qualifiedName;
-      }
-      return s;
+    if (c == null)
+        return null;
+
+    List<String> s = new List();
+    for (int i = 0; i < c.length; i++)
+        s[i] = c[i].qualifiedName;
+    return s;
   }
 
   static MethodMirror _getMethod0(ClassMirror owner, String methodName) {
@@ -73,31 +71,27 @@ class ReflectionUtil {
     MethodMirror m = clz.methods[methodName];
     if (m == null)
       m = clz.getters[methodName];
+
     while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
-        clz = owner.superclass;
-        m = clz.methods[methodName];
-        if (m == null)
-          m = clz.getters[methodName];
+      clz = owner.superclass;
+      m = clz.methods[methodName];
+      if (m == null)
+        m = clz.getters[methodName];
     }
     return m == null || m.isPrivate ? null : m;
   }
 
   /**
-   * Returns a method based on the criteria
-   * @param base the object that owns the method
-   * @param property the name of the method
-   * @param paramValues the parameter values
-   * @return the method specified
-   * @throws MethodNotFoundException
+   * Returns a method per the object and method name.
+   * + [base] - the object
+   * + [property] - the method name
    */
   static MethodMirror getMethod(Object base, Object property) {
-    if (base == null || property == null) {
-        throw new MethodNotFoundException(
-            MessageFactory.getString("error.method.notfound", [base, property, ""]));
-    }
+    if (base == null || property == null)
+      throw new MethodNotFoundException(
+          MessageFactory.getString("error.method.notfound", [base, property, ""]));
 
-    String methodName = (property is String) ? property
-            : property.toString();
+    String methodName = (property is String) ? property : property.toString();
 
     MethodMirror m =_getMethod0(reflect(base).type, methodName);
     if (m == null)
@@ -107,9 +101,14 @@ class ReflectionUtil {
     return m;
   }
 
-  // src will always be an object
-  static bool _isAssignableFrom(ClassMirror src, ClassMirror target) =>
-    ClassUtil.isAssignableFrom(target, src);
+  /**
+   * Returns whether a source class is assignable to target class.
+   *
+   * + [tgt] - target class
+   * + [src] - source class
+   */
+  static bool _isAssignableFrom(ClassMirror src, ClassMirror target)
+    => ClassUtil.isAssignableFrom(target, src);
 
   static bool _isCoercibleFrom(Object src, ClassMirror target) {
     // TODO: This isn't pretty but it works. Significant refactoring would
@@ -117,18 +116,19 @@ class ReflectionUtil {
     try {
       ELSupport.coerceToType(src, target);
     } on ELException catch (e) {
-        return false;
+      return false;
     }
+
     return true;
   }
 
+  /** Returns the parameter types as a comma delimited String. */
   static String paramString_(List<ClassMirror> types) {
     if (types != null) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < types.length; i++) {
-            sb.add(types[i].simpleName).add(", ");
-        }
-        return sb.length > 2 ? sb.toString().substring(0, sb.length - 2) : "";
+      StringBuffer sb = new StringBuffer();
+      for (int i = 0; i < types.length; i++)
+          sb.add(types[i].simpleName).add(", ");
+      return sb.length > 2 ? sb.toString().substring(0, sb.length - 2) : "";
     }
     return null;
   }

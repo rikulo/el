@@ -245,11 +245,13 @@ void testMapExpression() {
       context, "#{{'key1':o1,'key2':o2}.key2}", ClassUtil.OBJECT_MIRROR);
   expect(ve2.getValue(context), equals(o2));
 
+  //map is temporary created for each evaluation (setValue once, getValue another)
   ve1.setValue(context, o2);
-  expect(ve1.getValue(context), equals(o2));
+  expect(ve1.getValue(context) != o2, isTrue);
 
+  //map is temporary created for each evaluation (setValue once, getValue another)
   ve2.setValue(context, o1);
-  expect(ve2.getValue(context), equals(o1));
+  expect(ve2.getValue(context) != o1, isTrue);
 
 }
 
@@ -278,11 +280,13 @@ void testListExpression() {
         context, "\${[o1, o2][1]}", ClassUtil.OBJECT_MIRROR);
     expect(ve2.getValue(context), equals(o2));
 
+    //list is temporary created for each evaluation (setValue once, getValue another)
     ve1.setValue(context, o2);
-    expect(ve1.getValue(context), equals(o2));
+    expect(ve1.getValue(context) != o2, isTrue);
 
+    //list is temporary created for each evaluation (setValue once, getValue another)
     ve2.setValue(context, o1);
-    expect(ve2.getValue(context), equals(o1));
+    expect(ve2.getValue(context) != o1, isTrue);
 }
 
 //--------------------

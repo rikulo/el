@@ -86,7 +86,7 @@ class ExpressionBuilder implements NodeVisitor {
             if (e is ELException) {
                 throw e;
             } else {
-                throw (new ELException(null, e));
+                throw (new ELException(e.toString(), e));
             }
         }
         if (this._fnMapper is FunctionMapperFactory) {
@@ -122,11 +122,20 @@ class ExpressionBuilder implements NodeVisitor {
                 throw new ELException(MessageFactory.getString("error.fnMapper.null"));
             }
             Function fn = _fnMapper.resolveFunction(funcNode.getPrefix(), funcNode.getLocalName());
-            MethodMirror m = (reflect(fn) as ClosureMirror).function;
+            if (fn == null) {
+                throw new ELException(MessageFactory.getString(
+                        "error.fnMapper.method", [funcNode.getOutputName()]));
+            }
+            ClosureMirror fnclosure = reflect(fn);
+            MethodMirror m = fnclosure.function;
             if (m == null) {
                 throw new ELException(MessageFactory.getString(
                         "error.fnMapper.method", [funcNode.getOutputName()]));
             }
+            //20120930, henrichen: #issue4 support top level function
+            _TopLevelFn tfn = _TopLevelFn._getTopLevelFn(fn, m);
+            if (tfn != null)
+                m = tfn._method;
             ParameterInfo pinfo = new ParameterInfo(m.parameters);
             int pCount = pinfo.positionals.length; //positinal count
             int oCount = pinfo.optionals.length; //optional count

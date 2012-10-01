@@ -136,20 +136,33 @@ class ClassUtil {
   /**
    * Invoke a method of the specified instance.
    *
-   * + [inst] - the object
+   * + [inst] - the object instance.
    * + [m] - the method
    * + [params] - the positional + optional parameters.
    * + [nameArgs] - the optional named arguments.
    */
-  static Object invoke(Object inst, MethodMirror m, List<Object> params, [Map<String, Object> namedArgs]) {
+  static Object invoke(Object inst, MethodMirror m, List<Object> params,
+                       [Map<String, Object> namedArgs])
+    => invokeObjectMirror(reflect(inst), m, params, namedArgs);
+
+  /**
+   * Invoke a method of the specified ObjectMirror.
+   *
+   * + [inst] - the ObjectMirror.
+   * + [m] - the method.
+   * + [params] - the positional + optional parameters.
+   * + [nameArgs] - the optional named arguments.
+   */
+  static Object invokeObjectMirror(ObjectMirror inst, MethodMirror m,
+      List<Object> params, [Map<String, Object> namedArgs]) {
     Future<InstanceMirror> result;
     if (m.isGetter)
-      result = reflect(inst).getField(m.simpleName);
+      result = inst.getField(m.simpleName);
     else {
       params = _convertParams(params);
       namedArgs = _convertNamedArgs(namedArgs);
 
-      result = reflect(inst).invoke(m.simpleName, params, namedArgs);
+      result = inst.invoke(m.simpleName, params, namedArgs);
     }
     while(!result.isComplete) //wait until complete
       ;

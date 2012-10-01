@@ -5,71 +5,60 @@
 
 class ValueExpressionLiteral implements ValueExpression {
 
-    var _value;
+  var _value;
 
-    ClassMirror _expectedType;
+  ClassMirror _expectedType;
 
-    ValueExpressionLiteral(Object value, ClassMirror expectedType)
-        : this._value = value,
-          this._expectedType = expectedType;
+  ValueExpressionLiteral(Object value, ClassMirror expectedType)
+      : this._value = value,
+        this._expectedType = expectedType;
 
-    //@Override
-    Object getValue(ELContext context) {
-        if (this._expectedType != null) {
-            return ELSupport.coerceToType(this._value, this._expectedType);
-        }
-        return this._value;
+  //@Override
+  Object getValue(ELContext context)
+    => this._expectedType != null ?
+         ELSupport.coerceToType(this._value, this._expectedType) : this._value;
+
+  //@Override
+  void setValue(ELContext context, Object value) {
+    throw new PropertyNotWritableException(MessageFactory.getString(
+              "error.value.literal.write", [this._value]));
+  }
+
+  //@Override
+  bool isReadOnly(ELContext context)
+    => true;
+
+  //@Override
+  ClassMirror getType(ELContext context)
+    => this._value != null ? reflect(this._value).type : null;
+
+  //@Override
+  ClassMirror getExpectedType()
+    => this._expectedType;
+
+  //@Override
+  String getExpressionString()
+    => this._value != null ? this._value.toString() : null;
+
+  //@Override
+  bool operator ==(Object other) {
+    if (other is ValueExpressionLiteral) {
+      ValueExpressionLiteral ve = other;
+      return this._value != null
+             && ve._value != null && this._value == ve._value;
     }
+    return false;
+  }
 
-    //@Override
-    void setValue(ELContext context, Object value) {
-        throw new PropertyNotWritableException(MessageFactory.getString(
-                "error.value.literal.write", [this._value]));
-    }
+  //@Override
+  int hashCode()
+    => this._value != null ? this._value.hashCode() : 0;
 
-    //@Override
-    bool isReadOnly(ELContext context) {
-        return true;
-    }
+  //@Override
+  bool isLiteralText()
+    => true;
 
-    //@Override
-    ClassMirror getType(ELContext context) {
-        return (this._value != null) ? reflect(this._value).type : null;
-    }
-
-    //@Override
-    ClassMirror getExpectedType() {
-        return this._expectedType;
-    }
-
-    //@Override
-    String getExpressionString() {
-        return (this._value != null) ? this._value.toString() : null;
-    }
-
-    //@Override
-    bool operator ==(Object other) {
-      if (other is ValueExpressionLiteral) {
-        ValueExpressionLiteral ve = other;
-        return this._value != null && ve._value != null && this._value == ve._value;
-      }
-      return false;
-    }
-
-    //@Override
-    int hashCode() {
-        return (this._value != null) ? this._value.hashCode() : 0;
-    }
-
-    //@Override
-    bool isLiteralText() {
-        return true;
-    }
-
-    /**
-     * @since EL 2.2
-     */
-    //@Override
-    ValueReference getValueReference(ELContext context) => null;
-
+  //@Override
+  ValueReference getValueReference(ELContext context)
+    => null;
 }

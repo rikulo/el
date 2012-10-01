@@ -4,7 +4,5 @@
 //Port from Tomcat 7.0.x (java -> dart)
 
 abstract class FunctionMapper {
-
-    Function resolveFunction(String prefix, String localName);
-
+  Function resolveFunction(String prefix, String localName);
 }

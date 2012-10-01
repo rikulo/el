@@ -31,6 +31,7 @@
 #source("src/ValueReference.dart");
 #source("src/VariableMapper.dart");
 
+#source("src/VarELResolver.dart");
 #source("src/MessageFormat.dart");
 #source("src/PropertiesBundle.dart");
 #source("src/NoSuchClassException.dart");

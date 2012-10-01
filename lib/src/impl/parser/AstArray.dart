@@ -14,17 +14,14 @@ class AstArray extends SimpleNode {
 
   //@Override
   Object getValue(EvaluationContext ctx) {
-    List values = ctx.getAttribute(this);
-    if (values == null) {
-      int numItems = this.jjtGetNumChildren();
-      if (numItems > 0) {
-        values = new List(numItems);
-        for (int i = 0; i < numItems; i++)
-          values[i] = this.children_[i].getValue(ctx);
-      } else
-        values = new List(0);
-      ctx.setAttribute(this, values);
-    }
+    List values = null;
+    int numItems = this.jjtGetNumChildren();
+    if (numItems > 0) {
+      values = new List(numItems);
+      for (int i = 0; i < numItems; i++)
+        values[i] = this.children_[i].getValue(ctx);
+    } else
+      values = new List(0);
     return values;
   }
 }

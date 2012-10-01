@@ -14,17 +14,13 @@ class AstMap extends SimpleNode {
 
   //@Override
   Object getValue(EvaluationContext ctx) {
-    Map values = ctx.getAttribute(this);
-    if (values == null) {
-      values = new Map();
-      int numItems = this.jjtGetNumChildren();
-      if (numItems > 0) {
-        for (int i = 0; i < numItems; i++) {
-          AstMapEntry e = this.children_[i];
-          values[e.getKey(ctx)] = e.getValue(ctx);
-        }
+    Map values = new Map();
+    int numItems = this.jjtGetNumChildren();
+    if (numItems > 0) {
+      for (int i = 0; i < numItems; i++) {
+        AstMapEntry e = this.children_[i];
+        values[e.getKey(ctx)] = e.getValue(ctx);
       }
-      ctx.setAttribute(this, values);
     }
     return values;
   }

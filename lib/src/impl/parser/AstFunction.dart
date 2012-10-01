@@ -38,11 +38,21 @@ class AstFunction extends SimpleNode {
             throw new ELException(MessageFactory.getString("error.fnMapper.null"));
         }
         Function fn = fnMapper.resolveFunction(this.prefix_, this.localName_);
-        MethodMirror m = (reflect(fn) as ClosureMirror).function;
+        if (fn == null) {
+            throw new ELException(MessageFactory.getString("error.fnMapper.method",
+                    [this.getOutputName()]));
+        }
+        ClosureMirror fnclosure = reflect(fn);
+        MethodMirror m = fnclosure.function;
         if (m == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
                     [this.getOutputName()]));
         }
+        //20120930, henrichen: #issue4 support top level function
+        _TopLevelFn tfn = _TopLevelFn._getTopLevelFn(fn, m);
+        if (tfn != null)
+          m = tfn._method;
+
         return ClassUtil.getCorrespondingClassMirror(m.returnType);
     }
 
@@ -56,7 +66,12 @@ class AstFunction extends SimpleNode {
             throw new ELException(MessageFactory.getString("error.fnMapper.null"));
         }
         Function fn = fnMapper.resolveFunction(this.prefix_, this.localName_);
-        MethodMirror m = (reflect(fn) as ClosureMirror).function;
+        if (fn == null) {
+            throw new ELException(MessageFactory.getString("error.fnMapper.method",
+                    [this.getOutputName()]));
+        }
+        ClosureMirror fnclosure = reflect(fn);
+        MethodMirror m = fnclosure.function;
         if (m == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
                     [this.getOutputName()]));
@@ -77,9 +92,16 @@ class AstFunction extends SimpleNode {
         } else {
           values = new List(0);
         }
+        //20120930, henrichen: #issue4 support top level function
+        _TopLevelFn tfn = _TopLevelFn._getTopLevelFn(fn, m);
+        if (tfn != null)
+          m = tfn._method;
+
         List params = ELSupport.convertArgs(values, m, this);
 
-        Object result = ClassUtil.apply(fn, params);
+        Object result = tfn == null ?
+            ClassUtil.apply(fn, params) :
+            ClassUtil.invokeObjectMirror(tfn._lib, m, params);
 //        try {
 //            result = m.invoke(null, params);
 //        } on IllegalAccessException catch (iae) {

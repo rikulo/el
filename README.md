@@ -27,6 +27,10 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	  rikulo_el:
 	  
 ##History
+* Sep. 29, 2012:
+ * [issue3](https://github.com/rikulo/rikulo-el/issues/3) Support Dart top level variable resolving
+ * [issue4](https://github.com/rikulo/rikulo-el/issues/4) Support Dart top level function resolving
+ * [issue5](https://github.com/rikulo/rikulo-el/issues/5) Temporary map/array shall be live in each Evaluation only
 * Sep. 27, 2012:
  * [issue1](https://github.com/rikulo/rikulo-el/issues/1) Support Dart array expression
  * [issue2](https://github.com/rikulo/rikulo-el/issues/2) Support Dart map expression
@@ -38,7 +42,7 @@ Rikulo EL is distributed under the Apache 2.0 License.
  * Porting EL 2.2 from Java implementation of Tomcat 7 to Dart language(in brutal way :-)).
  * Some Java specific functions are removed(e.g. There is no BigDecimal in Dart; thus not in Rikulo-el, either).
  * It uses Dart Mirror a lot.
- * EL parser seems work great.
+ * EL parser seems working great.
  * There must be rooms for extra features in Dart specifically(e.g. named optional arguments for function).
 
 ##Notes to Contributors
