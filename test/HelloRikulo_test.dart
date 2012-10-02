@@ -2,7 +2,7 @@
 //History: Wed, Sep 26, 2012  11:13:24 AM
 // Author: hernichen
 #import('dart:mirrors');
-#import('package:rikulo_el/api.dart');
+#import('package:rikulo_el/el.dart');
 #import('package:rikulo_el/impl.dart');
 
 class Person {

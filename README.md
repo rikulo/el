@@ -15,8 +15,8 @@ Rikulo EL is distributed under the Apache 2.0 License.
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
 ##Pub Package
-    #import("package:rikulo_el/api.dart");
-    //EL API interfaces
+    #import("package:rikulo_el/el.dart");
+    //EL interfaces and utility classes
     #import("package:rikulo_el/impl.dart");
     //EL implementation
 
@@ -27,6 +27,8 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	  rikulo_el:
 	  
 ##History
+* Oct. 1, 2012:
+ * Change library name to match naming convention. 
 * Sep. 29, 2012:
  * [issue3](https://github.com/rikulo/rikulo-el/issues/3) Support Dart top level variable resolving
  * [issue4](https://github.com/rikulo/rikulo-el/issues/4) Support Dart top level function resolving

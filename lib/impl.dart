@@ -2,11 +2,11 @@
 //History: Fri, Aug 24, 2012  02:05:55 PM
 // Author: hernichen
 
-#library("rikulo:el/impl");
+#library("rikulo_el:impl");
 
 #import("dart:coreimpl");
 #import("dart:mirrors");
-#import("package:rikulo_el/api.dart");
+#import("el.dart");
 
 #source("src/impl/ExpressionFactoryImpl.dart");
 #source("src/impl/MethodExpressionImpl.dart");

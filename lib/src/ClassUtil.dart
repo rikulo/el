@@ -158,6 +158,8 @@ class ClassUtil {
     Future<InstanceMirror> result;
     if (m.isGetter)
       result = inst.getField(m.simpleName);
+    else if (m.isSetter)
+      result = inst.setField(m.simpleName, params[0]);
     else {
       params = _convertParams(params);
       namedArgs = _convertNamedArgs(namedArgs);

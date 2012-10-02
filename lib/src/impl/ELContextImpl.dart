@@ -105,7 +105,7 @@ class _TopLevelFn {
     => this;
 
   static _TopLevelFn _getTopLevelFn(Function fn, MethodMirror m)
-    => 'rikulo:el/impl._TopLevelFn' == m.returnType.qualifiedName ?
+    => 'rikulo_el:impl._TopLevelFn' == m.returnType.qualifiedName ?
           ClassUtil.apply(fn, []) : null;
 }
 

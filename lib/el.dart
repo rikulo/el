@@ -2,7 +2,7 @@
 //History: Fri, Aug 24, 2012  02:08:31 PM
 // Author: hernichen
 
-#library("rikulo:el/api");
+#library("rikulo_el");
 
 #import("dart:coreimpl");
 #import("dart:mirrors");
