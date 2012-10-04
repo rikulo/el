@@ -48,15 +48,18 @@ class ClassUtil {
   static bool isAssignableFrom(ClassMirror tgt, ClassMirror src) {
     if (tgt.qualifiedName == src.qualifiedName)
       return true;
-
-    if (isObjectClass(src)) //no more super class
+    if (isTopClass(src)) //no more super class
       return false;
 
     //PATCH(henri): reflect(new List()).qualifiedName is "dart:coreimpl.List"
-    if ("dart:coreimpl" == src.owner.qualifiedName &&
+    if (src.owner != null && "dart:coreimpl" == src.owner.qualifiedName &&
         tgt.qualifiedName == "dart:core.${src.simpleName}")
       return true;
 
+    //TypedefMirror does not implement superinterfaces/superclass
+    if (src is TypedefMirror) return false;
+
+    //check superinterfaces and superclass
     for (ClassMirror inf in src.superinterfaces)
       if (isAssignableFrom(tgt, inf)) return true; //recursive
 
@@ -98,8 +101,8 @@ class ClassUtil {
     => _getElementClassMirror0(map, 0);
 
   static ClassMirror _getElementClassMirror0(ClassMirror collection, int idx) {
-    List<TypeVariableMirror> vars = collection.typeVariables.getValues();
-    return getCorrespondingClassMirror(vars[idx].upperBound);
+    List<TypeMirror> vars = collection.typeArguments.getValues();
+    return getCorrespondingClassMirror(vars[idx]);
   }
 
   /**
@@ -158,9 +161,10 @@ class ClassUtil {
     Future<InstanceMirror> result;
     if (m.isGetter)
       result = inst.getField(m.simpleName);
-    else if (m.isSetter)
-      result = inst.setField(m.simpleName, params[0]);
-    else {
+    else if (m.isSetter) {
+      String fieldnm = m.simpleName.substring(0, m.simpleName.length-1);
+      result = inst.setField(fieldnm, _convertParam(params[0]));
+    } else {
       params = _convertParams(params);
       namedArgs = _convertNamedArgs(namedArgs);
 
@@ -207,25 +211,46 @@ class ClassUtil {
   }
 
   static Object _convertParam(var v) {
-    if (v == null || v is num || v is bool || v is String)
+    if (v == null || v is num || v is bool || v is String || v is Mirror)
       return v;
     return reflect(v);
   }
 
   /**
-   * Returns whether the specified class is the top Object class.
+   * Returns whether the specified class is the top class (no super class).
    */
-  static bool isObjectClass(ClassMirror clz)
-    => "dart:core.Object" == clz.qualifiedName;
+  static bool isTopClass(ClassMirror clz)
+    => "dart:core.Object" == clz.qualifiedName || "void" == clz.qualifiedName;
 
   /**
    * Create a new instance of the specified class name.
    */
   static Object newInstance(String className) {
     ClassMirror clz = forName(className);
+    return newInstanceByClassMirror(clz);
+  }
+
+  static Object newInstanceByClassMirror(ClassMirror clz) {
     Future<InstanceMirror> inst = clz.newInstance("", []); //unamed constructor
     while(!inst.isComplete)
       ; //wait until created
     return inst.value.reflectee;
+  }
+
+  static String _toSetter(String name)
+    => "set${name.substring(0, 1).toUpperCase()}${name.substring(1)}";
+
+  /**
+   * Returns the setter 'xxx' or 'setXxx" method of the class
+   */
+  static MethodMirror getSetter(ClassMirror cm, String name) {
+    do {
+      MethodMirror setter = cm.setters["$name="];
+      if (setter == null) //try setXxx
+        setter = cm.methods[_toSetter(name)];
+      if (setter != null && setter.parameters.length == 1)
+        return setter;
+    } while((cm = cm.superclass) != OBJECT_MIRROR);
+    return null;
   }
 }

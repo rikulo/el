@@ -72,7 +72,7 @@ class ReflectionUtil {
     if (m == null)
       m = clz.getters[methodName];
 
-    while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
+    while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
       clz = owner.superclass;
       m = clz.methods[methodName];
       if (m == null)

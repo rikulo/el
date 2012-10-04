@@ -32,7 +32,10 @@
 #source("src/VariableMapper.dart");
 
 #source("src/VarELResolver.dart");
+#source("src/ClassELResolver.dart");
+#source("src/LibELResolver.dart");
 #source("src/MessageFormat.dart");
 #source("src/PropertiesBundle.dart");
 #source("src/NoSuchClassException.dart");
 #source("src/ClassUtil.dart");
+#source("src/ELUtil.dart");

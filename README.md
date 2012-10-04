@@ -27,6 +27,10 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	  rikulo_el:
 	  
 ##History
+* Oct. 4, 2012:
+ * [issue6](https://github.com/rikulo/rikulo-el/issues/6) Support Dart ClassMirror static variable and static method resolving
+ * [issue7](https://github.com/rikulo/rikulo-el/issues/7) Support Dart LibrayMirror variable and function resolving
+ * [issue8](https://github.com/rikulo/rikulo-el/issues/8) NoSuchMethod when access superclass of 'void' ClassMirror
 * Oct. 1, 2012:
  * Change library name to match naming convention. 
 * Sep. 29, 2012:

@@ -202,7 +202,7 @@ class BeanProperty {
     MethodMirror _getWriteMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
         MethodMirror m = clz.setters[propertyName];
-        while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
+        while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
             m = clz.setters[propertyName];
         }
@@ -212,7 +212,7 @@ class BeanProperty {
     MethodMirror _getReadMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
         MethodMirror m = clz.getters[propertyName];
-        while(!ClassUtil.isObjectClass(clz) && (m == null || m.isPrivate)) {
+        while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
             m = clz.getters[propertyName];
         }

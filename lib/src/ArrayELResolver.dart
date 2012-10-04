@@ -64,7 +64,7 @@ class ArrayELResolver extends ELResolver {
             int idx = _coerce(property);
             _checkBounds(base, idx);
             if (value != null && !ClassUtil.isInstance(ClassUtil.getElementClassMirror(reflect(base).type), value)) {
-                throw new CastException();
+                throw new CastError();
 //              throw new ClassCastException(message(context, "objectNotAssignable",
 //                        [reflect(value).type.qualifiedName, ClassUtil.getElementClassMirror(reflect(base).type).qualifiedName]));
             }

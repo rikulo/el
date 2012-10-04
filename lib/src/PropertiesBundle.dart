@@ -3,7 +3,7 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-class PropertiesBundle {
+abstract class PropertiesBundle {
   Map<String, String> _localemsgs;
 
   PropertiesBundle(String locale) {
@@ -15,7 +15,7 @@ class PropertiesBundle {
   }
 
   Map<String, String> _getProperties(String locale) {
-	Map<String, Map<String, String>> msgs = getBundle_();
+    Map<String, Map<String, String>> msgs = getBundle_();
 
     Map<String, String> props = msgs[locale];
     while(props == null) {
@@ -32,5 +32,5 @@ class PropertiesBundle {
   	return j < 0 ? null : locale.substring(0, j);
   }
 
-  abstract Map<String, Map<String, String>> getBundle_();
+  Map<String, Map<String, String>> getBundle_();
 }
