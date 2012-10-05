@@ -26,7 +26,7 @@ class ClassUtil {
    * + [qname] - qulified class name (libname.classname)
    */
   static ClassMirror forName(String qname) {
-    Map splited = _splitQualifiedName(qname);
+    Map splited = splitQualifiedName(qname);
     if (splited != null) {
       String libName = splited["libName"];
       String clsName = splited["clsName"];
@@ -101,8 +101,10 @@ class ClassUtil {
     => _getElementClassMirror0(map, 0);
 
   static ClassMirror _getElementClassMirror0(ClassMirror collection, int idx) {
-    List<TypeMirror> vars = collection.typeArguments.getValues();
-    return getCorrespondingClassMirror(vars[idx]);
+//TODO(henri): Dart have not implemented typeArguments!
+//    List<TypeMirror> vars = collection.typeArguments.getValues();
+//    return getCorrespondingClassMirror(vars[idx]);
+    return OBJECT_MIRROR;
   }
 
   /**
@@ -114,7 +116,7 @@ class ClassUtil {
   static bool isInstance(ClassMirror cls, Object obj)
     => isAssignableFrom(cls, reflect(obj).type);
 
-  static Map _splitQualifiedName(String qname) {
+  static Map splitQualifiedName(String qname) {
     int j = qname.lastIndexOf(".");
     return j < 1 || j >= (qname.length - 1) ?
       {"libName" : null, "clsName" : qname} :
@@ -244,10 +246,13 @@ class ClassUtil {
    * Returns the setter 'xxx' or 'setXxx" method of the class
    */
   static MethodMirror getSetter(ClassMirror cm, String name) {
+    String sname = "$name=";
+    String mname = _toSetter(name);
+    MethodMirror setter = null;
     do {
-      MethodMirror setter = cm.setters["$name="];
+      setter = cm.setters[sname];
       if (setter == null) //try setXxx
-        setter = cm.methods[_toSetter(name)];
+        setter = cm.methods[mname];
       if (setter != null && setter.parameters.length == 1)
         return setter;
     } while((cm = cm.superclass) != OBJECT_MIRROR);
