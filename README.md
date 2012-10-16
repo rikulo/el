@@ -15,10 +15,14 @@ Rikulo EL is distributed under the Apache 2.0 License.
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
 ##Pub Package
-    #import("package:rikulo_el/el.dart");
+
+###Required
+    import 'package:rikulo_el/el.dart';
     //EL interfaces and utility classes
-    #import("package:rikulo_el/impl.dart");
-    //EL implementation
+
+###Optional
+    import 'package:rikulo_el/impl.dart';
+    //EL implementation for overriding ExpressionFactory, ELContext and others
 
 ##pubspec.yaml
     name: ...
@@ -27,6 +31,8 @@ Rikulo EL is distributed under the Apache 2.0 License.
 	  rikulo_el:
 	  
 ##History
+* Oct. 16, 2012:
+ * refactor to use new import/part syntax.
 * Oct. 4, 2012:
  * [issue6](https://github.com/rikulo/rikulo-el/issues/6) Support Dart ClassMirror static variable and static method resolving
  * [issue7](https://github.com/rikulo/rikulo-el/issues/7) Support Dart LibrayMirror variable and function resolving
