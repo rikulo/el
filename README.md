@@ -2,16 +2,14 @@
 
 [Rikulo EL](http://rikulo.org) is an implementation of the [Unified Expression
  Language](http://en.wikipedia.org/wiki/Unified_Expression_Language) 
- specification plus some enhancements for and in Dart. While the EL specification
- is originally designed for Java language, it serves as a powerful tool to embed 
- expressions into web pages.
- 
-Rikulo EL is distributed under the Apache 2.0 License.
+ specification plus some enhancements for and in Dart. 
 
 * [Home](http://rikulo.org)
-* [Tutorial](http://blog.rikulo.org/posts/2012/Sep/tutorial/rikulo-el-an-expression-language-for-and-in-dart/)
+* [Tutorial](http://blog.rikulo.org/posts/2012/Sep/Tutorial/rikulo-el-an-expression-language-for-and-in-dart/)
 * [Discussion](http://stackoverflow.com/questions/tagged/rikulo)
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
+
+Rikulo EL is distributed under the Apache 2.0 License.
 
 ##Installation
 
@@ -48,10 +46,16 @@ Using Rikulo EL is straightforward.
 
 ###Test and Debug
 
-You are welcome to submit bugs and feature requests. Or even better if you can fix or implement them!
+You are welcome to submit [bugs and feature requests](https://github.com/rikulo/rikulo-el/issues). Or even better if you can fix or implement them!
 
-###Fork Rikulo EL
+###Create Addons
+
+Rikulo is easy to extend. The simplest way to enhance Rikulo is to [create a new repository](https://help.github.com/articles/create-a-repo) and add your own great widgets and libraries to it.
+
+###Fork Rikulo
 
 If you'd like to contribute back to the core, you can [fork this repository](https://help.github.com/articles/fork-a-repo) and send us a pull request, when it is ready.
+
+Please be aware that one of Rikulo's design goals is to keep the sphere of API as neat and consistency as possible. Strong enhancement always demands greater consensus.
 
 If you are new to Git or GitHub, please read [this guide](https://help.github.com/) first.
