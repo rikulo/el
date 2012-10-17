@@ -13,7 +13,6 @@ Rikulo EL is distributed under the Apache 2.0 License.
 * [Discussion](http://stackoverflow.com/questions/tagged/rikulo)
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
-
 ##Installation
 
 Add this to your `pubspec.yaml` (or create it):
@@ -21,7 +20,7 @@ Add this to your `pubspec.yaml` (or create it):
     dependencies:
       rikulo_el:
 
-Then run the [Pub Package Manager](http://www.dartlang.org/docs/pub-package-manager/) (comes with the Dart SDK):
+Then run the [Pub Package Manager](http://pub.dartlang.org/doc) (comes with the Dart SDK):
 
     pub install
 

@@ -2,40 +2,40 @@
 //History: Fri, Aug 24, 2012  02:08:31 PM
 // Author: hernichen
 
-#library("rikulo_el");
+library rikulo_el;
 
-#import("dart:coreimpl");
-#import("dart:mirrors");
+import 'dart:coreimpl';
+import 'dart:mirrors';
 
-#source("src/ArrayELResolver.dart");
-#source("src/BeanELResolver.dart");
-#source("src/CompositeELResolver.dart");
-#source("src/ELContext.dart");
-#source("src/ELContextEvent.dart");
-#source("src/ELContextListener.dart");
-#source("src/ELException.dart");
-#source("src/ELResolver.dart");
-#source("src/Expression.dart");
-#source("src/ExpressionFactory.dart");
-#source("src/FunctionMapper.dart");
-//#source("src/ListELResolver.dart"); //duplicate with ArrayELResolver in dart
-#source("src/LocalStrings.dart");
-#source("src/MapELResolver.dart");
-#source("src/MethodExpression.dart");
-#source("src/MethodInfo.dart");
-#source("src/MethodNotFoundException.dart");
-#source("src/PropertyNotFoundException.dart");
-#source("src/PropertyNotWritableException.dart");
-//#source("src/ResourceBundleELResolver.dart");
-#source("src/ValueExpression.dart");
-#source("src/ValueReference.dart");
-#source("src/VariableMapper.dart");
+part 'src/ArrayELResolver.dart';
+part 'src/BeanELResolver.dart';
+part 'src/CompositeELResolver.dart';
+part 'src/ELContext.dart';
+part 'src/ELContextEvent.dart';
+part 'src/ELContextListener.dart';
+part 'src/ELException.dart';
+part 'src/ELResolver.dart';
+part 'src/Expression.dart';
+part 'src/ExpressionFactory.dart';
+part 'src/FunctionMapper.dart';
+//part 'src/ListELResolver.dart'; //duplicate with ArrayELResolver in dart
+part 'src/LocalStrings.dart';
+part 'src/MapELResolver.dart';
+part 'src/MethodExpression.dart';
+part 'src/MethodInfo.dart';
+part 'src/MethodNotFoundException.dart';
+part 'src/PropertyNotFoundException.dart';
+part 'src/PropertyNotWritableException.dart';
+//part 'src/ResourceBundleELResolver.dart';
+part 'src/ValueExpression.dart';
+part 'src/ValueReference.dart';
+part 'src/VariableMapper.dart';
 
-#source("src/VarELResolver.dart");
-#source("src/ClassELResolver.dart");
-#source("src/LibELResolver.dart");
-#source("src/MessageFormat.dart");
-#source("src/PropertiesBundle.dart");
-#source("src/NoSuchClassException.dart");
-#source("src/ClassUtil.dart");
-#source("src/ELUtil.dart");
+part 'src/VarELResolver.dart';
+part 'src/ClassELResolver.dart';
+part 'src/LibELResolver.dart';
+part 'src/MessageFormat.dart';
+part 'src/PropertiesBundle.dart';
+part 'src/NoSuchClassException.dart';
+part 'src/ClassUtil.dart';
+part 'src/ELUtil.dart';

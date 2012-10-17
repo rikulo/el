@@ -1,11 +1,11 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 26, 2012  11:13:24 AM
 // Author: hernichen
-#import("dart:mirrors");
+import 'dart:mirrors';
 
-#import("package:unittest/unittest.dart");
-#import("package:rikulo_el/el.dart");
-#import("package:rikulo_el/impl.dart");
+import 'package:unittest/unittest.dart';
+import 'package:rikulo_el/el.dart';
+import 'package:rikulo_el/impl.dart';
 
 //@Test
 void testEquals() {
