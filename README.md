@@ -6,6 +6,7 @@
 
 * [Home](http://rikulo.org)
 * [Tutorial](http://blog.rikulo.org/posts/2012/Sep/Tutorial/rikulo-el-an-expression-language-for-and-in-dart/)
+* [API Reference](http://api.rikulo.org/rikulo-el/latest/)
 * [Discussion](http://stackoverflow.com/questions/tagged/rikulo)
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
