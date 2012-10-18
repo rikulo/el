@@ -29,7 +29,6 @@ else
   dartcmd=dart
 fi
 outdir=$homedir/out
-srcfl=$homedir/dartdoc/dartdoc.dart
 
 if [ -d $outdir ] ; then
 	rm -rf $outdir/docs
@@ -41,10 +40,11 @@ if [ "$TERM" = "cygwin" ] || [ "$OSTYPE" = "cygwin" ] ; then
 fi
 
 PATH=$PATH:$SDK/bin
-echo Compiling $srcfl
-$dartcmd $dartdoc --exclude-lib _____ --out $homedir/out/docs $srcfl
-if [ ! -f $homedir/out/docs/index.html ] ; then
-	echo $homedir/docs/index.html not found. Failed?
+echo Compiling $homedir/lib
+mkdir -p $outdir/docs
+$dartcmd $dartdoc --out $outdir/docs $homedir/lib/*.dart
+if [ ! -f $outdir/docs/index.html ] ; then
+	echo $outdir/docs/index.html not found. Failed?
 	exit 1
 fi
 
