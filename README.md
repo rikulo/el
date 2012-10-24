@@ -29,7 +29,7 @@ To install stuff that is still in development, add this to your `pubspec.yam`:
 
     dependencies:
       rikulo_el:
-        git: git@github.com:rikulo/rikulo-el.git
+        git: git://github.com/rikulo/rikulo-el.git
 
 For more information, please refer to [Pub: Dependencies](http://pub.dartlang.org/doc/pubspec.html#dependencies).
 
