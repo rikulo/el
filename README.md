@@ -6,12 +6,13 @@
 
 * [Home](http://rikulo.org)
 * [Tutorial](http://blog.rikulo.org/posts/2012/Sep/Tutorial/rikulo-el-an-expression-language-for-and-in-dart/)
+* [API Reference](http://api.rikulo.org/rikulo-el/latest/)
 * [Discussion](http://stackoverflow.com/questions/tagged/rikulo)
 * [Issues](https://github.com/rikulo/rikulo-el/issues)
 
 Rikulo EL is distributed under the Apache 2.0 License.
 
-##Installation
+##Install from Dart Pub Repository
 
 Add this to your `pubspec.yaml` (or create it):
 
@@ -21,6 +22,16 @@ Add this to your `pubspec.yaml` (or create it):
 Then run the [Pub Package Manager](http://pub.dartlang.org/doc) (comes with the Dart SDK):
 
     pub install
+
+##Install from Github for Bleeding Edge Stuff
+
+To install stuff that is still in development, add this to your `pubspec.yam`:
+
+    dependencies:
+      rikulo_el:
+        git: git://github.com/rikulo/rikulo-el.git
+
+For more information, please refer to [Pub: Dependencies](http://pub.dartlang.org/doc/pubspec.html#dependencies).
 
 ##Usage
 
