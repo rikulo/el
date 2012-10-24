@@ -12,8 +12,8 @@
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the fields.
  */
-class ParseException extends ExceptionImplementation {
-
+class ParseException implements Exception {
+  final message;
   /**
    * This constructor is used by the method "generateParseException"
    * in the generated parser.  Calling this constructor generates
@@ -23,7 +23,7 @@ class ParseException extends ExceptionImplementation {
   ParseException.fromToken(Token currentTokenVal,
                         List<List<int>> expectedTokenSequencesVal,
                         List<String> tokenImageVal)
-      : super(_initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal)) {
+      : this.message = _initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal) {
 
     this.currentToken_ = currentTokenVal;
     this.expectedTokenSequences_ = expectedTokenSequencesVal;
@@ -31,8 +31,9 @@ class ParseException extends ExceptionImplementation {
   }
 
   /** Constructor with message. */
-  ParseException([String message])
-      : super(message);
+  ParseException([this.message]);
+
+  String toString() => (message == null) ? "Exception:" : "Exception: $message";
 
   /**
    * This is the last token that has been consumed successfully.  If
@@ -161,6 +162,8 @@ class ParseException extends ExceptionImplementation {
       }
       return retval.toString();
    }
+
+
 }
 
 /* JavaCC - OriginalChecksum=87586a39aa89f164889cc59bc6a7e7ad (do not edit this line) */

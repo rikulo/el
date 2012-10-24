@@ -4,7 +4,7 @@
 //Port from Tomcat 7.0.x (java -> dart)
 
 /** Token Manager Error. */
-class TokenMgrError extends ExceptionImplementation
+class TokenMgrError implements Exception
 {
 
   /*
@@ -36,6 +36,8 @@ class TokenMgrError extends ExceptionImplementation
    * one of the above 4 values.
    */
   int errorCode_;
+
+  final message;
 
   /**
    * Replaces unprintable characters by their escaped (or unicode escaped)
@@ -127,15 +129,17 @@ class TokenMgrError extends ExceptionImplementation
    */
 
   /** Constructor with message and reason. */
- TokenMgrError.fromMessage([String message, int reason])
-      : super(message) {
+ TokenMgrError.fromMessage([this.message, int reason]) {
     errorCode_ = reason;
   }
 
   /** Full Constructor. */
  TokenMgrError(bool EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, int curChar, int reason)
-      : super(LexicalError_(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar)) {
+      : this.message = LexicalError_(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar) {
     errorCode_ = reason;
   }
+
+  String toString() => (message == null) ?
+      "Exception: error code: $errorCode_" : "Exception: $message, error code: $errorCode_";
 }
 /* JavaCC - OriginalChecksum=de3ff0bacfb0fe749cc8eaf56ae82fea (do not edit this line) */

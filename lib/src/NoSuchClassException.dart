@@ -3,7 +3,9 @@
 // Author: hernichen
 
 /** Exception thrown because of non-existing class */
-class NoSuchClassException extends ExceptionImplementation {
-  const NoSuchClassException([msg])
-      : super(msg);
+class NoSuchClassException implements Exception {
+  final message;
+  const NoSuchClassException([this.message]);
+
+  String toString() => (message == null) ? "Exception:" : "Exception: $message";
 }

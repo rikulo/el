@@ -2305,9 +2305,10 @@ class JJCalls {
   JJCalls next_;
 }
 
-class _LookaheadSuccess extends ExceptionImplementation {
-  _LookaheadSuccess([msg])
-      : super(msg);
+class _LookaheadSuccess implements Exception {
+  final message;
+  _LookaheadSuccess([this.message]);
+  String toString() => (message == null) ? "Exception:" : "Exception: $message";
 }
 
 //20120920, henrichen: new and initialize.
