@@ -33,6 +33,6 @@ class VariableMapperFactory extends VariableMapper {
 
     //@Override
     ValueExpression setVariable(String variable, ValueExpression expression) {
-        throw new UnsupportedOperationException("Cannot Set Variables on Factory");
+        throw new UnsupportedError("Cannot Set Variables on Factory");
     }
 }

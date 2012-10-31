@@ -2,9 +2,8 @@
 //History: Tue, Sep 25, 2012  11:15:34 AM
 // Author: hernichen
 
-import 'dart:mirrors';
-
 import 'package:unittest/unittest.dart';
+import 'package:rikulo_commons/mirrors.dart';
 import 'package:rikulo_el/el.dart';
 import 'package:rikulo_el/impl.dart';
 

@@ -57,7 +57,7 @@ class MapELResolver extends ELResolver {
             try {
                 Map<Object, Object> map = base;
                 base[property] = value;
-            } on UnsupportedOperationException catch(e) {
+            } on UnsupportedError catch(e) {
                 throw new PropertyNotWritableException(property, e);
             }
         }

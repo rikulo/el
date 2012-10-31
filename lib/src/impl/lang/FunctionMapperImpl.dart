@@ -55,13 +55,8 @@ class ELFunction {
     //@Override
     bool equals(Object obj) {
         if (obj is ELFunction) {
-            return this.hashCode() == obj.hashCode();
+            return this.hashCode == obj.hashCode;
         }
         return false;
-    }
-
-    //@Override
-    int hashCode() {
-        return "${this.prefix_}:${this.localName_}".hashCode();
     }
 }

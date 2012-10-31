@@ -30,11 +30,11 @@ class MethodExpressionLiteral implements MethodExpression {
   //@Override
   bool operator ==(MethodExpression other)
     => other is MethodExpressionLiteral
-       && this.hashCode() == (other as MethodExpressionLiteral).hashCode();
+       && this.hashCode == (other as MethodExpressionLiteral).hashCode;
 
   //@Override
-  int hashCode()
-    => this._expr.hashCode();
+  int get hashCode
+    => this._expr.hashCode;
 
   //@Override
   bool isLiteralText()

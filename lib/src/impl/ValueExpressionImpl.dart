@@ -26,7 +26,7 @@ class ValueExpressionImpl implements ValueExpression {
   //@Override
   bool operator ==(ValueExpression other)
     => other is ValueExpressionImpl
-       && (other as ValueExpressionImpl).hashCode() == this.hashCode();
+       && (other as ValueExpressionImpl).hashCode == this.hashCode;
 
   //@Override
   ClassMirror getExpectedType()
@@ -59,8 +59,8 @@ class ValueExpressionImpl implements ValueExpression {
   }
 
   //@Override
-  int hashCode()
-    => this._getNode().hashCode();
+  int get hashCode
+    => this._getNode().hashCode;
 
   //@Override
   bool isLiteralText() {

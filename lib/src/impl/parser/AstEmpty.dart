@@ -20,9 +20,9 @@ class AstEmpty extends SimpleNode {
         } else if (obj is String) {
             return obj.length == 0;
         } else if (obj is Collection) {
-            return obj.isEmpty();
+            return obj.isEmpty;
         } else if (obj is Map) {
-            return obj.isEmpty();
+            return obj.isEmpty;
         }
         return false;
     }
