@@ -6,6 +6,7 @@ library rikulo_el;
 
 import 'dart:coreimpl';
 import 'dart:mirrors';
+import 'package:rikulo_commons/mirrors.dart';
 
 part 'src/ArrayELResolver.dart';
 part 'src/BeanELResolver.dart';
@@ -36,6 +37,4 @@ part 'src/ClassELResolver.dart';
 part 'src/LibELResolver.dart';
 part 'src/MessageFormat.dart';
 part 'src/PropertiesBundle.dart';
-part 'src/NoSuchClassException.dart';
-part 'src/ClassUtil.dart';
 part 'src/ELUtil.dart';

@@ -6,6 +6,7 @@ library rikulo_el_impl;
 
 import 'dart:coreimpl';
 import 'dart:mirrors';
+import 'package:rikulo_commons/mirrors.dart';
 import 'el.dart';
 
 part 'src/impl/ExpressionFactoryImpl.dart';
