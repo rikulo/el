@@ -129,7 +129,7 @@ abstract class ELContext {
    */
   factory ELContext()
       => CREATOR != null ? CREATOR() :
-         ClassUtil.newInstance("rikulo_el_impl.ELContextImpl");
+         ClassUtil.newInstance("rikulo_elimpl.ELContextImpl");
 
   /** Constructor to be called by subclass */
   ELContext.init()

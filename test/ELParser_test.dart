@@ -6,7 +6,7 @@ import 'dart:mirrors';
 import 'package:unittest/unittest.dart';
 import 'package:rikulo_commons/mirrors.dart';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/impl.dart';
+import 'package:rikulo_el/elimpl.dart';
 
 //@Test
 void testBug49081() {

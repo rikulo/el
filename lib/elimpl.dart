@@ -2,10 +2,11 @@
 //History: Fri, Aug 24, 2012  02:05:55 PM
 // Author: hernichen
 
-library rikulo_el_impl;
+library rikulo_elimpl;
 
 import 'dart:coreimpl';
 import 'dart:mirrors';
+import 'dart:collection';
 import 'package:rikulo_commons/mirrors.dart';
 import 'el.dart';
 

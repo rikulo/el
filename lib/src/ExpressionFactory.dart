@@ -68,7 +68,7 @@ abstract class ExpressionFactory {
    */
   factory ExpressionFactory()
       => CREATOR != null ? CREATOR() :
-         ClassUtil.newInstance("rikulo_el_impl.ExpressionFactoryImpl");
+         ClassUtil.newInstance("rikulo_elimpl.ExpressionFactoryImpl");
 
   /**
    * Function that return a new ExpressionFactory instance. You can configure

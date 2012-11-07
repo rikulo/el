@@ -4,7 +4,7 @@
 
 import 'package:unittest/unittest.dart';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/impl.dart';
+import 'package:rikulo_el/elimpl.dart';
 
 final String a = "1.1";
 final int b = 1000000000000000000000;
