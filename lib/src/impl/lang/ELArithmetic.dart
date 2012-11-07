@@ -157,15 +157,15 @@ abstract class ELArithmetic {
   static bool isNumberType(ClassMirror type)
     => ClassUtil.isAssignableFrom(ClassUtil.NUM_MIRROR, type);
 
-  abstract num add_(num num0, num num1);
+  num add_(num num0, num num1);
 
-  abstract num multiply_(num num0, num num1);
+  num multiply_(num num0, num num1);
 
-  abstract num subtract_(num num0, num num1);
+  num subtract_(num num0, num num1);
 
-  abstract num mod_(num num0, num num1);
+  num mod_(num num0, num num1);
 
-  abstract num coerceNumber_(num num);
+  num coerceNumber_(num num);
 
   num coerce_(Object obj) {
 
@@ -183,11 +183,11 @@ abstract class ELArithmetic {
         [obj, reflect(obj).type.qualifiedName, "num"]));
   }
 
-  abstract num coerceString_(String str);
+  num coerceString_(String str);
 
-  abstract num divide_(num num0, num num1);
+  num divide_(num num0, num num1);
 
-  abstract bool matches_(Object obj0, Object obj1);
+  bool matches_(Object obj0, Object obj1);
 }
 
 //TODO(henri): we don't support BigDecimal yet

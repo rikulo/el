@@ -3,7 +3,7 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-interface NodeVisitor {
+abstract class NodeVisitor {
     void visit(Node node, int index, int level);
     //henrichen@rikulo.org
     void after(Node node, int index, int level);
