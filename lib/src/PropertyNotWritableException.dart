@@ -4,6 +4,6 @@
 //Port from Tomcat 7.0.x (java -> dart)
 
 class PropertyNotWritableException extends ELException {
-  PropertyNotWritableException([String message, Exception cause])
+  PropertyNotWritableException([String message, var cause])
       : super(message, cause);
 }

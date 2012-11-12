@@ -2,11 +2,10 @@
 //History: Tue, Sep 25, 2012  11:15:34 AM
 // Author: hernichen
 
-import 'dart:mirrors';
-
 import 'package:unittest/unittest.dart';
+import 'package:rikulo_commons/mirrors.dart';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/impl.dart';
+import 'package:rikulo_el/elimpl.dart';
 
 void testBug42565() {
   expect(evaluateExpression("\${false?true:false}"), equals("false"));
@@ -112,8 +111,8 @@ void testParserStringLiteral() {
 void compareBoth(String msg, int expected, Object o1, Object o2){
   int i1 = ELSupport.compare(o1, o2);
   int i2 = ELSupport.compare(o2, o1);
-  expect(i1, equals(expected), msg);
-  expect(-i2, equals(expected), msg);
+  expect(i1, equals(expected), reason:msg);
+  expect(-i2, equals(expected), reason:msg);
 }
 
 void testElSupportCompare(){
@@ -124,7 +123,7 @@ void testElSupportCompare(){
   compareBoth("Date(0) should be less than Date(1)",-1, new Date(0), new Date(1));
   try {
     compareBoth("Should not compare",0, new Date.now(), new Map());
-    expect(false, isTrue, "Expecting CastException");
+    expect(false, isTrue, reason:"Expecting CastException");
   } on TypeError catch (expected) {
     // Expected
   }

@@ -103,8 +103,8 @@ class MethodExpressionImpl implements MethodExpression {
   }
 
   //@Override
-  int hashCode()
-    => this._expr.hashCode();
+  int get hashCode
+    => this._expr.hashCode;
 
   //@Override
   bool operator ==(MethodExpression other)

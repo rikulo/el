@@ -4,7 +4,7 @@
 
 import 'dart:mirrors';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/impl.dart';
+import 'package:rikulo_el/elimpl.dart';
 
 class Person {
   static Person xyz = new Person('xyz');

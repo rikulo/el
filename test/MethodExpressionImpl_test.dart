@@ -1,11 +1,12 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  11:53:01 AM
 // Author: hernichen
-import 'dart:mirrors';
 
+import 'dart:mirrors';
 import 'package:unittest/unittest.dart';
+import 'package:rikulo_commons/mirrors.dart';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/impl.dart';
+import 'package:rikulo_el/elimpl.dart';
 
 part 'TesterBeans.dart';
 

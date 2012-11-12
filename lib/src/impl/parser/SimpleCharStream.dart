@@ -457,7 +457,7 @@ class SimpleCharStream
 }
 /* JavaCC - OriginalChecksum=9ba0db3918bffb8019f00da1e421f339 (do not edit this line) */
 
-interface Reader {
+abstract class Reader {
   int read(List<int> cbuf, int off, int len);
   void close();
 }

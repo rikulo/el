@@ -88,12 +88,12 @@ abstract class SimpleNode implements Node {
 
     //@Override
     ClassMirror getType(EvaluationContext ctx) {
-        throw const UnsupportedOperationException("getType");
+        throw new UnsupportedError("getType");
     }
 
     //@Override
     Object getValue(EvaluationContext ctx) {
-        throw const UnsupportedOperationException("getValue");
+        throw new UnsupportedError("getValue");
     }
 
     //@Override
@@ -119,16 +119,16 @@ abstract class SimpleNode implements Node {
 
     //@Override
     Object invoke(EvaluationContext ctx, List<Object> paramValues, [Map<String, Object> namedArgs]) {
-        throw const UnsupportedOperationException("invoke");
+        throw new UnsupportedError("invoke");
     }
 
     //@Override
     MethodInfo getMethodInfo(EvaluationContext ctx) {
-        throw const UnsupportedOperationException("getMethodInfo");
+        throw new UnsupportedError("getMethodInfo");
     }
 
     int _arrayHashCode(List ls) {
-      if (!ls.isEmpty()) {
+      if (!ls.isEmpty) {
         final int prime = 31;
         int result = 1;
         ls.forEach((item) {

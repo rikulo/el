@@ -2,7 +2,7 @@
 
 [Rikulo EL](http://rikulo.org) is an implementation of the [Unified Expression
  Language](http://en.wikipedia.org/wiki/Unified_Expression_Language) 
- specification plus some enhancements for and in Dart. 
+ specification plus enhancements for and in Dart. 
 
 * [Home](http://rikulo.org)
 * [Tutorial](http://blog.rikulo.org/posts/2012/Sep/Tutorial/rikulo-el-an-expression-language-for-and-in-dart/)

@@ -3,7 +3,7 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-interface Node {
+abstract class Node {
 
   /** This method is called after the node has been made the current
     node.  It indicates that child nodes can now be added to it. */

@@ -51,8 +51,8 @@ class ValueExpressionLiteral implements ValueExpression {
   }
 
   //@Override
-  int hashCode()
-    => this._value != null ? this._value.hashCode() : 0;
+  int get hashCode
+    => this._value != null ? this._value.hashCode : 0;
 
   //@Override
   bool isLiteralText()

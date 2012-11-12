@@ -3,15 +3,21 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-class ELException extends ExceptionImplementation {
-  final Exception cause;
+class ELException implements Exception {
+  final cause;
+  final message;
+
   /**
    * Creates an ELException with the given detail message and root cause.
    *
    * + [message] - the detail message
    * + [cause] - the originating cause of this exception
    */
-  const ELException([String message, Exception cause])
+  const ELException([var message, var cause])
       : this.cause = cause,
-        super(message);
+        this.message = message;
+
+  String toString() => (message == null) ?
+      "Exception: ${cause == null ? '' : '\nCaused by\n$cause'}" :
+      "Exception: $message${cause == null ? '' : '\nCaused by\n$cause'}";
 }

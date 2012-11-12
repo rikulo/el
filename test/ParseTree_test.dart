@@ -2,11 +2,9 @@
 //History: Wed, Sep 26, 2012  09:44:11 AM
 // Author: hernichen
 
-import 'dart:mirrors';
-
 import 'package:unittest/unittest.dart';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/impl.dart';
+import 'package:rikulo_el/elimpl.dart';
 
 class ShowVisitor implements NodeVisitor {
   StringBuffer sb = new StringBuffer();
