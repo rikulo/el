@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 class BeanELResolver extends ELResolver {
     final bool _readOnly;
 
@@ -13,7 +15,7 @@ class BeanELResolver extends ELResolver {
     //@Override
     Object getValue(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
         if (base == null || property == null) {
             return null;
@@ -31,7 +33,7 @@ class BeanELResolver extends ELResolver {
     //@Override
     ClassMirror getType(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
         if (base == null || property == null) {
             return null;
@@ -44,7 +46,7 @@ class BeanELResolver extends ELResolver {
     //@Override
     void setValue(ELContext context, Object base, Object property, Object value) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
         if (base == null || property == null) {
             return;
@@ -67,7 +69,7 @@ class BeanELResolver extends ELResolver {
     //@Override
     bool isReadOnly(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
         if (base == null || property == null) {
             return false;
@@ -81,7 +83,7 @@ class BeanELResolver extends ELResolver {
     //@Override
     ClassMirror getCommonPropertyType(ELContext context, Object base) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base != null) {
@@ -111,7 +113,7 @@ class BeanELResolver extends ELResolver {
     Object invoke(ELContext context, Object base, Object method,
             List<Object> params, [Map<String, Object> namedArgs]) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
         if (base == null || method == null) {
             return null;

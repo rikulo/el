@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class VariableMapperFactory extends VariableMapper {
 
     VariableMapper _target;
@@ -10,7 +12,7 @@ class VariableMapperFactory extends VariableMapper {
 
     VariableMapperFactory(VariableMapper target) {
         if (target == null) {
-            throw const NullPointerException("Target VariableMapper cannot be null");
+            throw new ArgumentError("Target VariableMapper cannot be null");
         }
         this._target = target;
     }

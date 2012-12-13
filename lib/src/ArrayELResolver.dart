@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 class ArrayELResolver extends ELResolver {
 
     final bool _readOnly;
@@ -13,7 +15,7 @@ class ArrayELResolver extends ELResolver {
     //@Override
     Object getValue(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base != null && base is List) {
@@ -33,7 +35,7 @@ class ArrayELResolver extends ELResolver {
     //@Override
     ClassMirror getType(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base != null && base is List) {
@@ -50,7 +52,7 @@ class ArrayELResolver extends ELResolver {
     void setValue(ELContext context, Object base, Object property,
             Object value) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base != null && base is List) {
@@ -75,7 +77,7 @@ class ArrayELResolver extends ELResolver {
     //@Override
     bool isReadOnly(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base != null && base is List) {
@@ -104,7 +106,7 @@ class ArrayELResolver extends ELResolver {
 
     static void _checkBounds(Object base, int idx) {
         if (idx < 0 || idx >= (base as List).length) {
-            throw new PropertyNotFoundException(new IndexOutOfRangeException(idx).toString());
+            throw new PropertyNotFoundException(new RangeError(idx).toString());
         }
     }
 
@@ -118,7 +120,7 @@ class ArrayELResolver extends ELResolver {
         if (property is String) {
             return int.parse(property);
         }
-        throw new IllegalArgumentException(property != null ?
+        throw new ArgumentError(property != null ?
                 property.toString() : "null");
     }
 }

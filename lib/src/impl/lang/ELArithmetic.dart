@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 /**
  * Helper class for Arithmetic operation.
  */
@@ -179,7 +181,7 @@ abstract class ELArithmetic {
       return coerceString_(obj);
     }
 
-    throw new IllegalArgumentException(MessageFactory.getString("error.convert",
+    throw new ArgumentError(MessageFactory.getString("error.convert",
         [obj, reflect(obj).type.qualifiedName, "num"]));
   }
 

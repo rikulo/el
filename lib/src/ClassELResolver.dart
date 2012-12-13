@@ -2,6 +2,8 @@
 //History: Wed, Oct 03, 2012  06:55:03 PM
 // Author: hernichen
 
+part of rikulo_el;
+
 /**
  * Resolve ClassMirror static variable and static method.
  */
@@ -15,7 +17,7 @@ class ClassELResolver implements ELResolver {
   //@Override
   Object getValue(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! ClassMirror)
       return null;
@@ -32,7 +34,7 @@ class ClassELResolver implements ELResolver {
   //@Override
   ClassMirror getType(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! ClassMirror)
       return null;
@@ -49,7 +51,7 @@ class ClassELResolver implements ELResolver {
   //@Override
   void setValue(ELContext context, Object base, Object property, Object value) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! ClassMirror)
       return;
@@ -71,7 +73,7 @@ class ClassELResolver implements ELResolver {
   //@Override
   bool isReadOnly(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! ClassMirror)
       return false;
@@ -91,7 +93,7 @@ class ClassELResolver implements ELResolver {
   //@Override
   ClassMirror getCommonPropertyType(ELContext context, Object base) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     return base != null ? ClassUtil.OBJECT_MIRROR : null;
   }
@@ -100,7 +102,7 @@ class ClassELResolver implements ELResolver {
   Object invoke(ELContext context, Object base, Object method,
                 List params, [Map<String, Object> namedArgs]) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || method == null || base is! ClassMirror)
       return null;

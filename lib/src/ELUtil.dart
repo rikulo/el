@@ -2,6 +2,8 @@
 //History: Tue, Oct 2, 2012  04:30:08 PM
 // Author: hernichen
 
+part of rikulo_el;
+
 /**
  * Utility class for Rikulo EL.
  */

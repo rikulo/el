@@ -2,6 +2,8 @@
 //History: Wed, Sep 12, 2012  03:52:08 PM
 // Author: hernichen
 
+part of rikulo_el;
+
 class MessageFormat {
   static final int _QUOTE = "'".charCodeAt(0);
   static final int _LBRACE = "{".charCodeAt(0);

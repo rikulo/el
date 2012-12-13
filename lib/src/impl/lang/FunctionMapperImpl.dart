@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class FunctionMapperImpl extends FunctionMapper {
 
     Map<String, ELFunction> functions_ = null;
@@ -38,10 +40,10 @@ class ELFunction {
      */
     ELFunction(String prefix, String localName, Function m) {
         if (localName == null) {
-            throw const NullPointerException("LocalName cannot be null");
+            throw new ArgumentError("LocalName cannot be null");
         }
         if (m == null) {
-            throw const NullPointerException("MethodMirror cannot be null");
+            throw new ArgumentError("Function cannot be null");
         }
         this.prefix_ = prefix;
         this.localName_ = localName;

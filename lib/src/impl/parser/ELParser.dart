@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class ELParser {
   JJTELParserState jj_save_ = new JJTELParserState();
 
@@ -71,7 +73,7 @@ class ELParser {
         jj_save_.closeNodeScopeByCondition(jjtn000, true);
       }
     }
-    throw const Exception("Missing return statement in function");
+    throw new Exception("Missing return statement in function");
   }
 
 /*

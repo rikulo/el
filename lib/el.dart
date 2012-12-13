@@ -4,7 +4,6 @@
 
 library rikulo_el;
 
-import 'dart:coreimpl';
 import 'dart:mirrors';
 import 'dart:collection';
 import 'package:rikulo_commons/mirrors.dart';

@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 /**
  * Context used in EL expression parsing and evaluation.
  */
@@ -30,12 +32,14 @@ abstract class ELContext {
    * + [contextObject] - the associated object of the class.
    */
   void putContext(ClassMirror key, Object contextObject) {
-      if (key == null || contextObject == null) {
-          throw const NullPointerException();
+      if (key == null) {
+        throw new ArgumentError("key cannot be null");
       }
+      if (contextObject == null)
+        throw new ArgumentError("contextObject cannot be null");
 
       if (this._map == null) {
-          this._map = new Map();
+        this._map = new Map();
       }
 
       this._map[key] = contextObject;

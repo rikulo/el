@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class FunctionMapperFactory implements FunctionMapper {
 
     FunctionMapperImpl memento_ = null;
@@ -10,7 +12,7 @@ class FunctionMapperFactory implements FunctionMapper {
 
     FunctionMapperFactory(FunctionMapper mapper) {
         if (mapper == null) {
-            throw const NullPointerException("FunctionMapper target cannot be null");
+            throw new ArgumentError("FunctionMapper target cannot be null");
         }
         this.target_ = mapper;
     }

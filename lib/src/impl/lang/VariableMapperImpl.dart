@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class VariableMapperImpl extends VariableMapper {
 
     Map<String, ValueExpression> _vars = new Map();

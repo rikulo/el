@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class ExpressionFactoryImpl implements ExpressionFactory {
 
     //@Override
@@ -21,7 +23,7 @@ class ExpressionFactoryImpl implements ExpressionFactory {
     ValueExpression createValueExpression(ELContext context,
             String expression, ClassMirror expectedType) {
         if (expectedType == null) {
-            throw new NullPointerException(MessageFactory
+            throw new ArgumentError(MessageFactory
                     .getString("error.value.expectedType"));
         }
 
@@ -33,7 +35,7 @@ class ExpressionFactoryImpl implements ExpressionFactory {
     ValueExpression createValueExpressionByInstance(Object instance,
             ClassMirror expectedType) {
         if (expectedType == null) {
-            throw new NullPointerException(MessageFactory
+            throw new ArgumentError(MessageFactory
                     .getString("error.value.expectedType"));
         }
         return new ValueExpressionLiteral(instance, expectedType);

@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class ExpressionBuilder implements NodeVisitor {
     static final Map<String, Node> _cache = new Map();
 

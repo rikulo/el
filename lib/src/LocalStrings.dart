@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 class LocalStrings extends PropertiesBundle {
   static final Map<String, Map<String, String>> _msgs = const {
     "en_US" : const {

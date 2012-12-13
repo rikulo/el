@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 /**
  * An event which indicates that an ELContext has been created.
  * The source object is the ELContext that was created.

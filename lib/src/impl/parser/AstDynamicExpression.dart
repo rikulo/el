@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class AstDynamicExpression extends SimpleNode {
     AstDynamicExpression(int id)
         : super(id);

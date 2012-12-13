@@ -2,6 +2,8 @@
 //History: Sat, Sep 29, 2012  04:08:11 PM
 // Author: hernichen
 
+part of rikulo_el;
+
 //issue3: resolve top level variable
 class VarELResolver implements ELResolver {
   final bool _readOnly;
@@ -12,7 +14,7 @@ class VarELResolver implements ELResolver {
   //@Override
   Object getValue(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base != null || property == null)
       return null;
@@ -33,7 +35,7 @@ class VarELResolver implements ELResolver {
   //@Override
   ClassMirror getType(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base != null || property == null)
       return null;
@@ -49,7 +51,7 @@ class VarELResolver implements ELResolver {
   //@Override
   void setValue(ELContext context, Object base, Object property, Object value) {
     if (context == null) {
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
     }
     if (base != null || property == null) {
       return;
@@ -75,7 +77,7 @@ class VarELResolver implements ELResolver {
   //@Override
   bool isReadOnly(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base != null || property == null)
       return false;
@@ -91,7 +93,7 @@ class VarELResolver implements ELResolver {
   //@Override
   ClassMirror getCommonPropertyType(ELContext context, Object base) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     return base == null ? ClassUtil.OBJECT_MIRROR : null;
   }

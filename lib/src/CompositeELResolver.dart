@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 class CompositeELResolver extends ELResolver {
     int _size;
 
@@ -15,7 +17,7 @@ class CompositeELResolver extends ELResolver {
 
     void add(ELResolver elResolver) {
         if (elResolver == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("elResolver: null");
         }
         if (this._size >= this._resolvers.length) {
             List<ELResolver> nr = new List(this._size * 2);

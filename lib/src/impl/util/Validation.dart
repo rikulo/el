@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class Validation {
   static bool _SKIP_IDENTIFIER_CHECK = false;
 
@@ -43,5 +45,5 @@ class Validation {
     return _IDENT.hasMatch(key);
   }
 
-  static RegExp _IDENT = const RegExp("^[A-Za-z_]{1}[A-Za-z0-9_]*");
+  static RegExp _IDENT = new RegExp("^[A-Za-z_]{1}[A-Za-z0-9_]*");
 }

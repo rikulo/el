@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 class PropertyNotWritableException extends ELException {
   PropertyNotWritableException([String message, var cause])
       : super(message, cause);

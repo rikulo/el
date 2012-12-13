@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_el;
+
 class MapELResolver extends ELResolver {
 
     final bool _readOnly;
@@ -13,7 +15,7 @@ class MapELResolver extends ELResolver {
     //@Override
     Object getValue(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base is Map) {
@@ -28,7 +30,7 @@ class MapELResolver extends ELResolver {
     //@Override
     ClassMirror getType(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base is Map) {
@@ -43,7 +45,7 @@ class MapELResolver extends ELResolver {
     void setValue(ELContext context, Object base, Object property,
             Object value) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base is Map) {
@@ -66,7 +68,7 @@ class MapELResolver extends ELResolver {
     //@Override
     bool isReadOnly(ELContext context, Object base, Object property) {
         if (context == null) {
-            throw const NullPointerException();
+            throw new ArgumentError("context: null");
         }
 
         if (base is Map) {

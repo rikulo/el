@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by

@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class MessageFactory {
   static PropertiesBundle _bundle = new Messages("en_US"); //TODO(henri) : use current Locale
 

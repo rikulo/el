@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class AstMethodParameters extends SimpleNode {
     AstMethodParameters(int id)
         : super(id);

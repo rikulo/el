@@ -2,6 +2,8 @@
 //History: Tue, Sep 25, 2012  04:15:10 PM
 // Author: hernichen
 
+part of rikulo_elimpl;
+
 class ParameterInfo {
   List<ParameterMirror> positionals = new List();
   List<ParameterMirror> optionals = new List();

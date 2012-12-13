@@ -2,6 +2,8 @@
 //History: Wed, Oct 03, 2012  06:55:03 PM
 // Author: hernichen
 
+part of rikulo_el;
+
 /**
  * Resolve LibraryMirror variable and function.
  */
@@ -15,7 +17,7 @@ class LibELResolver implements ELResolver {
   //@Override
   Object getValue(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! LibraryMirror)
       return null;
@@ -42,7 +44,7 @@ class LibELResolver implements ELResolver {
   //@Override
   ClassMirror getType(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! LibraryMirror)
       return null;
@@ -59,7 +61,7 @@ class LibELResolver implements ELResolver {
   //@Override
   void setValue(ELContext context, Object base, Object property, Object value) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! LibraryMirror)
       return;
@@ -81,7 +83,7 @@ class LibELResolver implements ELResolver {
   //@Override
   bool isReadOnly(ELContext context, Object base, Object property) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || property == null || base is! LibraryMirror)
       return false;
@@ -101,7 +103,7 @@ class LibELResolver implements ELResolver {
   //@Override
   ClassMirror getCommonPropertyType(ELContext context, Object base) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     return base != null ? ClassUtil.OBJECT_MIRROR : null;
   }
@@ -110,7 +112,7 @@ class LibELResolver implements ELResolver {
   Object invoke(ELContext context, Object base, Object method,
                 List params, [Map<String, Object> namedArgs]) {
     if (context == null)
-      throw const NullPointerException();
+      throw new ArgumentError("context: null");
 
     if (base == null || method == null || base is! LibraryMirror)
       return null;

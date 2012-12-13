@@ -2,6 +2,8 @@
 //History: Tue, Sep 18, 2012  10:00:01 AM
 // Author: hernichen
 
+part of rikulo_elimpl;
+
 //#issue1: support Dart's array expression
 class AstArray extends SimpleNode {
 

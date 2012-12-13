@@ -3,7 +3,9 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
-class ELContextWrapper extends ELContext {
+part of rikulo_elimpl;
+
+class ELContextWrapper extends ELContextImpl implements ELContext {
 
     final ELContext _target;
     final FunctionMapper _fnMapper;

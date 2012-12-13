@@ -3,6 +3,8 @@
 // Author: hernichen
 //Port from Tomcat 7.0.x (java -> dart)
 
+part of rikulo_elimpl;
+
 class ELContextImpl extends ELContext {
   static final ELResolver _DefaultResolver =
       new CompositeELResolver()

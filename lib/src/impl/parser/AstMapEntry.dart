@@ -2,6 +2,8 @@
 //History: Thu, Sep 27, 2012  09:49:27 AM
 // Author: hernichen
 
+part of rikulo_elimpl;
+
 //#issue1: support Dart's map exprssion
 class AstMapEntry extends SimpleNode {
     AstMapEntry(int id)

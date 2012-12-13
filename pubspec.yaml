@@ -7,4 +7,6 @@ authors:
 - Henri Chen <henrichen@rikulo.org>
 homepage: http://rikulo.org
 dependencies:
-  rikulo_commons:
+  js: any
+  unittest: any
+  rikulo_commons: { git: git://github.com/rikulo/commons.git }

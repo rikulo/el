@@ -8,7 +8,7 @@ import 'package:rikulo_commons/mirrors.dart';
 import 'package:rikulo_el/el.dart';
 import 'package:rikulo_el/elimpl.dart';
 
-part 'TesterBeans.dart';
+import 'TesterBeans.dart';
 
 //@Test
 void testGetValueReference() {
