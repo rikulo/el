@@ -9,4 +9,4 @@ homepage: http://rikulo.org
 dependencies:
   js: any
   unittest: any
-  rikulo_commons: { git: git://github.com/rikulo/commons.git }
+  rikulo_commons: any
