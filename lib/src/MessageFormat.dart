@@ -5,16 +5,16 @@
 part of rikulo_el;
 
 class MessageFormat {
-  static final int _QUOTE = "'".charCodeAt(0);
-  static final int _LBRACE = "{".charCodeAt(0);
-  static final int _RBRACE = "}".charCodeAt(0);
+  static final int _QUOTE = "'".codeUnitAt(0);
+  static final int _LBRACE = "{".codeUnitAt(0);
+  static final int _RBRACE = "}".codeUnitAt(0);
 
 	static String format(String pattern, List props) {
     StringBuffer sb = new StringBuffer();
     int openQuote = -2;
     int lbrace = -2;
     for (int j = 0; j < pattern.length; ++j) {
-      int ch = pattern.charCodeAt(j);
+      int ch = pattern.codeUnitAt(j);
       if (ch ==_QUOTE) {
         if ((openQuote + 1) == j) {//consequtive quotes
           if (lbrace >= 0)

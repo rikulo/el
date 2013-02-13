@@ -153,7 +153,7 @@ class ParseException implements Exception {
               retval.add("\\\\");
               continue;
            default:
-              if ((ch = str.charCodeAt(i)) < 0x20 || ch > 0x7e) {
+              if ((ch = str.codeUnitAt(i)) < 0x20 || ch > 0x7e) {
                  String s = "0000${ch.toRadixString(16)}";
                  retval.add("\\u${s.substring(s.length - 4, s.length)}");
               } else if (ch != 0) {

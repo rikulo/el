@@ -474,7 +474,7 @@ class StringReader implements Reader {
     if (off >= _ref.length) return -1;
     int count = 0;
     for(int j = off; j < _ref.length && count < len; ++j) {
-      cbuf[count++] = _ref.charCodeAt(j);
+      cbuf[count++] = _ref.codeUnitAt(j);
     }
     return count;
   }
