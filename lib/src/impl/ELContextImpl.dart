@@ -21,9 +21,12 @@ class ELContextImpl extends ELContext {
 
   Map _attrs;
 
-  ELContextImpl([ELResolver resolver])
-      : this._resolver = resolver == null ? getDefaultResolver() : resolver,
-        super.init();
+  ELContextImpl({ELResolver elResolver, VariableMapper variableMapper, FunctionMapper functionMapper})
+      : this._resolver = elResolver == null ? getDefaultResolver() : elResolver,
+        super.init() {
+    setVariableMapper(variableMapper);
+    setFunctionMapper(functionMapper);
+  }
 
   //@Override
   ELResolver getELResolver() {

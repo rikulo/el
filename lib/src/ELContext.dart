@@ -131,9 +131,10 @@ abstract class ELContext {
    * ELContext.CREATOR is an [ELContextCreator] function that
    * should return an instance of ELContext.
    */
-  factory ELContext()
-      => CREATOR != null ? CREATOR() :
-         ClassUtil.newInstance("rikulo_elimpl.ELContextImpl");
+  factory ELContext({VariableMapper variableMapper, FunctionMapper functionMapper})
+  => CREATOR != null ?
+    CREATOR(variableMapper: variableMapper, functionMapper: functionMapper) :
+    new ELContextImpl(variableMapper: variableMapper, functionMapper: functionMapper);
 
   /** Constructor to be called by subclass */
   ELContext.init()
@@ -157,4 +158,5 @@ abstract class ELContext {
 }
 
 /** A function that return an ELContext */
-typedef ELContext ELContextCreator();
+typedef ELContext ELContextCreator(
+  {VariableMapper variableMapper, FunctionMapper functionMapper});

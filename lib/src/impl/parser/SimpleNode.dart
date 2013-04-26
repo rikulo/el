@@ -160,7 +160,7 @@ abstract class SimpleNode implements Node {
             return false;
         }
         SimpleNode other = obj;
-        if (!ListUtil.equals(children_, other.children_)) {
+        if (!ListUtil.areEqual(children_, other.children_)) {
             return false;
         }
         if (id_ != other.id_) {

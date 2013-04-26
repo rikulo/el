@@ -9,6 +9,8 @@ import 'dart:collection';
 import 'package:rikulo_commons/mirrors.dart';
 import 'package:rikulo_commons/util.dart' show ListUtil;
 
+import "elimpl.dart" show ELContextImpl, ExpressionFactoryImpl;
+
 part 'src/ArrayELResolver.dart';
 part 'src/BeanELResolver.dart';
 part 'src/CompositeELResolver.dart';

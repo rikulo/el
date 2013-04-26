@@ -53,11 +53,10 @@ Using Rikulo EL is straightforward.
     }
 
     void main() {
-      ExpressionFactory ef = new ExpressionFactory();
-      ValueExpression ve = ef.createValueExpression(
-        new ELContext()..setFunctionMapper(new _FunctionMapper()),
+      ValueExpression expr = new ExpressionFactory().createValueExpression(
+        new ELContext(functionMapper: new _FunctionMapper()),
         'Hello, #{owner().name}!', reflect('').type);
-      print(ve.getValue(ctx)); //'Hello, Rikulo!'
+      print(expr.getValue(ctx)); //'Hello, Rikulo!'
     }
 
 ##Notes to Contributors
