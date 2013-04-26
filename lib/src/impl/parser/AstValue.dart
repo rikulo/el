@@ -181,7 +181,7 @@ class AstValue extends SimpleNode {
         Target_ t = _getTarget(ctx);
         MethodMirror m = ReflectionUtil.getMethod(
                 t.base_, t.property_);
-        return new MethodInfo(m.simpleName, ClassUtil.getCorrespondingClassMirror(m.returnType));
+        return new MethodInfo(m.simpleName, m.returnType);
     }
 
     //@Override

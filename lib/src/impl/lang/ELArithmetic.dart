@@ -157,7 +157,7 @@ abstract class ELArithmetic {
 //    => obj is num || obj is BigDecimal;
 
   static bool isNumberType(ClassMirror type)
-    => ClassUtil.isAssignableFrom(ClassUtil.NUM_MIRROR, type);
+    => ClassUtil.isAssignableFrom(NUM_MIRROR, type);
 
   num add_(num num0, num num1);
 

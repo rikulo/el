@@ -44,7 +44,7 @@ abstract class SimpleNode implements Node {
             children_ = new List(i + 1);
         } else if (i >= children_.length) {
             List<Node> c = new List(i + 1);
-            Arrays.copy(children_, 0, c, 0, children_.length);
+            ListUtil.copy(children_, 0, c, 0, children_.length);
             children_ = c;
         }
         children_[i] = n;
@@ -160,7 +160,7 @@ abstract class SimpleNode implements Node {
             return false;
         }
         SimpleNode other = obj;
-        if (!Arrays.areEqual(children_, other.children_)) {
+        if (!ListUtil.equals(children_, other.children_)) {
             return false;
         }
         if (id_ != other.id_) {

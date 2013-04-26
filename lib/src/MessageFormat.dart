@@ -18,18 +18,18 @@ class MessageFormat {
       if (ch ==_QUOTE) {
         if ((openQuote + 1) == j) {//consequtive quotes
           if (lbrace >= 0)
-            sb.add(pattern.substring(lbrace, openQuote));
-          sb.add("'");
+            sb.write(pattern.substring(lbrace, openQuote));
+          sb.write("'");
           openQuote = lbrace = -2;
         }
         else if (openQuote >= 0) {
-          sb.add(pattern.substring(openQuote + 1, j));
+          sb.write(pattern.substring(openQuote + 1, j));
           openQuote = lbrace = -2;
         }
         else {
           openQuote = j;
           if (lbrace >= 0) {
-            sb.add(pattern.substring(lbrace, j));
+            sb.write(pattern.substring(lbrace, j));
             lbrace = -2;
           }
         }
@@ -40,13 +40,13 @@ class MessageFormat {
       }
       else if (ch == _RBRACE) {
         if (lbrace >= 0) {
-          sb.add(props[int.parse(pattern.substring(lbrace+1, j))]);
+          sb.write(props[int.parse(pattern.substring(lbrace+1, j))]);
           lbrace = -2;
         } else if (openQuote < 0)
-          sb.add('}');
+          sb.write('}');
       }
       else if (lbrace < 0 && openQuote < 0){
-        sb.addCharCode(ch);
+        sb.writeCharCode(ch);
       }
     }
     return sb.toString();

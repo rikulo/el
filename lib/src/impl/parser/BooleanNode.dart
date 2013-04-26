@@ -13,7 +13,5 @@ class BooleanNode extends SimpleNode {
         : super(i);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.BOOL_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => BOOL_MIRROR;
 }

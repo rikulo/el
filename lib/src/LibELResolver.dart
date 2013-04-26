@@ -25,14 +25,14 @@ class LibELResolver implements ELResolver {
     LibraryMirror lm = base;
 
     //try top level getter
-    MethodMirror getter = lm.getters[property];
+    MethodMirror getter = lm.getters[new Symbol(property)];
     if (getter != null && getter.isStatic) {
       context.setPropertyResolved(true);
-      return ClassUtil.invokeObjectMirror(lm, getter, []);
+      return ClassUtil.invokeByMirror(lm, getter, []);
     }
 
     //try class in library
-    ClassMirror clz = lm.classes[property];
+    ClassMirror clz = lm.classes[new Symbol(property)];
     if (clz != null) {
       context.setPropertyResolved(true);
       return clz;
@@ -42,7 +42,7 @@ class LibELResolver implements ELResolver {
   }
 
   //@Override
-  ClassMirror getType(ELContext context, Object base, Object property) {
+  TypeMirror getType(ELContext context, Object base, Object property) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -50,12 +50,12 @@ class LibELResolver implements ELResolver {
       return null;
 
     LibraryMirror lm = base;
-    MethodMirror getter = lm.getters[property];
+    MethodMirror getter = lm.getters[new Symbol(property)];
     if (getter == null || !getter.isStatic)
       return null;
 
     context.setPropertyResolved(true);
-    return ClassUtil.getCorrespondingClassMirror(getter.returnType);
+    return getter.returnType;
   }
 
   //@Override
@@ -67,7 +67,7 @@ class LibELResolver implements ELResolver {
       return;
 
     LibraryMirror lm = base;
-    MethodMirror setter = lm.setters[property];
+    MethodMirror setter = lm.setters[new Symbol(property)];
     if (setter == null  || !setter.isStatic)
       return;
 
@@ -77,7 +77,7 @@ class LibELResolver implements ELResolver {
       throw new PropertyNotWritableException(message(context,
                "resolverNotWriteable", [property]));
 
-    ClassUtil.invokeObjectMirror(lm, setter, [value]);
+    ClassUtil.invokeByMirror(lm, setter, [value]);
   }
 
   //@Override
@@ -95,8 +95,7 @@ class LibELResolver implements ELResolver {
 
   bool _hasSetter(Object base, Object property) {
     LibraryMirror lm = base;
-    String name = "${property}=";
-    MethodMirror setter = lm.setters[name];
+    MethodMirror setter = lm.setters[new Symbol("${property}=")];
     return setter != null && setter.isStatic;
   }
 
@@ -105,7 +104,7 @@ class LibELResolver implements ELResolver {
     if (context == null)
       throw new ArgumentError("context: null");
 
-    return base != null ? ClassUtil.OBJECT_MIRROR : null;
+    return base != null ? OBJECT_MIRROR : null;
   }
 
   //@Override
@@ -119,11 +118,11 @@ class LibELResolver implements ELResolver {
 
     String methodName = method.toString();
     LibraryMirror lm = base;
-    MethodMirror fn = lm.functions[methodName];
+    MethodMirror fn = lm.functions[new Symbol(methodName)];
     if (fn == null || !fn.isStatic)
       return null;
 
     context.setPropertyResolved(true);
-    return ClassUtil.invokeObjectMirror(lm, fn , params, namedArgs);
+    return ClassUtil.invokeByMirror(lm, fn , params, namedArgs);
   }
 }

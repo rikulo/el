@@ -44,18 +44,18 @@ class ELSupport {
         }
 //TODO(henri): we don't support BigDecimal yet.
 //        if (isBigDecimalOp(obj0, obj1)) {
-//            BigDecimal bd0 = coerceToNumber(obj0, ClassUtil.BIGDECIMAL_MIRROR);
-//            BigDecimal bd1 = coerceToNumber(obj1, ClassUtil.BIGDECIMAL_MIRROR);
+//            BigDecimal bd0 = coerceToNumber(obj0, BIGDECIMAL_MIRROR);
+//            BigDecimal bd1 = coerceToNumber(obj1, BIGDECIMAL_MIRROR);
 //            return bd0.compareTo(bd1);
 //        }
         if (isDoubleOp(obj0, obj1)) {
-            double d0 = coerceToNumber(obj0, ClassUtil.DOUBLE_MIRROR);
-            double d1 = coerceToNumber(obj1, ClassUtil.DOUBLE_MIRROR);
+            double d0 = coerceToNumber(obj0, DOUBLE_MIRROR);
+            double d1 = coerceToNumber(obj1, DOUBLE_MIRROR);
             return d0.compareTo(d1);
         }
         if (isIntOp(obj0, obj1)) {
-            int l0 = coerceToNumber(obj0, ClassUtil.INT_MIRROR);
-            int l1 = coerceToNumber(obj1, ClassUtil.INT_MIRROR);
+            int l0 = coerceToNumber(obj0, INT_MIRROR);
+            int l1 = coerceToNumber(obj1, INT_MIRROR);
             return l0.compareTo(l1);
         }
         if (obj0 is String || obj1 is String) {
@@ -66,6 +66,13 @@ class ELSupport {
         }
         if (obj1 is Comparable) {
             return (obj0 != null) ? -obj1.compareTo(obj0) : -1;
+        }
+        if (obj0 is DateTime) {
+            if (obj1 is DateTime) return obj0.compareTo(obj1);
+            else if (obj1 == null) return 1;
+        }
+        if (obj1 is DateTime && obj0 == null) {
+            return -1;
         }
         throw new ELException(MessageFactory.getString("error.compare", [obj0, obj1]));
     }
@@ -91,16 +98,16 @@ class ELSupport {
             return false;
 //TODO(henri): we don't support BigDecimal yet.
 //        } else if (isBigDecimalOp(obj0, obj1)) {
-//            BigDecimal bd0 = coerceToNumber(obj0, ClassUtil.BIGDECIMAL_MIRROR);
-//            BigDecimal bd1 = coerceToNumber(obj1, ClassUtil.BIGDECIMAL_MIRROR);
+//            BigDecimal bd0 = coerceToNumber(obj0, BIGDECIMAL_MIRROR);
+//            BigDecimal bd1 = coerceToNumber(obj1, BIGDECIMAL_MIRROR);
 //            return bd0 == bd1;
         } else if (isDoubleOp(obj0, obj1)) {
-            double d0 = coerceToNumber(obj0, ClassUtil.DOUBLE_MIRROR);
-            double d1 = coerceToNumber(obj1, ClassUtil.DOUBLE_MIRROR);
+            double d0 = coerceToNumber(obj0, DOUBLE_MIRROR);
+            double d1 = coerceToNumber(obj1, DOUBLE_MIRROR);
             return d0 == d1;
         } else if (isIntOp(obj0, obj1)) {
-            int l0 = coerceToNumber(obj0, ClassUtil.INT_MIRROR);
-            int l1 = coerceToNumber(obj1, ClassUtil.INT_MIRROR);
+            int l0 = coerceToNumber(obj0, INT_MIRROR);
+            int l1 = coerceToNumber(obj1, INT_MIRROR);
             return l0 == l1;
         } else if (obj0 is bool || obj1 is bool) {
             return coerceToBoolean(obj0) == coerceToBoolean(obj1);
@@ -187,14 +194,14 @@ class ELSupport {
 
     static num coerceNumberToNumber_(num number,
             ClassMirror type) {
-        if (ClassUtil.INT_MIRROR == type) {
+        if (INT_MIRROR == type) {
             return number.toInt();
         }
-        if (ClassUtil.DOUBLE_MIRROR == type) {
+        if (DOUBLE_MIRROR == type) {
             return number.toDouble();
         }
 //TODO(henri): we don't support BigDecimal yet.
-//        if (ClassUtil.BIGDECIMAL_MIRROR == type) {
+//        if (BIGDECIMAL_MIRROR == type) {
 //            if (number is BigDecimal) {
 //                return number;
 //            }
@@ -203,7 +210,7 @@ class ELSupport {
 //            }
 //            return new BigDecimal.fromDouble(number.toDouble());
 //        }
-        if (ClassUtil.NUM_MIRROR == type) {
+        if (NUM_MIRROR == type) {
             return number;
         }
 
@@ -229,14 +236,14 @@ class ELSupport {
 
     static num coerceStringToNumber_(String val,
             ClassMirror type) {
-        if (ClassUtil.INT_MIRROR == type) {
+        if (INT_MIRROR == type) {
             return int.parse(val);
         }
-        if (ClassUtil.DOUBLE_MIRROR == type) {
+        if (DOUBLE_MIRROR == type) {
             return double.parse(val);
         }
 //TODO(henri): we don't support BigDecimal yet.
-//        if (ClassUtil.BIGDECIMAL_MIRROR == type) {
+//        if (BIGDECIMAL_MIRROR == type) {
 //            try {
 //                return new BigDecimal.fromString(val);
 //            } on NumberFormatException catch (nfe) {
@@ -269,21 +276,21 @@ class ELSupport {
 
     static Object coerceToType(Object obj,
             ClassMirror type) {
-        if (type == null || type == ClassUtil.OBJECT_MIRROR ||
+        if (type == null || type == OBJECT_MIRROR ||
                 (obj != null && ClassUtil.isAssignableFrom(type, reflect(obj).type))) {
             return obj;
         }
-        if (ClassUtil.STRING_MIRROR == type) {
+        if (STRING_MIRROR == type) {
             return coerceToString(obj);
         }
         if (ELArithmetic.isNumberType(type)) {
             return coerceToNumber(obj, type);
         }
-        if (ClassUtil.BOOL_MIRROR == type) {
+        if (BOOL_MIRROR == type) {
             return coerceToBoolean(obj);
         }
 //TODO(henri): we don't support Enum yet.
-//        if (ClassUtil.isAssignableFrom(ClassUtil.ENUM_MIRROR, type)) {
+//        if (ClassUtil.isAssignableFrom(ENUM_MIRROR, type)) {
 //            return coerceToEnum(obj, type);
 //        }
 

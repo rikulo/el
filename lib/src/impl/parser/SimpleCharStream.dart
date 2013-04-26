@@ -48,29 +48,29 @@ class SimpleCharStream
 //    {
       if (wrapAround)
       {
-        Arrays.copy(buffer_, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
-        Arrays.copy(buffer_, 0, newbuffer, bufsize - tokenBegin, bufpos);
+        ListUtil.copy(buffer_, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
+        ListUtil.copy(buffer_, 0, newbuffer, bufsize - tokenBegin, bufpos);
         buffer_ = newbuffer;
 
-        Arrays.copy(bufline_, tokenBegin, newbufline, 0, bufsize - tokenBegin);
-        Arrays.copy(bufline_, 0, newbufline, bufsize - tokenBegin, bufpos);
+        ListUtil.copy(bufline_, tokenBegin, newbufline, 0, bufsize - tokenBegin);
+        ListUtil.copy(bufline_, 0, newbufline, bufsize - tokenBegin, bufpos);
         bufline_ = newbufline;
 
-        Arrays.copy(bufcolumn_, tokenBegin, newbufcolumn, 0, bufsize - tokenBegin);
-        Arrays.copy(bufcolumn_, 0, newbufcolumn, bufsize - tokenBegin, bufpos);
+        ListUtil.copy(bufcolumn_, tokenBegin, newbufcolumn, 0, bufsize - tokenBegin);
+        ListUtil.copy(bufcolumn_, 0, newbufcolumn, bufsize - tokenBegin, bufpos);
         bufcolumn_ = newbufcolumn;
 
         maxNextCharInd_ = (bufpos += (bufsize - tokenBegin));
       }
       else
       {
-        Arrays.copy(buffer_, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
+        ListUtil.copy(buffer_, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
         buffer_ = newbuffer;
 
-        Arrays.copy(bufline_, tokenBegin, newbufline, 0, bufsize - tokenBegin);
+        ListUtil.copy(bufline_, tokenBegin, newbufline, 0, bufsize - tokenBegin);
         bufline_ = newbufline;
 
-        Arrays.copy(bufcolumn_, tokenBegin, newbufcolumn, 0, bufsize - tokenBegin);
+        ListUtil.copy(bufcolumn_, tokenBegin, newbufcolumn, 0, bufsize - tokenBegin);
         bufcolumn_ = newbufcolumn;
 
         maxNextCharInd_ = (bufpos -= tokenBegin);
@@ -374,13 +374,13 @@ class SimpleCharStream
     if (bufpos >= tokenBegin)
       return _charCodesToString(buffer_, tokenBegin, bufpos - tokenBegin + 1);
     else
-      return new StringBuffer(_charCodesToString(buffer_, tokenBegin, bufsize - tokenBegin))
-          .add(_charCodesToString(buffer_, 0, bufpos + 1)).toString();
+      return (new StringBuffer(_charCodesToString(buffer_, tokenBegin, bufsize - tokenBegin))
+          ..write(_charCodesToString(buffer_, 0, bufpos + 1))).toString();
   }
 
   String _charCodesToString(List<int> src, int offset, int count) {
     List<int> charCodes = new List(count);
-    Arrays.copy(src, offset, charCodes, 0, count);
+    ListUtil.copy(src, offset, charCodes, 0, count);
     return new String.fromCharCodes(charCodes);
   }
 
@@ -390,12 +390,12 @@ class SimpleCharStream
     List<int> ret = _newIntList(len);
 
     if ((bufpos + 1) >= len)
-      Arrays.copy(buffer_, bufpos - len + 1, ret, 0, len);
+      ListUtil.copy(buffer_, bufpos - len + 1, ret, 0, len);
     else
     {
-      Arrays.copy(buffer_, bufsize - (len - bufpos - 1), ret, 0,
+      ListUtil.copy(buffer_, bufsize - (len - bufpos - 1), ret, 0,
                                                         len - bufpos - 1);
-      Arrays.copy(buffer_, 0, ret, len - bufpos - 1, bufpos + 1);
+      ListUtil.copy(buffer_, 0, ret, len - bufpos - 1, bufpos + 1);
     }
 
     return ret;

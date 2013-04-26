@@ -10,9 +10,7 @@ class AstEmpty extends SimpleNode {
         : super(id);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.BOOL_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => BOOL_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {
@@ -21,7 +19,7 @@ class AstEmpty extends SimpleNode {
             return true;
         } else if (obj is String) {
             return obj.length == 0;
-        } else if (obj is Collection) {
+        } else if (obj is Iterable) {
             return obj.isEmpty;
         } else if (obj is Map) {
             return obj.isEmpty;

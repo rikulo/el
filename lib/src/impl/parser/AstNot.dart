@@ -10,9 +10,7 @@ class AstNot extends SimpleNode {
         : super(id);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.BOOL_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => BOOL_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {

@@ -23,16 +23,16 @@ class ClassELResolver implements ELResolver {
       return null;
 
     ClassMirror cm = base;
-    MethodMirror getter = cm.getters[property];
+    MethodMirror getter = cm.getters[new Symbol(property)];
     if (getter == null || !getter.isStatic)
       return null;
 
     context.setPropertyResolved(true);
-    return ClassUtil.invokeObjectMirror(cm, getter, []);
+    return ClassUtil.invokeByMirror(cm, getter, []);
   }
 
   //@Override
-  ClassMirror getType(ELContext context, Object base, Object property) {
+  TypeMirror getType(ELContext context, Object base, Object property) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -40,12 +40,12 @@ class ClassELResolver implements ELResolver {
       return null;
 
     ClassMirror cm = base;
-    MethodMirror getter = cm.getters[property];
+    MethodMirror getter = cm.getters[new Symbol(property)];
     if (getter == null || !getter.isStatic)
       return null;
 
     context.setPropertyResolved(true);
-    return ClassUtil.getCorrespondingClassMirror(getter.returnType);
+    return getter.returnType;
   }
 
   //@Override
@@ -57,7 +57,7 @@ class ClassELResolver implements ELResolver {
       return;
 
     ClassMirror cm = base;
-    MethodMirror setter = cm.setters[property];
+    MethodMirror setter = cm.setters[new Symbol(property)];
     if (setter == null  || !setter.isStatic)
       return;
 
@@ -67,7 +67,7 @@ class ClassELResolver implements ELResolver {
       throw new PropertyNotWritableException(message(context,
                "resolverNotWriteable", [property]));
 
-    ClassUtil.invokeObjectMirror(cm, setter, [value]);
+    ClassUtil.invokeByMirror(cm, setter, [value]);
   }
 
   //@Override
@@ -85,8 +85,7 @@ class ClassELResolver implements ELResolver {
 
   bool _hasSetter(Object base, Object property) {
     ClassMirror cm = base;
-    String name = "${property}=";
-    MethodMirror setter = cm.setters[name];
+    MethodMirror setter = cm.setters[new Symbol("${property}=")];
     return setter != null && setter.isStatic;
   }
 
@@ -95,7 +94,7 @@ class ClassELResolver implements ELResolver {
     if (context == null)
       throw new ArgumentError("context: null");
 
-    return base != null ? ClassUtil.OBJECT_MIRROR : null;
+    return base != null ? OBJECT_MIRROR : null;
   }
 
   //@Override
@@ -109,12 +108,12 @@ class ClassELResolver implements ELResolver {
 
     String methodName = method.toString();
     ClassMirror cm = base;
-    MethodMirror m = cm.methods[methodName];
+    MethodMirror m = cm.methods[new Symbol(methodName)];
     if (m == null || !m.isStatic)
       return null;
 
     context.setPropertyResolved(true);
 
-    return ClassUtil.invokeObjectMirror(cm, m , params, namedArgs);
+    return ClassUtil.invokeByMirror(cm, m , params, namedArgs);
   }
 }

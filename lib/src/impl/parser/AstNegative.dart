@@ -10,9 +10,7 @@ class AstNegative extends SimpleNode {
         : super(id);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.NUM_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => NUM_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {
@@ -37,7 +35,7 @@ class AstNegative extends SimpleNode {
         if (obj is int) {
             return -obj.toInt();
         }
-        int num0 = ELSupport.coerceToNumber(obj, ClassUtil.INT_MIRROR);
+        int num0 = ELSupport.coerceToNumber(obj, INT_MIRROR);
         return -num0.toInt();
     }
 }

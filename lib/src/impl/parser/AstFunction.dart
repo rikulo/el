@@ -31,7 +31,7 @@ class AstFunction extends SimpleNode {
     }
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
+    TypeMirror getType(EvaluationContext ctx) {
 
         FunctionMapper fnMapper = ctx.getFunctionMapper();
 
@@ -55,7 +55,7 @@ class AstFunction extends SimpleNode {
         if (tfn != null)
           m = tfn._method;
 
-        return ClassUtil.getCorrespondingClassMirror(m.returnType);
+        return m.returnType;
     }
 
     //@Override
@@ -103,7 +103,7 @@ class AstFunction extends SimpleNode {
 
         Object result = tfn == null ?
             ClassUtil.apply(fn, params) :
-            ClassUtil.invokeObjectMirror(tfn._lib, m, params);
+            ClassUtil.invokeByMirror(tfn._lib, m, params);
 //        try {
 //            result = m.invoke(null, params);
 //        } on IllegalAccessException catch (iae) {

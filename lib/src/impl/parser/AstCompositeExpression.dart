@@ -11,9 +11,7 @@ class AstCompositeExpression extends SimpleNode {
         : super(id);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.STRING_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => STRING_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {
@@ -23,7 +21,7 @@ class AstCompositeExpression extends SimpleNode {
             for (int i = 0; i < this.children_.length; i++) {
                 obj = this.children_[i].getValue(ctx);
                 if (obj != null) {
-                    sb.add(ELSupport.coerceToString(obj));
+                    sb.write(ELSupport.coerceToString(obj));
                 }
             }
         }

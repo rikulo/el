@@ -14,7 +14,7 @@ class ELUtil {
       [TypeMirror expectedType]) {
     ValueExpression valexpr =
         _elfactory.createValueExpression(ctx, expr,
-            expectedType == null ? ClassUtil.OBJECT_MIRROR : expectedType);
+            expectedType == null ? OBJECT_MIRROR : expectedType);
     return valexpr.getValue(ctx);
   }
 

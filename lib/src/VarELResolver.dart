@@ -24,16 +24,11 @@ class VarELResolver implements ELResolver {
       return null;
 
     context.setPropertyResolved(true);
-    Future<InstanceMirror> result = _getLib().getField(property);
-
-    //TODO(henri) : handle exception
-    while(!result.isComplete)
-      ; //wait another Isolate to complete
-    return result.value.reflectee;
+    return _getLib().getField(property).reflectee;
   }
 
   //@Override
-  ClassMirror getType(ELContext context, Object base, Object property) {
+  TypeMirror getType(ELContext context, Object base, Object property) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -45,7 +40,7 @@ class VarELResolver implements ELResolver {
       return null;
 
     context.setPropertyResolved(true);
-    return ClassUtil.getCorrespondingClassMirror(vm.type);
+    return vm.type;
   }
 
   //@Override
@@ -67,11 +62,7 @@ class VarELResolver implements ELResolver {
       throw new PropertyNotWritableException(message(context,
                "resolverNotWriteable", [property]));
 
-    Future<InstanceMirror> result = _getLib().setField(property, value);
-
-    //TODO(henri) : handle exception
-    while(!result.isComplete)
-      ; //wait another Isolate to complete
+    _getLib().setField(property, value);
   }
 
   //@Override
@@ -95,7 +86,7 @@ class VarELResolver implements ELResolver {
     if (context == null)
       throw new ArgumentError("context: null");
 
-    return base == null ? ClassUtil.OBJECT_MIRROR : null;
+    return base == null ? OBJECT_MIRROR : null;
   }
 
   //@Override
@@ -108,6 +99,6 @@ class VarELResolver implements ELResolver {
 
   VariableMirror _getVar(Object property) {
     LibraryMirror lm = currentMirrorSystem().isolate.rootLibrary;
-    return lm != null ? lm.variables[property] : null;
+    return lm != null ? lm.variables[new Symbol(property)] : null;
   }
 }

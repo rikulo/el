@@ -10,15 +10,15 @@ part of rikulo_el;
  */
 class MethodInfo {
 
-    final String _name;
+    final Symbol _name;
 
     final ClassMirror _returnType;
 
-    MethodInfo(String name, ClassMirror returnType)
+    MethodInfo(Symbol name, ClassMirror returnType)
         : this._name = name,
           this._returnType = returnType;
 
-    String getName() => _name;
+    Symbol getName() => _name;
 
     ClassMirror getReturnType() => _returnType;
 }

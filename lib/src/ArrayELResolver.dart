@@ -92,7 +92,7 @@ class ArrayELResolver extends ELResolver {
     //@Override
     ClassMirror getCommonPropertyType(ELContext context, Object base) {
         if (base != null && base is List) {
-            return ClassUtil.INT_MIRROR;
+            return INT_MIRROR;
         }
         return null;
     }

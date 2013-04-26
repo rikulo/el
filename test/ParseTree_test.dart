@@ -11,11 +11,11 @@ class ShowVisitor implements NodeVisitor {
   void visit(Node node, int index, int level) {
     StringBuffer space = new StringBuffer();
     while(level-- > 0) {
-      space.add("  ");
+      space.write("  ");
     }
 
-    sb.add(space).add(node).add("\n");
-    //sb.add("(").add(node).add(")");
+    sb..write(space)..write(node)..write("\n");
+    //sb..write("(")..write(node)..write(")");
   }
   void after(Node node, int index, int level) {
     //do nothing

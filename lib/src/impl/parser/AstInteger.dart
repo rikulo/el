@@ -19,9 +19,7 @@ class AstInteger extends SimpleNode {
     }
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.INT_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => INT_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {

@@ -11,8 +11,7 @@ class AstArray extends SimpleNode {
       : super(id);
 
   //@Override
-  ClassMirror getType(EvaluationContext ctx)
-    => ClassUtil.LIST_MIRROR;
+  ClassMirror getType(EvaluationContext ctx) => LIST_MIRROR;
 
   //@Override
   Object getValue(EvaluationContext ctx) {

@@ -11,8 +11,7 @@ class AstMap extends SimpleNode {
       : super(id);
 
   //@Override
-  ClassMirror getType(EvaluationContext ctx)
-    => ClassUtil.MAP_MIRROR;
+  ClassMirror getType(EvaluationContext ctx) => MAP_MIRROR;
 
   //@Override
   Object getValue(EvaluationContext ctx) {

@@ -21,7 +21,7 @@ class CompositeELResolver extends ELResolver {
         }
         if (this._size >= this._resolvers.length) {
             List<ELResolver> nr = new List(this._size * 2);
-            Arrays.copy(this._resolvers, 0, nr, 0, this._size);
+            ListUtil.copy(this._resolvers, 0, nr, 0, this._size);
             this._resolvers = nr;
         }
         this._resolvers[this._size++] = elResolver;

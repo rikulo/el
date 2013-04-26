@@ -54,35 +54,35 @@ class TokenMgrError implements Exception
 //        case 0 :
 //          continue;
         case '\b':
-          retval.add("\\b");
+          retval.write("\\b");
           continue;
         case '\t':
-          retval.add("\\t");
+          retval.write("\\t");
           continue;
         case '\n':
-          retval.add("\\n");
+          retval.write("\\n");
           continue;
         case '\f':
-          retval.add("\\f");
+          retval.write("\\f");
           continue;
         case '\r':
-          retval.add("\\r");
+          retval.write("\\r");
           continue;
         case '\"':
-          retval.add("\\\"");
+          retval.write("\\\"");
           continue;
         case '\'':
-          retval.add("\\\'");
+          retval.write("\\\'");
           continue;
         case '\\':
-          retval.add("\\\\");
+          retval.write("\\\\");
           continue;
         default:
           if ((ch = str.codeUnitAt(i)) < 0x20 || ch > 0x7e) {
             String s = "0000${ch.toRadixString(16)}";
-            retval.add("\\u").add(s.substring(s.length - 4, s.length));
+            retval..write("\\u")..write(s.substring(s.length - 4, s.length));
           } else if (ch != 0) {
-            retval.add(ch);
+            retval.write(ch);
           }
           continue;
       }
@@ -104,13 +104,14 @@ class TokenMgrError implements Exception
    */
   static String LexicalError_(bool EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, int curChar) {
     StringBuffer sb = new StringBuffer("Lexical error at line ")
-          .add(errorLine).add(", column ")
-          .add(errorColumn).add(".  Encountered: ");
+          ..write(errorLine)..write(", column ")
+          ..write(errorColumn)..write(".  Encountered: ");
     if (EOFSeen)
-      sb.add("<EOF> ");
+      sb.write("<EOF> ");
     else
-      sb.add("\"").add(addEscapes_(new String.fromCharCodes([curChar]))).add("\"").add(" (").add(curChar).add("), ");
-    return sb.add("after : \"").add(addEscapes_(errorAfter)).add("\"").toString();
+      sb..write("\"")..write(addEscapes_(new String.fromCharCodes([curChar])))
+        ..write("\"")..write(" (")..write(curChar)..write("), ");
+    return (sb..write("after : \"")..write(addEscapes_(errorAfter))..write("\"")).toString();
   }
 
   /**

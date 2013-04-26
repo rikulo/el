@@ -8,7 +8,7 @@ part of rikulo_el;
 class BeanELResolver extends ELResolver {
     final bool _readOnly;
 
-    final Map<String, BeanProperties> _cache = new Map();
+    final Map<Symbol, BeanProperties> _cache = new Map();
 
     BeanELResolver([bool readOnly = false]) : this._readOnly = readOnly;
 
@@ -22,12 +22,7 @@ class BeanELResolver extends ELResolver {
         }
 
         context.setPropertyResolved(true);
-        Future<InstanceMirror> result = reflect(base).getField(property);
-
-        //TODO(henri) : handle exception
-        while(!result.isComplete)
-            ; //wait another Isolate to complete
-        return result.value.reflectee;
+        return reflect(base).getField(new Symbol(property)).reflectee;
     }
 
     //@Override
@@ -59,11 +54,7 @@ class BeanELResolver extends ELResolver {
                     "resolverNotWriteable", [reflect(base).type.qualifiedName]));
         }
 
-        Future<InstanceMirror> result = reflect(base).setField(property, value);
-
-        //TODO(henri) : handle exception
-        while(!result.isComplete)
-            ; //wait another Isolate to complete
+        return reflect(base).setField(new Symbol(property), value).reflectee;
     }
 
     //@Override
@@ -87,7 +78,7 @@ class BeanELResolver extends ELResolver {
         }
 
         if (base != null) {
-            return ClassUtil.OBJECT_MIRROR;
+            return OBJECT_MIRROR;
         }
 
         return null;
@@ -123,12 +114,7 @@ class BeanELResolver extends ELResolver {
 
         context.setPropertyResolved(true);
 
-        Future<InstanceMirror> result = reflect(base).invoke(methodName, params, namedArgs);
-
-        //TODO(henri) : handle exception
-        while(!result.isComplete)
-            ; //wait another Isolate to complete
-        return result.value.reflectee;
+        return reflect(base).invoke(new Symbol(methodName), params, _toNamedParams(namedArgs)).reflectee;
     }
 
 }
@@ -162,7 +148,7 @@ class BeanProperties {
 class BeanProperty {
     final ClassMirror _owner;
     final String _propertyName;
-    ClassMirror _type;
+    TypeMirror _type;
 
     MethodMirror _read;
     MethodMirror _write;
@@ -175,7 +161,7 @@ class BeanProperty {
             throw new PropertyNotFoundException(ELResolver.message(null,
                     "propertyNotFound", [owner, propertyName]));
         }
-        _type = ClassUtil.getCorrespondingClassMirror(_read.returnType);
+        _type = _read.returnType;
         _write = _getWriteMethod();
     }
 
@@ -203,20 +189,20 @@ class BeanProperty {
 
     MethodMirror _getWriteMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
-        MethodMirror m = clz.setters[propertyName];
+        MethodMirror m = clz.setters[new Symbol(propertyName)];
         while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
-            m = clz.setters[propertyName];
+            m = clz.setters[new Symbol(propertyName)];
         }
         return m == null || m.isPrivate ? null : m;
     }
 
     MethodMirror _getReadMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
-        MethodMirror m = clz.getters[propertyName];
+        MethodMirror m = clz.getters[new Symbol(propertyName)];
         while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
-            m = clz.getters[propertyName];
+            m = clz.getters[new Symbol(propertyName)];
         }
         return m == null || m.isPrivate ? null : m;
     }

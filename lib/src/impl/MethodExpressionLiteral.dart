@@ -17,7 +17,7 @@ class MethodExpressionLiteral implements MethodExpression {
 
   //@Override
   MethodInfo getMethodInfo(ELContext context)
-    => new MethodInfo(this._expr, this._expectedType);
+    => new MethodInfo(new Symbol(this._expr), this._expectedType);
 
   //@Override
   Object invoke(ELContext context, List<Object> params,

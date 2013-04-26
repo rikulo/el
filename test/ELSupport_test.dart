@@ -58,13 +58,13 @@ void testFloat() {
 //@Test
 void testCoerceIntegerToNumber() {
     int input = 4390241;
-    Object output = ELSupport.coerceToType(input, ClassUtil.NUM_MIRROR);
+    Object output = ELSupport.coerceToType(input, NUM_MIRROR);
     expect(output, equals(input));
 }
 
 //@Test
 void testCoerceNullToNumber() {
-    Object output = ELSupport.coerceToType(null, ClassUtil.NUM_MIRROR);
+    Object output = ELSupport.coerceToType(null, NUM_MIRROR);
     expect(output, equals(0));
 }
 

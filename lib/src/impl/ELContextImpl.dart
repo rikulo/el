@@ -91,7 +91,7 @@ class _FunctionMapperImpl implements FunctionMapper {
 
   MethodMirror _getFun(Object property) {
     LibraryMirror lm = currentMirrorSystem().isolate.rootLibrary;
-    return lm != null ? lm.functions[property] : null;
+    return lm != null ? lm.functions[new Symbol(property)] : null;
   }
 }
 
@@ -107,8 +107,7 @@ class _TopLevelFn {
     => this;
 
   static _TopLevelFn _getTopLevelFn(Function fn, MethodMirror m)
-    => 'rikulo_elimpl._TopLevelFn' == m.returnType.qualifiedName ?
-          ClassUtil.apply(fn, []) : null;
+    => ClassUtil.apply(fn, []);
 }
 
 class _VariableMapperImpl implements VariableMapper {

@@ -10,9 +10,7 @@ class AstLiteralExpression extends SimpleNode {
         : super(id);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.STRING_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => STRING_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {
@@ -37,7 +35,7 @@ class AstLiteralExpression extends SimpleNode {
                     i++;
                 }
             }
-            buf.add(c);
+            buf.write(c);
         }
         this.image_ = buf.toString();
     }

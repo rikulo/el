@@ -7,6 +7,7 @@ library rikulo_el;
 import 'dart:mirrors';
 import 'dart:collection';
 import 'package:rikulo_commons/mirrors.dart';
+import 'package:rikulo_commons/util.dart' show ListUtil;
 
 part 'src/ArrayELResolver.dart';
 part 'src/BeanELResolver.dart';
@@ -38,3 +39,13 @@ part 'src/LibELResolver.dart';
 part 'src/MessageFormat.dart';
 part 'src/PropertiesBundle.dart';
 part 'src/ELUtil.dart';
+
+///Converts a map of named parameters to Symbol for synchronous invocation
+Map<Symbol, Object> _toNamedParams(Map<String, Object> namedArgs) {
+  if (namedArgs != null) {
+    Map<Symbol, Object> nargs = new HashMap();
+    namedArgs.forEach((k,v) => nargs[new Symbol(k)] = v);
+    return nargs;
+  }
+  return null;
+}

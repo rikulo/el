@@ -65,9 +65,9 @@ class TesterBeanC {
             new StringBuffer("ABB[]: Hello ${a.name} from ");
         for (int i = 0; i < b.length; i++) {
             if (i > 0) {
-                result.add(", ");
+                result.write(", ");
             }
-            result.add(b[i].name);
+            result.write(b[i].name);
         }
         return result.toString();
     }

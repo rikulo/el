@@ -19,9 +19,7 @@ class AstString extends SimpleNode {
     }
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.STRING_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => STRING_MIRROR;
 
     //@Override
     Object getValue(EvaluationContext ctx) {
@@ -45,7 +43,7 @@ class AstString extends SimpleNode {
                     i++;
                 }
             }
-            buf.add(c);
+            buf.write(c);
         }
         this.image_ = buf.toString();
     }

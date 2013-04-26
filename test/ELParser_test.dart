@@ -52,7 +52,7 @@ void testJavaKeyWordSuffix() {
     Exception e = null;
     try {
         elfactory.createValueExpression(context, "\${beanA.int}",
-                ClassUtil.STRING_MIRROR);
+                STRING_MIRROR);
     } on ELException catch (ele) {
         e = ele;
     }
@@ -73,7 +73,7 @@ void testJavaKeyWordIdentifier() {
     // Should fail
     Exception e = null;
     try {
-        elfactory.createValueExpression(context, "\${this}", ClassUtil.STRING_MIRROR);
+        elfactory.createValueExpression(context, "\${this}", STRING_MIRROR);
     } on ELException catch (ele) {
         e = ele;
     }
@@ -86,7 +86,7 @@ void _testExpression(String expression, String expected) {
     ELContext context = new ELContext();
 
     ValueExpression ve = elfactory.createValueExpression(
-            context, expression, ClassUtil.STRING_MIRROR);
+            context, expression, STRING_MIRROR);
 
     String result = ve.getValue(context);
     expect(result, equals(expected));

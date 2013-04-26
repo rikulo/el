@@ -78,35 +78,36 @@ class ParseException implements Exception {
         maxSize = expectedTokenSequences_[i].length;
       }
       for (int j = 0; j < expectedTokenSequences_[i].length; j++) {
-        expected.add(tokenImage[expectedTokenSequences_[i][j]]).add(' ');
+        expected..write(tokenImage[expectedTokenSequences_[i][j]])..write(' ');
       }
       if (expectedTokenSequences_[i][expectedTokenSequences_[i].length - 1] != 0) {
-        expected.add("...");
+        expected.write("...");
       }
-      expected.add(eol).add("    ");
+      expected..write(eol)..write("    ");
     }
     StringBuffer retval = new StringBuffer("Encountered \"");
     Token tok = currentToken_.next_;
     for (int i = 0; i < maxSize; i++) {
-      if (i != 0) retval.add(" ");
+      if (i != 0) retval.write(" ");
       if (tok.kind_ == 0) {
-        retval.add(tokenImage[0]);
+        retval.write(tokenImage[0]);
         break;
       }
-      retval.add(" ").add(tokenImage[tok.kind_]);
-      retval.add(" \"");
-      retval.add(add_escapes(tok.image_));
-      retval.add("\" ");
+      retval..write(" ")..write(tokenImage[tok.kind_])
+        ..write(" \"")
+        ..write(add_escapes(tok.image_))
+        ..write("\" ");
       tok = tok.next_;
     }
-    retval.add("\" at line ").add(currentToken_.next_.beginLine_).add(", column ").add(currentToken_.next_.beginColumn_);
-    retval.add(".").add(eol);
+    retval..write("\" at line ")..write(currentToken_.next_.beginLine_)
+      ..write(", column ")..write(currentToken_.next_.beginColumn_);
+    retval..write(".")..write(eol);
     if (expectedTokenSequences_.length == 1) {
-      retval.add("Was expecting:").add(eol).add("    ");
+      retval..write("Was expecting:")..write(eol)..write("    ");
     } else {
-      retval.add("Was expecting one of:").add(eol).add("    ");
+      retval..write("Was expecting one of:")..write(eol)..write("    ");
     }
-    retval.add(expected.toString());
+    retval.write(expected.toString());
     return retval.toString();
   }
 
@@ -129,35 +130,35 @@ class ParseException implements Exception {
 //           case 0:
 //              continue;
            case '\b':
-              retval.add("\\b");
+              retval.write("\\b");
               continue;
            case '\t':
-              retval.add("\\t");
+              retval.write("\\t");
               continue;
            case '\n':
-              retval.add("\\n");
+              retval.write("\\n");
               continue;
            case '\f':
-              retval.add("\\f");
+              retval.write("\\f");
               continue;
            case '\r':
-              retval.add("\\r");
+              retval.write("\\r");
               continue;
            case '\"':
-              retval.add("\\\"");
+              retval.write("\\\"");
               continue;
            case '\'':
-              retval.add("\\\'");
+              retval.write("\\\'");
               continue;
            case '\\':
-              retval.add("\\\\");
+              retval.write("\\\\");
               continue;
            default:
               if ((ch = str.codeUnitAt(i)) < 0x20 || ch > 0x7e) {
                  String s = "0000${ch.toRadixString(16)}";
-                 retval.add("\\u${s.substring(s.length - 4, s.length)}");
+                 retval.write("\\u${s.substring(s.length - 4, s.length)}");
               } else if (ch != 0) {
-                 retval.add(new String.fromCharCodes([ch])).add("(").add(ch).add(")");
+                 retval..write(new String.fromCharCodes([ch]))..write("(")..write(ch)..write(")");
               }
               continue;
         }

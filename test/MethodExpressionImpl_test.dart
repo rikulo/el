@@ -71,9 +71,9 @@ void testIsParametersProvided() {
     _context.getVariableMapper().setVariable("_beanB", var0);
 
     MethodExpression me1 = _elfactory.createMethodExpression(
-            _context, "\${_beanB.getName}", ClassUtil.STRING_MIRROR);
+            _context, "\${_beanB.getName}", STRING_MIRROR);
     MethodExpression me2 = _elfactory.createMethodExpression(
-            _context, "\${_beanB.sayHello('JUnit')}", ClassUtil.STRING_MIRROR);
+            _context, "\${_beanB.sayHello('JUnit')}", STRING_MIRROR);
 
     expect(me1.isParametersProvided(), isFalse);
     expect(me2.isParametersProvided(), isTrue);
@@ -89,13 +89,13 @@ void testInvoke() {
             _elfactory.createValueExpressionByInstance(_beanB, reflect(_beanB).type));
 
     MethodExpression me1 = _elfactory.createMethodExpression(
-            _context, "\${_beanB.getName}", ClassUtil.STRING_MIRROR);
+            _context, "\${_beanB.getName}", STRING_MIRROR);
 
     MethodExpression me2 = _elfactory.createMethodExpression(
-            _context, "\${_beanB.sayHello('JUnit')}", ClassUtil.STRING_MIRROR);
+            _context, "\${_beanB.sayHello('JUnit')}", STRING_MIRROR);
 
     MethodExpression me3 = _elfactory.createMethodExpression(
-            _context, "\${_beanB.sayHello}", ClassUtil.STRING_MIRROR);
+            _context, "\${_beanB.sayHello}", STRING_MIRROR);
 
     expect(me1.invoke(_context, null), equals("B"));
     expect(me2.invoke(_context, null), equals("Hello JUnit from B"));
@@ -114,7 +114,7 @@ void testInvokeWithSuper() {
 
     me.invoke(_context, null);
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "\${beanA.bean.name}", ClassUtil.STRING_MIRROR);
+            "\${beanA.bean.name}", STRING_MIRROR);
     Object r = ve.getValue(_context);
     expect(r, equals("BB"));
 }
@@ -134,7 +134,7 @@ void testInvokeWithSuperABReturnTypeNoParamTypes() {
   setUp();
 
     MethodExpression me3 = _elfactory.createMethodExpression(_context,
-            "\${beanC.sayHelloA2B(beanA,_beanB)}", ClassUtil.STRING_MIRROR);
+            "\${beanC.sayHelloA2B(beanA,_beanB)}", STRING_MIRROR);
     Object r3 = me3.invoke(_context, null);
     expect(r3.toString(), equals("AB: Hello A from B"));
 }
@@ -154,7 +154,7 @@ void testInvokeWithSuperABReturnTypeParamTypes() {
   setUp();
 
     MethodExpression me5 = _elfactory.createMethodExpression(_context,
-            "\${beanC.sayHelloA2B(beanA,_beanB)}", ClassUtil.STRING_MIRROR);
+            "\${beanC.sayHelloA2B(beanA,_beanB)}", STRING_MIRROR);
     Object r5 = me5.invoke(_context, null);
     expect(r5.toString(), equals("AB: Hello A from B"));
 }
@@ -361,7 +361,7 @@ void testBug49655() {
     // The rest is to check it worked correctly
     me.invoke(_context, null);
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "#{beanA.name}", ClassUtil.STRING_MIRROR);
+            "#{beanA.name}", STRING_MIRROR);
     expect(ve.getValue(_context), equals("New value"));
 }
 
@@ -373,7 +373,7 @@ void testBugPrimitives() {
             "\${beanA.setValLong(5)}", null);
     me.invoke(_context, null);
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "#{beanA.valLong}", ClassUtil.STRING_MIRROR);
+            "#{beanA.valLong}", STRING_MIRROR);
     expect(ve.getValue(_context), equals("5"));
 }
 
@@ -402,7 +402,7 @@ void testBug50790a() {
   setUp();
 
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "#{beanAA.name.contains(beanA.name)}", ClassUtil.BOOL_MIRROR);
+            "#{beanAA.name.contains(beanA.name)}", BOOL_MIRROR);
     bool actual = ve.getValue(_context);
     expect(actual, equals(true));
 }
@@ -412,7 +412,7 @@ void testBug50790b() {
   setUp();
 
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "#{beanA.name.contains(beanAA.name)}", ClassUtil.BOOL_MIRROR);
+            "#{beanA.name.contains(beanAA.name)}", BOOL_MIRROR);
     bool actual = ve.getValue(_context);
     expect(actual, equals(false));
 }
@@ -459,7 +459,7 @@ void testBug53792a() {
     me.invoke(_context, null);
 
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "#{beanA.getBean().name}", ClassUtil.STRING_MIRROR);
+            "#{beanA.getBean().name}", STRING_MIRROR);
     String actual = ve.getValue(_context);
     expect(actual, equals(_BUG53792));
 }
@@ -476,7 +476,7 @@ void testBug53792b() {
     me.invoke(_context, null);
 
     ValueExpression ve = _elfactory.createValueExpression(_context,
-            "#{beanA.getBean().name.length}", ClassUtil.INT_MIRROR);
+            "#{beanA.getBean().name.length}", INT_MIRROR);
     int actual = ve.getValue(_context);
     expect(actual, equals(_BUG53792.length));
 }

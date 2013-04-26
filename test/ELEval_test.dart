@@ -119,12 +119,13 @@ void testElSupportCompare(){
   compareBoth("Nulls should compare equal", 0, null, null);
   compareBoth("Null should compare equal to \"\"", 0, "", null);
 //  compareBoth("Null should be less than File()",-1, null, new File(""));
-  compareBoth("Null should be less than Date()",-1, null, new Date.now());
-  compareBoth("Date(0) should be less than Date(1)",-1, new Date(0), new Date(1));
+  compareBoth("Null should be less than DateTime.now()",-1, null, new DateTime.now());
+  compareBoth("DateTime.fromMillisecondsSinceEpoch(0) should be less than DateTime.fromMillisecondsSinceEpoch(1)",
+    -1, new DateTime.fromMillisecondsSinceEpoch(0), new DateTime.fromMillisecondsSinceEpoch(1));
   try {
-    compareBoth("Should not compare",0, new Date.now(), new Map());
+    compareBoth("Should not compare",0, new DateTime.now(), new Map());
     expect(false, isTrue, reason:"Expecting CastException");
-  } on TypeError catch (expected) {
+  } on ELException catch (expected) {
     // Expected
   }
   expect(null, isNull);
@@ -150,7 +151,7 @@ String evaluateExpression(String expression) {
   ctx.setFunctionMapper(new FMapper());
   ExpressionFactoryImpl exprFactory = new ExpressionFactory();
   ValueExpression ve = exprFactory.createValueExpression(ctx, expression,
-      ClassUtil.STRING_MIRROR);
+      STRING_MIRROR);
   return ve.getValue(ctx);
 }
 

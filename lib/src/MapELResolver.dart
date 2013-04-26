@@ -35,7 +35,7 @@ class MapELResolver extends ELResolver {
 
         if (base is Map) {
             context.setPropertyResolved(true);
-            return ClassUtil.OBJECT_MIRROR;
+            return OBJECT_MIRROR;
         }
 
         return null;
@@ -82,7 +82,7 @@ class MapELResolver extends ELResolver {
     //@Override
     ClassMirror getCommonPropertyType(ELContext context, Object base) {
         if (base is Map) {
-            return ClassUtil.OBJECT_MIRROR;
+            return OBJECT_MIRROR;
         }
         return null;
     }

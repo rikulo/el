@@ -11,7 +11,5 @@ class ArithmeticNode extends SimpleNode {
         : super(i);
 
     //@Override
-    ClassMirror getType(EvaluationContext ctx) {
-        return ClassUtil.NUM_MIRROR;
-    }
+    ClassMirror getType(EvaluationContext ctx) => NUM_MIRROR;
 }

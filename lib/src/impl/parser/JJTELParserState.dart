@@ -50,7 +50,7 @@ class JJTELParserState {
 
   Object _remove(List list, int idx) {
     var mk0 = list[idx];
-    list.removeRange(idx, 1);
+    list.removeAt(idx);
     return mk0;
   }
 
