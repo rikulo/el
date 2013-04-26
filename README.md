@@ -12,6 +12,8 @@
 
 Rikulo EL is distributed under the Apache 2.0 License.
 
+[![Build Status](https://drone.io/github.com/rikulo/el/status.png)](https://drone.io/github.com/rikulo/el/latest)
+
 ##Install from Dart Pub Repository
 
 Add this to your `pubspec.yaml` (or create it):
