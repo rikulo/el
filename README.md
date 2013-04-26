@@ -39,8 +39,7 @@ For more information, please refer to [Pub: Dependencies](http://pub.dartlang.or
 
 Using Rikulo EL is straightforward.
 
-    import "package:rikulo_el/el.dart"; //(Required) EL interfaces and utility classes
-    import "package:rikulo_el/impl.dart"; //(Optional) EL implementation
+    import "package:rikulo_el/el.dart";
 
     class Person {
       String name;
@@ -48,10 +47,16 @@ Using Rikulo EL is straightforward.
     }
     Person person = new Person('Rikulo');
 
+    class _FunctionMapper extends FunctionMapper {
+      Function resolveFunction(String name)
+      => name == "owner" ? () => person: null;
+    }
+
     void main() {
       ExpressionFactory ef = new ExpressionFactory();
       ValueExpression ve = ef.createValueExpression(
-        new ELContext(), 'Hello, #{person.name}!', reflect('').type);
+        new ELContext()..setFunctionMapper(new _FunctionMapper()),
+        'Hello, #{owner().name}!', reflect('').type);
       print(ve.getValue(ctx)); //'Hello, Rikulo!'
     }
 

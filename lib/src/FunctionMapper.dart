@@ -6,5 +6,6 @@
 part of rikulo_el;
 
 abstract class FunctionMapper {
-  Function resolveFunction(String prefix, String localName);
+  ///Returns the function with the given name, or null if not found
+  Function resolveFunction(String name);
 }

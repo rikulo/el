@@ -45,8 +45,8 @@ void testParserBug45511() {
 }
 
 void testBug48112() {
-  expect(evaluateExpression("\${fn:trim('{world}')}"), equals("{world}"));
   expect(evaluateExpression("\${trim('{world}')}"), equals("{world}"));
+  expect(evaluateExpression("\${fn:trim('{world}')}"), equals("{fn:trim}"));
 }
 
 void testFunctionMapper2() {
@@ -171,22 +171,18 @@ aaa() => person;
 class FMapper extends FunctionMapper {
 
   //@Override
-  Function resolveFunction(String prefix, String localName) {
-    switch (localName) {
+  Function resolveFunction(String name) {
+    switch (name) {
       case "trim":
-        return TesterFunctions.trim;
+        return (String input) => input.trim();
+      case "fn:trim":
+        return (String input) => "{fn:trim}";
       case "aaa":
         return aaa;
     }
 
     return null;
   }
-}
-
-class TesterFunctions {
-    static String trim(String input) {
-        return input.trim();
-    }
 }
 
 //class Inner$Class {

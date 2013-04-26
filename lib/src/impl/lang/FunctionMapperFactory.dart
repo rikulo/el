@@ -7,31 +7,31 @@ part of rikulo_elimpl;
 
 class FunctionMapperFactory implements FunctionMapper {
 
-    FunctionMapperImpl memento_ = null;
-    FunctionMapper target_;
+    FunctionMapperImpl _memento;
+    FunctionMapper _target;
 
     FunctionMapperFactory(FunctionMapper mapper) {
         if (mapper == null) {
             throw new ArgumentError("FunctionMapper target cannot be null");
         }
-        this.target_ = mapper;
+        _target = mapper;
     }
 
 
     //@Override
-    Function resolveFunction(String prefix, String localName) {
-        if (this.memento_ == null) {
-            this.memento_ = new FunctionMapperImpl();
+    Function resolveFunction(String name) {
+        if (_memento == null) {
+            _memento = new FunctionMapperImpl();
         }
-        Function m = this.target_.resolveFunction(prefix, localName);
+        Function m = _target.resolveFunction(name);
         if (m != null) {
-            this.memento_.addFunction(prefix, localName, m);
+            _memento.addFunction(name, m);
         }
         return m;
     }
 
     FunctionMapper create() {
-        return this.memento_;
+        return _memento;
     }
 
 }

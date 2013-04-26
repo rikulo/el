@@ -7,51 +7,45 @@ part of rikulo_elimpl;
 
 class FunctionMapperImpl extends FunctionMapper {
 
-    Map<String, ELFunction> functions_ = null;
+    Map<String, ELFunction> _functions;
 
     //@Override
-    Function resolveFunction(String prefix, String localName) {
-        if (this.functions_ != null) {
-            ELFunction f = this.functions_["$prefix:$localName"];
+    Function resolveFunction(String name) {
+        if (_functions != null) {
+            ELFunction f = _functions[name];
             return f.getMethod();
         }
         return null;
     }
 
-    void addFunction(String prefix, String localName, Function m) {
-        if (this.functions_ == null) {
-            this.functions_ = new Map();
+    void addFunction(String name, Function m) {
+        if (_functions == null) {
+            _functions = new HashMap();
         }
-        ELFunction f = new ELFunction(prefix, localName, m);
-        this.functions_["$prefix:$localName"] = f;
+        ELFunction f = new ELFunction(name, m);
+        _functions[name] = f;
     }
 }
 
 class ELFunction {
 
-    Function m_;
-//    String owner_;
-//    String name_;
-    String prefix_;
-    String localName_;
+    Function _m;
+    String _name;
 
     /**
      *
      */
-    ELFunction(String prefix, String localName, Function m) {
-        if (localName == null) {
-            throw new ArgumentError("LocalName cannot be null");
+    ELFunction(this._name, this._m) {
+        if (_name == null) {
+            throw new ArgumentError("Name cannot be null");
         }
-        if (m == null) {
+        if (_m == null) {
             throw new ArgumentError("Function cannot be null");
         }
-        this.prefix_ = prefix;
-        this.localName_ = localName;
-        this.m_ = m;
     }
 
     Function getMethod() {
-        return this.m_;
+        return _m;
     }
 
     //@Override

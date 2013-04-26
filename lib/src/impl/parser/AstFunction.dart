@@ -7,27 +7,34 @@ part of rikulo_elimpl;
 
 class AstFunction extends SimpleNode {
 
-    String localName_ = "";
+    String _localName = "";
 
-    String prefix_ = "";
+    String _prefix = "";
 
     AstFunction(int id)
         : super(id);
 
     String getLocalName() {
-        return localName_;
+        return _localName;
     }
 
     String getOutputName() {
-        if (this.prefix_ == null) {
-            return this.localName_;
+        if (_prefix == null) {
+            return _localName;
         } else {
-            return "${this.prefix_}:${this.localName_}";
+            return "${_prefix}:${_localName}";
         }
     }
 
     String getPrefix() {
-        return prefix_;
+        return _prefix;
+    }
+    String getFunctionName() {
+        if (_prefix == null || _prefix.isEmpty) {
+            return _localName;
+        } else {
+            return "$_prefix:$_localName";
+        }
     }
 
     //@Override
@@ -39,16 +46,16 @@ class AstFunction extends SimpleNode {
         if (fnMapper == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.null"));
         }
-        Function fn = fnMapper.resolveFunction(this.prefix_, this.localName_);
+        Function fn = fnMapper.resolveFunction(getFunctionName());
         if (fn == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [this.getOutputName()]));
+                    [getOutputName()]));
         }
         ClosureMirror fnclosure = reflect(fn);
         MethodMirror m = fnclosure.function;
         if (m == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [this.getOutputName()]));
+                    [getOutputName()]));
         }
         return m.returnType;
     }
@@ -62,16 +69,16 @@ class AstFunction extends SimpleNode {
         if (fnMapper == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.null"));
         }
-        Function fn = fnMapper.resolveFunction(this.prefix_, this.localName_);
+        Function fn = fnMapper.resolveFunction(getFunctionName());
         if (fn == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [this.getOutputName()]));
+                    [getOutputName()]));
         }
         ClosureMirror fnclosure = reflect(fn);
         MethodMirror m = fnclosure.function;
         if (m == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [this.getOutputName()]));
+                    [getOutputName()]));
         }
 
         List values = null;
@@ -107,17 +114,17 @@ class AstFunction extends SimpleNode {
     }
 
     void setLocalName(String localName) {
-        this.localName_ = localName;
+        _localName = localName;
     }
 
     void setPrefix(String prefix) {
-        this.prefix_ = prefix;
+        _prefix = prefix;
     }
 
 
     //@Override
     String toString()
     {
-        return "${ELParserTreeConstants.jjtNodeName[id_]}[${this.getOutputName()}]";
+        return "${ELParserTreeConstants.jjtNodeName[id_]}[${getOutputName()}]";
     }
 }

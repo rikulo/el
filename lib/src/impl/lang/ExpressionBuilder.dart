@@ -123,7 +123,7 @@ class ExpressionBuilder implements NodeVisitor {
             if (this._fnMapper == null) {
                 throw new ELException(MessageFactory.getString("error.fnMapper.null"));
             }
-            Function fn = _fnMapper.resolveFunction(funcNode.getPrefix(), funcNode.getLocalName());
+            Function fn = _fnMapper.resolveFunction(funcNode.getFunctionName());
             if (fn == null) {
                 throw new ELException(MessageFactory.getString(
                         "error.fnMapper.method", [funcNode.getOutputName()]));
