@@ -50,11 +50,6 @@ class AstFunction extends SimpleNode {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
                     [this.getOutputName()]));
         }
-        //20120930, henrichen: #issue4 support top level function
-        _TopLevelFn tfn = _TopLevelFn._getTopLevelFn(fn, m);
-        if (tfn != null)
-          m = tfn._method;
-
         return m.returnType;
     }
 
@@ -94,16 +89,10 @@ class AstFunction extends SimpleNode {
         } else {
           values = new List(0);
         }
-        //20120930, henrichen: #issue4 support top level function
-        _TopLevelFn tfn = _TopLevelFn._getTopLevelFn(fn, m);
-        if (tfn != null)
-          m = tfn._method;
 
         List params = ELSupport.convertArgs(values, m, this);
 
-        Object result = tfn == null ?
-            ClassUtil.apply(fn, params) :
-            ClassUtil.invokeByMirror(tfn._lib, m, params);
+        Object result = ClassUtil.apply(fn, params);
 //        try {
 //            result = m.invoke(null, params);
 //        } on IllegalAccessException catch (iae) {

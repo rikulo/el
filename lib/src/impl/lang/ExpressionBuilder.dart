@@ -134,10 +134,6 @@ class ExpressionBuilder implements NodeVisitor {
                 throw new ELException(MessageFactory.getString(
                         "error.fnMapper.method", [funcNode.getOutputName()]));
             }
-            //20120930, henrichen: #issue4 support top level function
-            _TopLevelFn tfn = _TopLevelFn._getTopLevelFn(fn, m);
-            if (tfn != null)
-                m = tfn._method;
             ParameterInfo pinfo = new ParameterInfo(m.parameters);
             int pCount = pinfo.positionals.length; //positinal count
             int oCount = pinfo.optionals.length; //optional count

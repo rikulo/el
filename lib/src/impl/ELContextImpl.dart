@@ -13,11 +13,9 @@ class ELContextImpl extends ELContext {
         ..add(new ArrayELResolver())
         ..add(new BeanELResolver());
 
-  static final FunctionMapper _DefaultFunctionMapper = new _FunctionMapperImpl();
-
   final ELResolver _resolver;
 
-  FunctionMapper _functionMapper = _DefaultFunctionMapper;
+  FunctionMapper _functionMapper;
 
   VariableMapper _variableMapper;
 
@@ -70,63 +68,5 @@ class ELContextImpl extends ELContext {
 
   static ELResolver getDefaultResolver() {
      return _DefaultResolver;
-  }
-}
-
-//issue4: support Dart top level function
-//default FunctionMapper
-class _FunctionMapperImpl implements FunctionMapper {
-  Function resolveFunction(String prefix, String localName) {
-    if (prefix == null || prefix == '') {
-      MethodMirror mm = _getFun(localName);
-      if (mm != null)
-        return new _TopLevelFn(_getLib(), mm)._topLevelFn;
-    }
-    return null;
-  }
-
-  LibraryMirror _getLib() {
-    return currentMirrorSystem().isolate.rootLibrary;
-  }
-
-  MethodMirror _getFun(Object property) {
-    LibraryMirror lm = currentMirrorSystem().isolate.rootLibrary;
-    return lm != null ? lm.functions[new Symbol(property)] : null;
-  }
-}
-
-//issue4: support Dart top level function
-//Used to hold a top level function
-class _TopLevelFn {
-  LibraryMirror _lib;
-  MethodMirror _method;
-
-  _TopLevelFn(this._lib, this._method);
-
-  _TopLevelFn _topLevelFn()
-    => this;
-
-  static _TopLevelFn _getTopLevelFn(Function fn, MethodMirror m)
-    => ClassUtil.apply(fn, []);
-}
-
-class _VariableMapperImpl implements VariableMapper {
-
-  Map<String, ValueExpression> _vars;
-
-  //@Override
-  ValueExpression resolveVariable(String variable) {
-    if (_vars == null)
-      return null;
-
-    return _vars[variable];
-  }
-
-  //@Override
-  ValueExpression setVariable(String variable, ValueExpression expression) {
-    if (_vars == null)
-      _vars = new Map();
-
-    return _vars[variable] = expression;
   }
 }

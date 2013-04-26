@@ -46,8 +46,12 @@ void testParserBug45511() {
 
 void testBug48112() {
   expect(evaluateExpression("\${fn:trim('{world}')}"), equals("{world}"));
+  expect(evaluateExpression("\${trim('{world}')}"), equals("{world}"));
 }
 
+void testFunctionMapper2() {
+  expect(evaluateExpression("\${aaa().name}"), equals("Rikulo"));
+}
 void testParserLiteralExpression() {
   // Inspired by work on bug 45451, comments from kkolinko on the dev
   // list and looking at the spec to find some edge cases
@@ -155,13 +159,26 @@ String evaluateExpression(String expression) {
   return ve.getValue(ctx);
 }
 
+class Person {
+  String name;
+  Person(this.name);
+}
+
+Person person = new Person('Rikulo');
+
+aaa() => person;
+
 class FMapper extends FunctionMapper {
 
   //@Override
   Function resolveFunction(String prefix, String localName) {
-    if ("trim" == localName) {
-      return TesterFunctions.trim;
+    switch (localName) {
+      case "trim":
+        return TesterFunctions.trim;
+      case "aaa":
+        return aaa;
     }
+
     return null;
   }
 }
@@ -186,6 +203,7 @@ void main() {
   test('Bug44994', testBug44994);
   test('ParserBug45511', testParserBug45511);
   test('Bug48112', testBug48112);
+  test('testFunctionMapper2', testFunctionMapper2);
   test('parserLiteralExpression', testParserLiteralExpression);
   test('parserStringLiteral', testParserStringLiteral);
   test('ElSupportCompare', testElSupportCompare);
