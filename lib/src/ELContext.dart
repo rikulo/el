@@ -86,7 +86,7 @@ abstract class ELContext {
    * Sets the locale string of the ISO format (lang_COUNTRY_variant).
    *
    * + [locale] - the associated locale string when evaluating the EL
-   *              expression.
+   * expression.
    */
   void set locale(String locale) {
       this._locale = locale;
