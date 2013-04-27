@@ -15,7 +15,7 @@ class ReflectionUtil {
 //  static Map<String, ClassMirror> _PRIMITIVE_NAMES = _initPrimitiveNames();
 
 //  static Map<String, ClassMirror> _initPrimitiveNames() {
-//    Map<String, ClassMirror> map = new Map();
+//    Map<String, ClassMirror> map = new HashMap();
 //    map["bool"] = BOOL_MIRROR;
 //    map["num"] = NUM_MIRROR;
 //    map["int"] = INT_MIRROR;

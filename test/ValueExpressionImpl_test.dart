@@ -1,6 +1,7 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Mon, Sep 03, 2012  02:51:12 PM
 // Author: hernichen
+library ValueExpressionImpl_test;
 
 import 'dart:mirrors';
 import 'package:unittest/unittest.dart';

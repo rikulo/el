@@ -49,7 +49,7 @@ class ELContextImpl extends ELContext {
   //@Override
   setAttribute(var key, Object val) {
     if (_attrs == null)
-      _attrs = new Map();
+      _attrs = new HashMap();
     var old = _attrs[key];
     _attrs[key] = val;
 

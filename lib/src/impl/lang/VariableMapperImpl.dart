@@ -7,7 +7,7 @@ part of rikulo_elimpl;
 
 class VariableMapperImpl extends VariableMapper {
 
-    Map<String, ValueExpression> _vars = new Map();
+    Map<String, ValueExpression> _vars = new HashMap();
 
     //@Override
     ValueExpression resolveVariable(String variable) {

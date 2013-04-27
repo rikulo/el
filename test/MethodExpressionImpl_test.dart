@@ -1,6 +1,7 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  11:53:01 AM
 // Author: hernichen
+library MethodExpressionImpl_test;
 
 import 'dart:mirrors';
 import 'package:unittest/unittest.dart';
@@ -73,8 +74,8 @@ void testIsParametersProvided() {
     MethodExpression me2 = _elfactory.createMethodExpression(
             _context, "\${_beanB.sayHello('JUnit')}", STRING_MIRROR);
 
-    expect(me1.isParametersProvided(), isFalse);
-    expect(me2.isParametersProvided(), isTrue);
+    expect(me1.isParametersProvided, isFalse);
+    expect(me2.isParametersProvided, isTrue);
 }
 
 //@Test

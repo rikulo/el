@@ -6,7 +6,7 @@
 part of rikulo_elimpl;
 
 class ExpressionBuilder implements NodeVisitor {
-    static final Map<String, Node> _cache = new Map();
+    static final Map<String, Node> _cache = new HashMap();
 
     FunctionMapper _fnMapper;
 

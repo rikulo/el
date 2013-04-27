@@ -15,7 +15,7 @@ class AstMap extends SimpleNode {
 
   //@Override
   Object getValue(EvaluationContext ctx) {
-    Map values = new Map();
+    Map values = new HashMap();
     int numItems = this.jjtGetNumChildren();
     if (numItems > 0) {
       for (int i = 0; i < numItems; i++) {

@@ -4,7 +4,7 @@
 
 import 'package:unittest/unittest.dart';
 import 'package:rikulo_el/el.dart';
-import 'package:rikulo_el/elimpl.dart' show NodeVisitor, ELParser;
+import 'package:rikulo_el/elimpl.dart' show Node, NodeVisitor, ELParser;
 
 class ShowVisitor implements NodeVisitor {
   StringBuffer sb = new StringBuffer();

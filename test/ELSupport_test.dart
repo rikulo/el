@@ -1,6 +1,7 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Wed, Sep 26, 2012  11:13:24 AM
 // Author: hernichen
+library ELSupport_test;
 
 import 'dart:mirrors';
 import 'package:unittest/unittest.dart';

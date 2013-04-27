@@ -39,7 +39,7 @@ abstract class ELContext {
         throw new ArgumentError("contextObject cannot be null");
 
       if (this._map == null) {
-        this._map = new Map();
+        this._map = new HashMap();
       }
 
       this._map[key] = contextObject;
@@ -111,7 +111,8 @@ abstract class ELContext {
   setAttribute(var key, Object val);
 
   /**
-   * Create a new [ELContext].
+   * Create a new [ELContext] from the optional [FunctionMapper]
+   * and [VariableResolver].
    *
    * By default, an instance of [ELContextImpl] will be returned.
    * Note you can configure the static field ELContext.CREATOR
@@ -119,22 +120,40 @@ abstract class ELContext {
    *
    *     ELContext.CREATOR =
    *        () => new MyELContextImpl();
-   *
    *     ...
+   *     ELContext myctx = new ELContext.from(functionMapper: new MyFuncMapper());
    *
+   * ELContext.CREATOR is an [ELContextCreator] function that
+   * should return an instance of ELContext.
+   */
+  factory ELContext.from({VariableMapper variableMapper, FunctionMapper functionMapper})
+  => CREATOR != null ?
+    CREATOR(variableMapper: variableMapper, functionMapper: functionMapper) :
+    new ELContextImpl(variableMapper: variableMapper, functionMapper: functionMapper);
+  /** Create a new [ELContext] with the optional function and variable mapper.
+   *
+   * Notice the value returned by [variableMapper] will be cached in the EL context.
+   * If the value might change among different retrieval, use
+   * [ElContext.from] or implement your own instead.
+   *
+   * By default, an instance of [ELContextImpl] will be returned.
+   * Note you can configure the static field ELContext.CREATOR
+   * to make this constructor return your own ELContext implementation.
+   *
+   *     ELContext.CREATOR =
+   *        () => new MyELContextImpl();
+   *     ...
    *     ELContext myctx = new ELContext();
    *
    * ELContext.CREATOR is an [ELContextCreator] function that
    * should return an instance of ELContext.
    */
-  factory ELContext({VariableMapper variableMapper, FunctionMapper functionMapper})
-  => CREATOR != null ?
-    CREATOR(variableMapper: variableMapper, functionMapper: functionMapper) :
-    new ELContextImpl(variableMapper: variableMapper, functionMapper: functionMapper);
+  factory ELContext({Object variableMapper(String name), Function functionMapper(String name)})
+  => new ELContext.from(variableMapper: _toVMapper(variableMapper),
+      functionMapper: _toFMapper(functionMapper));
 
   /** Constructor to be called by subclass */
-  ELContext.init()
-      : this._resolved = false;
+  ELContext.init(): this._resolved = false;
 
   /**
    * Function that return a new ELContext instance. You can configure
@@ -156,3 +175,35 @@ abstract class ELContext {
 /** A function that return an ELContext */
 typedef ELContext ELContextCreator(
   {VariableMapper variableMapper, FunctionMapper functionMapper});
+
+class _VMapper implements VariableMapper {
+  Function _mapper;
+  Map<String, ValueExpression> _vars = new HashMap();
+
+  _VMapper(Object mapper(String name)): _mapper = mapper;
+
+  ValueExpression resolveVariable(String name) {
+    var val = _vars[name];
+    if (val == null) {
+      val = _mapper(name);
+      if (val != null) {
+        _vars[name] = val = _factory.createVariable(val);
+      }
+    }
+    return val;
+  }
+  ValueExpression setVariable(String name, ValueExpression expression) {
+    throw new UnsupportedError("Cannot set variables");
+  }
+}
+final ExpressionFactory _factory = new ExpressionFactory();
+VariableMapper _toVMapper(Object variableMapper(String name))
+=> variableMapper != null ? new _VMapper(variableMapper): null;
+
+class _FMapper implements FunctionMapper {
+  Function _mapper;
+  _FMapper(Function mapper(String name)): _mapper = mapper;
+  Function resolveFunction(String name) => _mapper(name);
+}
+FunctionMapper _toFMapper(Function functionMapper(String name))
+=> functionMapper != null ? new _FMapper(functionMapper): null;

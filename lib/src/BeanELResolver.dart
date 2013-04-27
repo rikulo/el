@@ -8,7 +8,7 @@ part of rikulo_el;
 class BeanELResolver extends ELResolver {
     final bool _readOnly;
 
-    final Map<Symbol, BeanProperties> _cache = new Map();
+    final Map<Symbol, BeanProperties> _cache = new HashMap();
 
     BeanELResolver([bool readOnly = false]) : this._readOnly = readOnly;
 
@@ -126,7 +126,7 @@ class BeanProperties {
 
     BeanProperties(ClassMirror type)
         : this._type = type {
-        this._properties = new Map();
+        this._properties = new HashMap();
     }
 
     BeanProperty getBeanProperty(String name) {

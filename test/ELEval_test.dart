@@ -1,6 +1,7 @@
 //Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 //History: Tue, Sep 25, 2012  11:15:34 AM
 // Author: hernichen
+library ELEval_test;
 
 import 'package:unittest/unittest.dart';
 import 'package:rikulo_commons/mirrors.dart';
@@ -151,7 +152,7 @@ void testMixedTypes() {
 
 //----------------
 String evaluateExpression(String expression) {
-  ELContext ctx = new ELContext(functionMapper: new FMapper());
+  ELContext ctx = new ELContext.from(functionMapper: new FMapper());
   ExpressionFactory exprFactory = new ExpressionFactory();
   ValueExpression ve = exprFactory.createValueExpression(ctx, expression,
       STRING_MIRROR);
