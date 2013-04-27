@@ -35,7 +35,6 @@ part 'src/ValueExpression.dart';
 part 'src/ValueReference.dart';
 part 'src/VariableMapper.dart';
 
-part 'src/VarELResolver.dart';
 part 'src/ClassELResolver.dart';
 part 'src/LibELResolver.dart';
 part 'src/MessageFormat.dart';

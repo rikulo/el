@@ -8,7 +8,6 @@ part of rikulo_elimpl;
 class ELContextImpl extends ELContext {
   static final ELResolver _DefaultResolver =
       new CompositeELResolver()
-        ..add(new VarELResolver()) //issue3: resolve top level variable
         ..add(new MapELResolver())
         ..add(new ArrayELResolver())
         ..add(new BeanELResolver());
