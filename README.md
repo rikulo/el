@@ -39,25 +39,32 @@ For more information, please refer to [Pub: Dependencies](http://pub.dartlang.or
 
 Using Rikulo EL is straightforward.
 
-	import 'dart:mirrors' show reflect;
-    import "package:rikulo_el/el.dart";
-
+    import 'dart:mirrors' show reflect;
+    import 'package:rikulo_el/el.dart';
+    
     class Person {
       String name;
       Person(this.name);
     }
-    Person person = new Person('Rikulo');
-
-    class _FunctionMapper extends FunctionMapper {
-      Function resolveFunction(String name)
-      => name == "owner" ? () => person: null;
-    }
 
     void main() {
-      ValueExpression expr = new ExpressionFactory().createValueExpression(
-        new ELContext(functionMapper: new _FunctionMapper()),
-        'Hello, #{owner().name}!', reflect('').type);
-      print(expr.getValue(ctx)); //'Hello, Rikulo!'
+      //Prepare an expression factory.
+      ExpressionFactory ef = new ExpressionFactory();
+    
+      //Prepare the expression script
+      //expression inside #{...} is to be evaluated
+      String script = 'Hello, #{person.name}!'; 
+    
+      //Prepare an expression context.
+      ELContext ctx = new ELContext();
+      ctx.variableResolver.setVariable('person',
+          ef.createVariable(new Person('Rikulo')));
+      
+      //Parse the script and create a value expression which expect a String type
+      ValueExpression ve = ef.createValueExpression(ctx, script, reflect('').type);
+      
+      //Evaluate the expression and return the evaluated result
+      print(ve.getValue(ctx)); //'Hello, Rikulo!'
     }
 
 For more examples, please refer to [here](https://github.com/rikulo/el/blob/master/test/ValueExpressionImpl_test.dart), [here](https://github.com/rikulo/el/blob/master/test/MethodExpressionImpl_test.dart) and [here](https://github.com/rikulo/el/blob/master/test/ELEval_test.dart).
