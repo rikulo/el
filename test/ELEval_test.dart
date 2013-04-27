@@ -152,7 +152,7 @@ void testMixedTypes() {
 
 //----------------
 String evaluateExpression(String expression) {
-  ELContext ctx = new ELContext.from(functionMapper: new FMapper());
+  ELContext ctx = new ELContext.mapper(functionMapper: new FMapper());
   ExpressionFactory exprFactory = new ExpressionFactory();
   ValueExpression ve = exprFactory.createValueExpression(ctx, expression,
       STRING_MIRROR);

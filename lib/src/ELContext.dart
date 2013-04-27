@@ -122,12 +122,12 @@ abstract class ELContext {
    *       FunctionMapper functionMapper})
    *       => new MyELContextImpl(variableMapper, functionMapper);
    *     ...
-   *     ELContext myctx = new ELContext.from(functionMapper: new MyFuncMapper());
+   *     ELContext myctx = new ELContext.mapper(functionMapper: new MyFuncMapper());
    *
    * ELContext.CREATOR is an [ELContextCreator] function that
    * should return an instance of ELContext.
    */
-  factory ELContext.from({VariableMapper variableMapper, FunctionMapper functionMapper})
+  factory ELContext.mapper({VariableMapper variableMapper, FunctionMapper functionMapper})
   => CREATOR != null ?
     CREATOR(variableMapper: variableMapper, functionMapper: functionMapper) :
     new ELContextImpl(variableMapper: variableMapper, functionMapper: functionMapper);
@@ -135,7 +135,7 @@ abstract class ELContext {
    *
    * Notice the value returned by [variableMapper] will be cached in the EL context.
    * If the value might change among different retrieval, use
-   * [ELContext.from] or implement your own instead.
+   * [ELContext.mapper] or implement your own instead.
    *
    * By default, an instance of [ELContextImpl] will be returned.
    * Note you can configure the static field [ELContext.CREATOR]
@@ -151,7 +151,7 @@ abstract class ELContext {
    * should return an instance of ELContext.
    */
   factory ELContext({Object variableMapper(String name), Function functionMapper(String name)})
-  => new ELContext.from(variableMapper: _toVMapper(variableMapper),
+  => new ELContext.mapper(variableMapper: _toVMapper(variableMapper),
       functionMapper: _toFMapper(functionMapper));
 
   /** Constructor to be called by subclass */
