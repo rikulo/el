@@ -39,6 +39,7 @@ For more information, please refer to [Pub: Dependencies](http://pub.dartlang.or
 
 Using Rikulo EL is straightforward.
 
+	import 'dart:mirrors' show reflect;
     import "package:rikulo_el/el.dart";
 
     class Person {
