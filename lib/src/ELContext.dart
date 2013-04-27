@@ -115,11 +115,12 @@ abstract class ELContext {
    * and [VariableResolver].
    *
    * By default, an instance of [ELContextImpl] will be returned.
-   * Note you can configure the static field ELContext.CREATOR
-   * to make this constructor return your own ELContext implementation.
+   * Note you can configure the static field [ELContext.CREATOR]
+   * to make this constructor return your own [ELContext] implementation.
    *
-   *     ELContext.CREATOR =
-   *        () => new MyELContextImpl();
+   *     ELContext.CREATOR = ({VariableMapper variableMapper,
+   *       FunctionMapper functionMapper})
+   *       => new MyELContextImpl(variableMapper, functionMapper);
    *     ...
    *     ELContext myctx = new ELContext.from(functionMapper: new MyFuncMapper());
    *
@@ -134,14 +135,15 @@ abstract class ELContext {
    *
    * Notice the value returned by [variableMapper] will be cached in the EL context.
    * If the value might change among different retrieval, use
-   * [ElContext.from] or implement your own instead.
+   * [ELContext.from] or implement your own instead.
    *
    * By default, an instance of [ELContextImpl] will be returned.
-   * Note you can configure the static field ELContext.CREATOR
-   * to make this constructor return your own ELContext implementation.
+   * Note you can configure the static field [ELContext.CREATOR]
+   * to make this constructor return your own [ELContext] implementation.
    *
-   *     ELContext.CREATOR =
-   *        () => new MyELContextImpl();
+   *     ELContext.CREATOR = ({VariableMapper variableMapper,
+   *       FunctionMapper functionMapper})
+   *       => new MyELContextImpl(variableMapper, functionMapper);
    *     ...
    *     ELContext myctx = new ELContext();
    *
@@ -161,11 +163,10 @@ abstract class ELContext {
    * ELContext implementation (System default will return an instance
    * of [ELContextImpl]).
    *
-   *     ELContext.CREATOR =
-   *        () => new MyELContextImpl();
-   *
+   *     ELContext.CREATOR = ({VariableMapper variableMapper,
+   *       FunctionMapper functionMapper})
+   *       => new MyELContextImpl(variableMapper, functionMapper);
    *     ...
-   *
    *     ELContext myctx = new ELContext();
    *
    */
