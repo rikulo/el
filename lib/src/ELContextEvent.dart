@@ -15,5 +15,5 @@ class ELContextEvent {
   ELContextEvent(ELContext elctx)
       : this._elctx = elctx;
 
-  ELContext getELContext() => _elctx;
+  ELContext get elContext => _elctx;
 }

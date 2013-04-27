@@ -11,16 +11,16 @@ class AstIdentifier extends SimpleNode {
 
     //@Override
     ClassMirror getType(EvaluationContext ctx) {
-        VariableMapper varMapper = ctx.getVariableMapper();
+        VariableMapper varMapper = ctx.variableMapper;
         if (varMapper != null) {
             ValueExpression expr = varMapper.resolveVariable(this.image_);
             if (expr != null) {
-                return expr.getType(ctx.getELContext());
+                return expr.getType(ctx.elContext);
             }
         }
-        ctx.setPropertyResolved(false);
-        ClassMirror result = ctx.getELResolver().getType(ctx, null, this.image_);
-        if (!ctx.isPropertyResolved()) {
+        ctx.isPropertyResolved = false;
+        ClassMirror result = ctx.resolver.getType(ctx, null, this.image_);
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled.null", [this.image_]));
         }
@@ -29,16 +29,16 @@ class AstIdentifier extends SimpleNode {
 
     //@Override
     Object getValue(EvaluationContext ctx) {
-        VariableMapper varMapper = ctx.getVariableMapper();
+        VariableMapper varMapper = ctx.variableMapper;
         if (varMapper != null) {
             ValueExpression expr = varMapper.resolveVariable(this.image_);
             if (expr != null) {
-                return expr.getValue(ctx.getELContext());
+                return expr.getValue(ctx.elContext);
             }
         }
-        ctx.setPropertyResolved(false);
-        Object result = ctx.getELResolver().getValue(ctx, null, this.image_);
-        if (!ctx.isPropertyResolved()) {
+        ctx.isPropertyResolved = false;
+        Object result = ctx.resolver.getValue(ctx, null, this.image_);
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled.null", [this.image_]));
         }
@@ -47,16 +47,16 @@ class AstIdentifier extends SimpleNode {
 
     //@Override
     bool isReadOnly(EvaluationContext ctx) {
-        VariableMapper varMapper = ctx.getVariableMapper();
+        VariableMapper varMapper = ctx.variableMapper;
         if (varMapper != null) {
             ValueExpression expr = varMapper.resolveVariable(this.image_);
             if (expr != null) {
-                return expr.isReadOnly(ctx.getELContext());
+                return expr.isReadOnly(ctx.elContext);
             }
         }
-        ctx.setPropertyResolved(false);
-        bool result = ctx.getELResolver().isReadOnly(ctx, null, this.image_);
-        if (!ctx.isPropertyResolved()) {
+        ctx.isPropertyResolved = false;
+        bool result = ctx.resolver.isReadOnly(ctx, null, this.image_);
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled.null", [this.image_]));
         }
@@ -65,17 +65,17 @@ class AstIdentifier extends SimpleNode {
 
     //@Override
     void setValue(EvaluationContext ctx, Object value) {
-        VariableMapper varMapper = ctx.getVariableMapper();
+        VariableMapper varMapper = ctx.variableMapper;
         if (varMapper != null) {
             ValueExpression expr = varMapper.resolveVariable(this.image_);
             if (expr != null) {
-                expr.setValue(ctx.getELContext(), value);
+                expr.setValue(ctx.elContext, value);
                 return;
             }
         }
-        ctx.setPropertyResolved(false);
-        ctx.getELResolver().setValue(ctx, null, this.image_, value);
-        if (!ctx.isPropertyResolved()) {
+        ctx.isPropertyResolved = false;
+        ctx.resolver.setValue(ctx, null, this.image_, value);
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled.null", [this.image_]));
         }
@@ -84,13 +84,13 @@ class AstIdentifier extends SimpleNode {
     //@Override
     Object invoke(EvaluationContext ctx,
             List<Object> paramValues, [Map<String, Object> namedArgs]) {
-        return this._getMethodExpression(ctx).invoke(ctx.getELContext(), paramValues);
+        return this._getMethodExpression(ctx).invoke(ctx.elContext, paramValues);
     }
 
 
     //@Override
     MethodInfo getMethodInfo(EvaluationContext ctx) {
-        return this._getMethodExpression(ctx).getMethodInfo(ctx.getELContext());
+        return this._getMethodExpression(ctx).getMethodInfo(ctx.elContext);
     }
 
     //@Override
@@ -105,7 +105,7 @@ class AstIdentifier extends SimpleNode {
 
     //@Override
     ValueReference getValueReference(EvaluationContext ctx) {
-        VariableMapper varMapper = ctx.getVariableMapper();
+        VariableMapper varMapper = ctx.variableMapper;
 
         if (varMapper == null) {
             return null;
@@ -126,7 +126,7 @@ class AstIdentifier extends SimpleNode {
 
         // case A: ValueExpression exists, getValue which must
         // be a MethodExpression
-        VariableMapper varMapper = ctx.getVariableMapper();
+        VariableMapper varMapper = ctx.variableMapper;
         ValueExpression ve = null;
         if (varMapper != null) {
             ve = varMapper.resolveVariable(this.image_);
@@ -138,8 +138,8 @@ class AstIdentifier extends SimpleNode {
         // case B: evaluate the identity against the ELResolver, again, must be
         // a MethodExpression to be able to invoke
         if (ve == null) {
-            ctx.setPropertyResolved(false);
-            obj = ctx.getELResolver().getValue(ctx, null, this.image_);
+            ctx.isPropertyResolved = false;
+            obj = ctx.resolver.getValue(ctx, null, this.image_);
         }
 
         // finally provide helpful hints

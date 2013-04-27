@@ -50,41 +50,37 @@ abstract class ELContext {
    *
    * + [resolved] - true to indicate the EL expression has been resolved.
    */
-  void setPropertyResolved(bool resolved) {
+  void set isPropertyResolved(bool resolved) {
       this._resolved = resolved;
   }
 
   /**
    * Returns whether the EL expression has been resolveed.
    */
-  bool isPropertyResolved() {
-      return this._resolved;
-  }
+  bool get isPropertyResolved => this._resolved;
 
   /**
    * Returns the ELResolver for evaluating the EL expression.
    */
-  ELResolver getELResolver();
+  ELResolver get resolver;
 
   /**
    * Returns the FunctionMapper that help resolving a function when evaluating
    * the EL expression.
    */
-  FunctionMapper getFunctionMapper();
+  FunctionMapper get functionMapper;
 
   /**
    * Returns the [VariableMapper] that help resolving a varaible when
    * evaluating the EL expression.
    */
-  VariableMapper getVariableMapper();
+  VariableMapper get variableMapper;
 
   /**
    * Return the associate locale string of the ISO
    * format (lang_COUNTRY_variant).
    */
-  String getLocale() {
-      return this._locale;
-  }
+  String get locale => this._locale;
 
   /**
    * Sets the locale string of the ISO format (lang_COUNTRY_variant).
@@ -92,7 +88,7 @@ abstract class ELContext {
    * + [locale] - the associated locale string when evaluating the EL
    *              expression.
    */
-  void setLocale(String locale) {
+  void set locale(String locale) {
       this._locale = locale;
   }
 

@@ -6,7 +6,7 @@
 part of rikulo_el;
 
 abstract class Expression {
-    String getExpressionString();
+    String get expressionString;
 
-    bool isLiteralText();
+    bool get isLiteralText;
 }

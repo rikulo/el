@@ -26,8 +26,7 @@ class MethodExpressionLiteral implements MethodExpression {
        ELSupport.coerceToType(this._expr, this._expectedType) : this._expr;
 
   //@Override
-  String getExpressionString()
-    => this._expr;
+  String get expressionString => this._expr;
 
   //@Override
   bool operator ==(MethodExpression other)
@@ -39,14 +38,12 @@ class MethodExpressionLiteral implements MethodExpression {
     => this._expr.hashCode;
 
   //@Override
-  bool isLiteralText()
-    => true;
+  bool get isLiteralText => true;
 
   //@Override
   ValueReference getValueReference(ELContext context)
     => null;
 
   //@Override
-  bool isParametersProvided()
-    => false;
+  bool get isParametersProvided => false;
 }

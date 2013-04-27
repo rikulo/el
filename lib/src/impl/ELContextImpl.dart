@@ -29,17 +29,13 @@ class ELContextImpl extends ELContext {
   }
 
   //@Override
-  ELResolver getELResolver() {
-    return this._resolver;
-  }
+  ELResolver get resolver => this._resolver;
 
   //@Override
-  FunctionMapper getFunctionMapper() {
-    return this._functionMapper;
-  }
+  FunctionMapper get functionMapper => this._functionMapper;
 
   //@Override
-  VariableMapper getVariableMapper() {
+  VariableMapper get variableMapper {
     if (this._variableMapper == null)
       this._variableMapper = new VariableMapperImpl();
     return this._variableMapper;

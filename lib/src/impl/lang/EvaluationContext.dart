@@ -18,8 +18,7 @@ class EvaluationContext implements ELContext {
         this._fnMapper = fnMapper,
         this._varMapper = varMapper;
 
-  ELContext getELContext()
-    => this._elContext;
+  ELContext get elContext => this._elContext;
 
   //20120928, henrichen: provide a general attribute carrier
   //@Override
@@ -32,24 +31,20 @@ class EvaluationContext implements ELContext {
     => this._elContext.setAttribute(key, val);
 
   //@Override
-  FunctionMapper getFunctionMapper()
-    => this._fnMapper;
+  FunctionMapper get functionMapper => this._fnMapper;
 
   //@Override
-  VariableMapper getVariableMapper()
-    => this._varMapper;
+  VariableMapper get variableMapper => this._varMapper;
 
   //@Override
   Object getContext(ClassMirror key)
     => this._elContext.getContext(key);
 
   //@Override
-  ELResolver getELResolver()
-    => this._elContext.getELResolver();
+  ELResolver get resolver => this._elContext.resolver;
 
   //@Override
-  bool isPropertyResolved()
-    => this._elContext.isPropertyResolved();
+  bool get isPropertyResolved => this._elContext.isPropertyResolved;
 
   //@Override
   void putContext(ClassMirror key, Object contextObject) {
@@ -57,16 +52,15 @@ class EvaluationContext implements ELContext {
   }
 
   //@Override
-  void setPropertyResolved(bool resolved) {
-    this._elContext.setPropertyResolved(resolved);
+  void set isPropertyResolved(bool resolved) {
+    this._elContext.isPropertyResolved = resolved;
   }
 
   //@Override
-  String getLocale()
-    => this._elContext.getLocale();
+  String get locale => this._elContext.locale;
 
   //@Override
-  void setLocale(String locale) {
-    this._elContext.setLocale(locale);
+  void set locale(String locale) {
+    this._elContext.locale = locale;
   }
 }

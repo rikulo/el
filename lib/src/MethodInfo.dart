@@ -10,15 +10,9 @@ part of rikulo_el;
  */
 class MethodInfo {
 
-    final Symbol _name;
+    final Symbol name;
 
-    final ClassMirror _returnType;
+    final ClassMirror returnType;
 
-    MethodInfo(Symbol name, ClassMirror returnType)
-        : this._name = name,
-          this._returnType = returnType;
-
-    Symbol getName() => _name;
-
-    ClassMirror getReturnType() => _returnType;
+    MethodInfo(this.name, this.returnType);
 }

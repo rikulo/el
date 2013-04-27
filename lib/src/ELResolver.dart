@@ -8,7 +8,7 @@ part of rikulo_el;
 abstract class ELResolver {
 
     static String message(ELContext context, String name, List props) {
-        String locale = context.getLocale();
+        String locale = context.locale;
         if (locale == null) {
             locale = "en_US"; //TODO(henri): until Dart has Locale concept
         }

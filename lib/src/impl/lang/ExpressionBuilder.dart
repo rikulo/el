@@ -19,8 +19,8 @@ class ExpressionBuilder implements NodeVisitor {
      */
     ExpressionBuilder(String expression, ELContext ctx)
         : this._expression = expression {
-      FunctionMapper ctxFn = ctx.getFunctionMapper();
-      VariableMapper ctxVar = ctx.getVariableMapper();
+      FunctionMapper ctxFn = ctx.functionMapper;
+      VariableMapper ctxVar = ctx.variableMapper;
 
       if (ctxFn != null) {
           this._fnMapper = new FunctionMapperFactory(ctxFn);

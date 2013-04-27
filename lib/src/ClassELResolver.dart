@@ -27,7 +27,7 @@ class ClassELResolver implements ELResolver {
     if (getter == null || !getter.isStatic)
       return null;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
     return ClassUtil.invokeByMirror(cm, getter, []);
   }
 
@@ -44,7 +44,7 @@ class ClassELResolver implements ELResolver {
     if (getter == null || !getter.isStatic)
       return null;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
     return getter.returnType;
   }
 
@@ -61,7 +61,7 @@ class ClassELResolver implements ELResolver {
     if (setter == null  || !setter.isStatic)
       return;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
 
     if (this._readOnly)
       throw new PropertyNotWritableException(message(context,
@@ -78,7 +78,7 @@ class ClassELResolver implements ELResolver {
     if (base == null || property == null || base is! ClassMirror)
       return false;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
 
     return this._readOnly || !_hasSetter(base, property);
   }
@@ -112,7 +112,7 @@ class ClassELResolver implements ELResolver {
     if (m == null || !m.isStatic)
       return null;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
 
     return ClassUtil.invokeByMirror(cm, m , params, namedArgs);
   }

@@ -29,13 +29,13 @@ class CompositeELResolver extends ELResolver {
 
     //@Override
     Object getValue(ELContext context, Object base, Object property) {
-        context.setPropertyResolved(false);
+        context.isPropertyResolved = false;
         int sz = this._size;
         Object result = null;
 
         for (int i = 0; i < sz; i++) {
             result = this._resolvers[i].getValue(context, base, property);
-            if (context.isPropertyResolved()) {
+            if (context.isPropertyResolved) {
                 return result;
             }
         }
@@ -44,11 +44,11 @@ class CompositeELResolver extends ELResolver {
 
     //@Override
     void setValue(ELContext context, Object base, Object property, Object value) {
-        context.setPropertyResolved(false);
+        context.isPropertyResolved = false;
         int sz = this._size;
         for (int i = 0; i < sz; i++) {
             this._resolvers[i].setValue(context, base, property, value);
-            if (context.isPropertyResolved()) {
+            if (context.isPropertyResolved) {
                 return;
             }
         }
@@ -56,12 +56,12 @@ class CompositeELResolver extends ELResolver {
 
     //@Override
     bool isReadOnly(ELContext context, Object base, Object property) {
-        context.setPropertyResolved(false);
+        context.isPropertyResolved = false;
         int sz = this._size;
         bool readOnly = false;
         for (int i = 0; i < sz; i++) {
             readOnly = this._resolvers[i].isReadOnly(context, base, property);
-            if (context.isPropertyResolved()) {
+            if (context.isPropertyResolved) {
                 return readOnly;
             }
         }
@@ -84,12 +84,12 @@ class CompositeELResolver extends ELResolver {
 
     //@Override
     ClassMirror getType(ELContext context, Object base, Object property) {
-        context.setPropertyResolved(false);
+        context.isPropertyResolved = false;
         int sz = this._size;
         ClassMirror type;
         for (int i = 0; i < sz; i++) {
             type = this._resolvers[i].getType(context, base, property);
-            if (context.isPropertyResolved()) {
+            if (context.isPropertyResolved) {
                 return type;
             }
         }
@@ -102,12 +102,12 @@ class CompositeELResolver extends ELResolver {
     //@Override
     Object invoke(ELContext context, Object base, Object method,
         List params, [Map<String, Object> namedArgs]) {
-        context.setPropertyResolved(false);
+        context.isPropertyResolved = false;
         int sz = this._size;
         Object obj;
         for (int i = 0; i < sz; i++) {
             obj = this._resolvers[i].invoke(context, base, method, params, namedArgs);
-            if (context.isPropertyResolved()) {
+            if (context.isPropertyResolved) {
                 return obj;
             }
         }

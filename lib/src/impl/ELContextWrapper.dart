@@ -15,19 +15,17 @@ class ELContextWrapper extends ELContextImpl implements ELContext {
           this._fnMapper = fnMapper;
 
     //@Override
-    ELResolver getELResolver() {
-        return this._target.getELResolver();
-    }
+    ELResolver get resolver => this._target.resolver;
 
     //@Override
-    FunctionMapper getFunctionMapper() {
+    FunctionMapper get functionMapper {
         if (this._fnMapper != null) return this._fnMapper;
-        return this._target.getFunctionMapper();
+        return this._target.functionMapper;
     }
 
     //@Override
-    VariableMapper getVariableMapper() {
-        return this._target.getVariableMapper();
+    VariableMapper get variableMapper {
+        return this._target.variableMapper;
     }
 
     //@Override
@@ -36,14 +34,11 @@ class ELContextWrapper extends ELContextImpl implements ELContext {
     }
 
     //@Override
-    String getLocale() {
-        return this._target.getLocale();
-    }
+    String get locale => this._target.locale;
+
 
     //@Override
-    bool isPropertyResolved() {
-        return this._target.isPropertyResolved();
-    }
+    bool get isPropertyResolved => this._target.isPropertyResolved;
 
     //@Override
     void putContext(ClassMirror key, Object contextObject) {
@@ -51,13 +46,13 @@ class ELContextWrapper extends ELContextImpl implements ELContext {
     }
 
     //@Override
-    void setLocale(String locale) {
-        this._target.setLocale(locale);
+    void set locale(String locale) {
+        this._target.locale = locale;
     }
 
     //@Override
-    void setPropertyResolved(bool resolved) {
-        this._target.setPropertyResolved(resolved);
+    void set isPropertyResolved(bool resolved) {
+        this._target.isPropertyResolved = resolved;
     }
 
 }

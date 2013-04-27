@@ -7,7 +7,7 @@ part of rikulo_el;
 
 abstract class ValueExpression extends Expression {
 
-  ClassMirror getExpectedType();
+  ClassMirror get expectedType;
 
   ClassMirror getType(ELContext context);
 

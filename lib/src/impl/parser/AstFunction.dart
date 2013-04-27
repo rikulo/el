@@ -32,7 +32,7 @@ class AstFunction extends SimpleNode {
     //@Override
     TypeMirror getType(EvaluationContext ctx) {
 
-        FunctionMapper fnMapper = ctx.getFunctionMapper();
+        FunctionMapper fnMapper = ctx.functionMapper;
 
         // quickly validate again for this request
         if (fnMapper == null) {
@@ -55,7 +55,7 @@ class AstFunction extends SimpleNode {
     //@Override
     Object getValue(EvaluationContext ctx) {
 
-        FunctionMapper fnMapper = ctx.getFunctionMapper();
+        FunctionMapper fnMapper = ctx.functionMapper;
 
         // quickly validate again for this request
         if (fnMapper == null) {

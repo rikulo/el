@@ -21,7 +21,7 @@ class BeanELResolver extends ELResolver {
             return null;
         }
 
-        context.setPropertyResolved(true);
+        context.isPropertyResolved = true;
         return reflect(base).getField(new Symbol(property)).reflectee;
     }
 
@@ -34,8 +34,8 @@ class BeanELResolver extends ELResolver {
             return null;
         }
 
-        context.setPropertyResolved(true);
-        return this._property(context, base, property).getPropertyType();
+        context.isPropertyResolved = true;
+        return this._property(context, base, property).propertyType;
     }
 
     //@Override
@@ -47,7 +47,7 @@ class BeanELResolver extends ELResolver {
             return;
         }
 
-        context.setPropertyResolved(true);
+        context.isPropertyResolved = true;
 
         if (this._readOnly) {
             throw new PropertyNotWritableException(message(context,
@@ -66,9 +66,9 @@ class BeanELResolver extends ELResolver {
             return false;
         }
 
-        context.setPropertyResolved(true);
+        context.isPropertyResolved = true;
         return this._readOnly
-                || _property(context, base, property).isReadOnly();
+                || _property(context, base, property).isReadOnly;
     }
 
     //@Override
@@ -89,7 +89,7 @@ class BeanELResolver extends ELResolver {
         String prop = property.toString();
 
         BeanProperties props = this._cache[type.qualifiedName];
-        if (props == null || type != props.getType()) {
+        if (props == null || type != props.type) {
             props = new BeanProperties(type);
             this._cache[type.qualifiedName] = props;
         }
@@ -112,7 +112,7 @@ class BeanELResolver extends ELResolver {
 
         String methodName = method.toString();
 
-        context.setPropertyResolved(true);
+        context.isPropertyResolved = true;
 
         return reflect(base).invoke(new Symbol(methodName), params, _toNamedParams(namedArgs)).reflectee;
     }
@@ -142,7 +142,7 @@ class BeanProperties {
         return property;
     }
 
-    ClassMirror getType() => _type;
+    ClassMirror get type => _type;
 }
 
 class BeanProperty {
@@ -165,13 +165,9 @@ class BeanProperty {
         _write = _getWriteMethod();
     }
 
-    ClassMirror getPropertyType() {
-        return this._type;
-    }
+    ClassMirror get propertyType => this._type;
 
-    bool isReadOnly() {
-        return _write == null;
-    }
+    bool get isReadOnly => _write == null;
 
     MethodMirror _getWriteMethod() {
         if (this._write == null) {

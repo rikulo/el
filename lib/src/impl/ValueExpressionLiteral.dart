@@ -35,11 +35,10 @@ class ValueExpressionLiteral implements ValueExpression {
     => this._value != null ? reflect(this._value).type : null;
 
   //@Override
-  ClassMirror getExpectedType()
-    => this._expectedType;
+  ClassMirror get expectedType => this._expectedType;
 
   //@Override
-  String getExpressionString()
+  String get expressionString
     => this._value != null ? this._value.toString() : null;
 
   //@Override
@@ -57,8 +56,7 @@ class ValueExpressionLiteral implements ValueExpression {
     => this._value != null ? this._value.hashCode : 0;
 
   //@Override
-  bool isLiteralText()
-    => true;
+  bool get isLiteralText => true;
 
   //@Override
   ValueReference getValueReference(ELContext context)

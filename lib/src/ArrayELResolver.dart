@@ -19,7 +19,7 @@ class ArrayELResolver extends ELResolver {
         }
 
         if (base != null && base is List) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
             if ("length" == property) //henerichen@rikulo.org: special suffix
               return base.length;
             int idx = _coerce(property);
@@ -39,7 +39,7 @@ class ArrayELResolver extends ELResolver {
         }
 
         if (base != null && base is List) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
             int idx = _coerce(property);
             _checkBounds(base, idx);
             return ClassUtil.getElementClassMirror(reflect(base).type);
@@ -56,7 +56,7 @@ class ArrayELResolver extends ELResolver {
         }
 
         if (base != null && base is List) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
 
             if (this._readOnly) {
                 throw new PropertyNotWritableException(message(context,
@@ -81,7 +81,7 @@ class ArrayELResolver extends ELResolver {
         }
 
         if (base != null && base is List) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
             int idx = _coerce(property);
             _checkBounds(base, idx);
         }

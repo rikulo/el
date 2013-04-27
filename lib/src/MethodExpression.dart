@@ -11,5 +11,5 @@ abstract class MethodExpression extends Expression {
 
     Object invoke(ELContext context, List<Object> positionalArgs, [Map<String, Object> namedArgs]);
 
-    bool isParametersProvided();
+    bool get isParametersProvided;
 }

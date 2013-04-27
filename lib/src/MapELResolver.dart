@@ -19,7 +19,7 @@ class MapELResolver extends ELResolver {
         }
 
         if (base is Map) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
             //henrichen@rikulo.org: handle special suffix "length"
             return "length" == property ? base.length : base[property];
         }
@@ -34,7 +34,7 @@ class MapELResolver extends ELResolver {
         }
 
         if (base is Map) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
             return OBJECT_MIRROR;
         }
 
@@ -49,7 +49,7 @@ class MapELResolver extends ELResolver {
         }
 
         if (base is Map) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
 
             if (this._readOnly) {
                 throw new PropertyNotWritableException(message(context,
@@ -72,7 +72,7 @@ class MapELResolver extends ELResolver {
         }
 
         if (base is Map) {
-            context.setPropertyResolved(true);
+            context.isPropertyResolved = true;
             return this._readOnly;
         }
 

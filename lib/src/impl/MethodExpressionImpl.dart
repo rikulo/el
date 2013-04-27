@@ -74,11 +74,10 @@ class MethodExpressionImpl implements MethodExpression {
    * expression string but different function mappings.
    * </p>
    *
-   * + see [Expression.getExpressionString()]
+   * + see [Expression.expressionString]
    */
   //@Override
-  String getExpressionString()
-    => this._expr;
+  String get expressionString => this._expr;
 
   /**
    * Returns an instance of [MethodInfo] containing information about the
@@ -136,10 +135,9 @@ class MethodExpressionImpl implements MethodExpression {
   }
 
   //@Override
-  bool isLiteralText()
-      => false;
+  bool get isLiteralText => false;
 
   //@Override
-  bool isParametersProvided()
+  bool get isParametersProvided
     => this._getNode().isParametersProvided();
 }

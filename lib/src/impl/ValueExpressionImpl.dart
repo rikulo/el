@@ -31,12 +31,10 @@ class ValueExpressionImpl implements ValueExpression {
        && (other as ValueExpressionImpl).hashCode == this.hashCode;
 
   //@Override
-  ClassMirror getExpectedType()
-    => this._expectedType;
+  ClassMirror get expectedType  => this._expectedType;
 
   //@Override
-  String getExpressionString()
-    => this._expr;
+  String get expressionString => this._expr;
 
   Node _getNode() {
     if (this._node == null)
@@ -65,7 +63,7 @@ class ValueExpressionImpl implements ValueExpression {
     => this._getNode().hashCode;
 
   //@Override
-  bool isLiteralText() {
+  bool get isLiteralText {
     try {
         return this._getNode() is AstLiteralExpression;
     } on ELException catch (ele) {

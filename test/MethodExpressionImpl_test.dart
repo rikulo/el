@@ -22,40 +22,40 @@ void setUp() {
 
     TesterBeanA beanA = new TesterBeanA();
     beanA.setName("A");
-    _context.getVariableMapper().setVariable("beanA",
+    _context.variableMapper.setVariable("beanA",
             _elfactory.createVariable(beanA));
 
     TesterBeanAA beanAA = new TesterBeanAA();
     beanAA.setName("AA");
-    _context.getVariableMapper().setVariable("beanAA",
+    _context.variableMapper.setVariable("beanAA",
             _elfactory.createVariable(beanAA));
 
     TesterBeanAAA beanAAA = new TesterBeanAAA();
     beanAAA.setName("AAA");
-    _context.getVariableMapper().setVariable("beanAAA",
+    _context.variableMapper.setVariable("beanAAA",
             _elfactory.createVariable(beanAAA));
 
     _beanB = new TesterBeanB();
     _beanB.setName("B");
-    _context.getVariableMapper().setVariable("_beanB",
+    _context.variableMapper.setVariable("_beanB",
             _elfactory.createVariable(_beanB));
 
     TesterBeanBB beanBB = new TesterBeanBB();
     beanBB.setName("BB");
-    _context.getVariableMapper().setVariable("beanBB",
+    _context.variableMapper.setVariable("beanBB",
             _elfactory.createVariable(beanBB));
 
     TesterBeanBBB beanBBB = new TesterBeanBBB();
     beanBBB.setName("BBB");
-    _context.getVariableMapper().setVariable("beanBBB",
+    _context.variableMapper.setVariable("beanBBB",
             _elfactory.createVariable(beanBBB));
 
     TesterBeanC beanC = new TesterBeanC();
-    _context.getVariableMapper().setVariable("beanC",
+    _context.variableMapper.setVariable("beanC",
             _elfactory.createVariable(beanC));
 
 //    TesterBeanEnum beanEnum = new TesterBeanEnum();
-//    _context.getVariableMapper().setVariable("beanEnum",
+//    _context.variableMapper.setVariable("beanEnum",
 //            _elfactory.createVariable(type));
 }
 
@@ -66,7 +66,7 @@ void testIsParametersProvided() {
     TesterBeanB _beanB = new TesterBeanB();
     _beanB.setName("Tomcat");
     ValueExpression var0 = _elfactory.createVariable(_beanB);
-    _context.getVariableMapper().setVariable("_beanB", var0);
+    _context.variableMapper.setVariable("_beanB", var0);
 
     MethodExpression me1 = _elfactory.createMethodExpression(
             _context, "\${_beanB.getName}", STRING_MIRROR);
@@ -83,7 +83,7 @@ void testInvoke() {
 
     TesterBeanB _beanB = new TesterBeanB();
     _beanB.setName("B");
-    _context.getVariableMapper().setVariable("_beanB",
+    _context.variableMapper.setVariable("_beanB",
             _elfactory.createVariable(_beanB));
 
     MethodExpression me1 = _elfactory.createMethodExpression(

@@ -15,9 +15,9 @@ class AstValue extends SimpleNode {
     //@Override
     ClassMirror getType(EvaluationContext ctx) {
         Target_ t = _getTarget(ctx);
-        ctx.setPropertyResolved(false);
-        ClassMirror result = ctx.getELResolver().getType(ctx, t.base_, t.property_);
-        if (!ctx.isPropertyResolved()) {
+        ctx.isPropertyResolved = false;
+        ClassMirror result = ctx.resolver.getType(ctx, t.base_, t.property_);
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled", [t.base_, t.property_]));
         }
@@ -40,7 +40,7 @@ class AstValue extends SimpleNode {
 
         int i = 1;
         // evaluate any properties or methods before our target
-        ELResolver resolver = ctx.getELResolver();
+        ELResolver resolver = ctx.resolver;
         while (i < propCount) {
             if (i + 2 < propCount &&
                     this.children_[i + 1] is AstMethodParameters) {
@@ -54,7 +54,7 @@ class AstValue extends SimpleNode {
             } else if (i + 2 == propCount &&
                     this.children_[i + 1] is AstMethodParameters) {
                 // Method call at end of expression
-                ctx.setPropertyResolved(false);
+                ctx.isPropertyResolved = false;
                 property = this.children_[i].getValue(ctx);
                 i += 2;
 
@@ -65,13 +65,13 @@ class AstValue extends SimpleNode {
             } else if (i + 1 < propCount) {
                 // Object with property not at end of expression
                 property = this.children_[i].getValue(ctx);
-                ctx.setPropertyResolved(false);
+                ctx.isPropertyResolved = false;
                 base = resolver.getValue(ctx, base, property);
                 i++;
 
             } else {
                 // Object with property at end of expression
-                ctx.setPropertyResolved(false);
+                ctx.isPropertyResolved = false;
                 property = this.children_[i].getValue(ctx);
                 i++;
 
@@ -98,7 +98,7 @@ class AstValue extends SimpleNode {
         int propCount = this.jjtGetNumChildren();
         int i = 1;
         Object suffix = null;
-        ELResolver resolver = ctx.getELResolver();
+        ELResolver resolver = ctx.resolver;
         while (base != null && i < propCount) {
             suffix = this.children_[i].getValue(ctx);
             if (i + 1 < propCount &&
@@ -115,12 +115,12 @@ class AstValue extends SimpleNode {
                     return null;
                 }
 
-                ctx.setPropertyResolved(false);
+                ctx.isPropertyResolved = false;
                 base = resolver.getValue(ctx, base, suffix);
                 i++;
             }
         }
-        if (!ctx.isPropertyResolved()) {
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled", [base, suffix]));
         }
@@ -130,10 +130,10 @@ class AstValue extends SimpleNode {
     //@Override
     bool isReadOnly(EvaluationContext ctx) {
         Target_ t = _getTarget(ctx);
-        ctx.setPropertyResolved(false);
+        ctx.isPropertyResolved = false;
         bool result =
-            ctx.getELResolver().isReadOnly(ctx, t.base_, t.property_);
-        if (!ctx.isPropertyResolved()) {
+            ctx.resolver.isReadOnly(ctx, t.base_, t.property_);
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled", [t.base_, t.property_]));
         }
@@ -144,8 +144,8 @@ class AstValue extends SimpleNode {
     void setValue(EvaluationContext ctx, Object value)
             {
         Target_ t = _getTarget(ctx);
-        ctx.setPropertyResolved(false);
-        ELResolver resolver = ctx.getELResolver();
+        ctx.isPropertyResolved = false;
+        ELResolver resolver = ctx.resolver;
 
         // coerce to the expected type
         ClassMirror targetClass = resolver.getType(ctx, t.base_, t.property_);
@@ -156,7 +156,7 @@ class AstValue extends SimpleNode {
         } else {
             resolver.setValue(ctx, t.base_, t.property_, value);
         }
-        if (!ctx.isPropertyResolved()) {
+        if (!ctx.isPropertyResolved) {
             throw new PropertyNotFoundException(MessageFactory.getString(
                     "error.resolver.unhandled", [t.base_, t.property_]));
         }

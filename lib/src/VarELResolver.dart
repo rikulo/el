@@ -23,7 +23,7 @@ class VarELResolver implements ELResolver {
     if (vm == null)
       return null;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
     return _getLib().getField(property).reflectee;
   }
 
@@ -39,7 +39,7 @@ class VarELResolver implements ELResolver {
     if (vm == null)
       return null;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
     return vm.type;
   }
 
@@ -56,7 +56,7 @@ class VarELResolver implements ELResolver {
     if (vm == null)
       return;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
 
     if (this._readOnly)
       throw new PropertyNotWritableException(message(context,
@@ -77,7 +77,7 @@ class VarELResolver implements ELResolver {
     if (vm == null)
       return false;
 
-    context.setPropertyResolved(true);
+    context.isPropertyResolved = true;
     return this._readOnly || vm.isFinal;
   }
 

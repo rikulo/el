@@ -7,14 +7,8 @@ part of rikulo_el;
 
 class ValueReference {
 
-  final Object _base;
-  final Object _property;
+  final Object base;
+  final Object property;
 
-  ValueReference(Object base, Object property)
-      : this._base = base,
-        this._property = property;
-
-  Object getBase() => _base;
-
-  Object getProperty() => _property;
+  ValueReference(this.base, this.property);
 }
