@@ -8,20 +8,17 @@ part of rikulo_el;
  * Utility class for Rikulo EL.
  */
 class ELUtil {
-  static ExpressionFactory _elfactory = new ExpressionFactory();
+  ///The expression factory
+  static ExpressionFactory factory = new ExpressionFactory();
 
-  static eval(ELContext ctx, String expr,
-      [TypeMirror expectedType]) {
-    ValueExpression valexpr =
-        _elfactory.createValueExpression(ctx, expr,
-            expectedType == null ? OBJECT_MIRROR : expectedType);
-    return valexpr.getValue(ctx);
-  }
+  ///Evaluates the given expression
+  static eval(ELContext ctx, String expression, [ClassMirror expectedType])
+  => factory.createValueExpression(ctx, expression, expectedType).getValue(ctx);
 
-  static ValueExpression createSetterExpression(ELContext ctx,
-      String value, MethodMirror setter) {
-
-    ClassMirror expectedType = setter.parameters[0].type;
-    return _elfactory.createValueExpression(ctx, value, expectedType);
+  ///Assign an object to the given variable. It returns the previous assignment
+  ///(which is an expression since a variable can be an expression).
+  static ValueExpression
+  setVariable(VariableMapper variableMapper, String variable, Object instance) {
+    variableMapper.setVariable(variable, factory.createVariable(instance));
   }
 }

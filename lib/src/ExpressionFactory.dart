@@ -25,9 +25,10 @@ abstract class ExpressionFactory {
    * + [expression] - the EL expression script to be parsed.
    * + [expectedType] - the expected type when evaluate the created
    *                    [ValueExpression].
+   * If omitted, it is assumed to be [OBJECT_MIRROR].
    */
   ValueExpression createValueExpression(ELContext context,
-          String expression, ClassMirror expectedType);
+          String expression, [ClassMirror expectedType]);
 
   /**
    * Create a [ValueExpression] of the specified object instance.
@@ -35,9 +36,9 @@ abstract class ExpressionFactory {
    * + [instance] - the instance object to be wrapped as a [ValueExpression].
    * + [expectedType] - the expected type when evaluate the created
    *                    [ValueExpression].
+   * If omitted, it is the instance's type.
    */
-  ValueExpression createValueExpressionByInstance(Object instance,
-          ClassMirror expectedType);
+  ValueExpression createVariable(Object instance, [ClassMirror expectedType]);
 
   /**
    * Create a [MethodExpression] of the specified EL script.
@@ -49,7 +50,7 @@ abstract class ExpressionFactory {
    *                    [MethodExpression].
    */
   MethodExpression createMethodExpression(ELContext context,
-          String expression, ClassMirror expectedReturnType);
+          String expression, [ClassMirror expectedReturnType]);
 
   /**
    * Create a new [ExpressionFactory].

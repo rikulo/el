@@ -14,17 +14,16 @@ class ExpressionFactoryImpl implements ExpressionFactory {
 
     //@Override
     MethodExpression createMethodExpression(ELContext context,
-            String expression, ClassMirror expectedReturnType) {
+            String expression, [ClassMirror expectedReturnType]) {
         ExpressionBuilder builder = new ExpressionBuilder(expression, context);
         return builder.createMethodExpression(expectedReturnType);
     }
 
     //@Override
     ValueExpression createValueExpression(ELContext context,
-            String expression, ClassMirror expectedType) {
+            String expression, [ClassMirror expectedType]) {
         if (expectedType == null) {
-            throw new ArgumentError(MessageFactory
-                    .getString("error.value.expectedType"));
+            expectedType = OBJECT_MIRROR;
         }
 
         ExpressionBuilder builder = new ExpressionBuilder(expression, context);
@@ -32,11 +31,9 @@ class ExpressionFactoryImpl implements ExpressionFactory {
     }
 
     //@Override
-    ValueExpression createValueExpressionByInstance(Object instance,
-            ClassMirror expectedType) {
+    ValueExpression createVariable(Object instance, [ClassMirror expectedType]) {
         if (expectedType == null) {
-            throw new ArgumentError(MessageFactory
-                    .getString("error.value.expectedType"));
+            expectedType = instance != null ? reflect(instance).type: OBJECT_MIRROR;
         }
         return new ValueExpressionLiteral(instance, expectedType);
     }

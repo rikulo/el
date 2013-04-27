@@ -17,8 +17,7 @@ void testGetValueReference() {
 
     TesterBeanB beanB = new TesterBeanB();
     beanB.name = "Tomcat";
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(beanB, reflect(beanB).type);
+    ValueExpression var0 = elfactory.createVariable(beanB);
     context.getVariableMapper().setVariable("beanB", var0);
 
     ValueExpression ve = elfactory.createValueExpression(
@@ -43,8 +42,7 @@ void testGetValueReferenceVariable() {
 
     TesterBeanB beanB = new TesterBeanB();
     beanB.name = "Tomcat";
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(beanB, reflect(beanB).type);
+    ValueExpression var0 = elfactory.createVariable(beanB);
     context.getVariableMapper().setVariable("beanB", var0);
 
     ValueExpression var2 = elfactory.createValueExpression(
@@ -74,8 +72,7 @@ void testBug49345() {
     beanB.name = "Tomcat";
     beanA.bean = beanB;
 
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type);
+    ValueExpression var0 = elfactory.createVariable(beanA);
     context.getVariableMapper().setVariable("beanA", var0);
 
     ValueExpression ve = elfactory.createValueExpression(
@@ -129,17 +126,16 @@ void testBug51177ObjectMap() {
     map["key1"] = o1;
     map["key2"] = o2;
 
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(map, MAP_MIRROR);
+    ValueExpression var0 = elfactory.createVariable(map);
     context.getVariableMapper().setVariable("map", var0);
 
     ValueExpression ve1 = elfactory.createValueExpression(
-            context, "\${map.key1}", OBJECT_MIRROR);
+            context, "\${map.key1}");
     ve1.setValue(context, o2);
     expect(ve1.getValue(context), equals(o2));
 
     ValueExpression ve2 = elfactory.createValueExpression(
-            context, "\${map.key2}", OBJECT_MIRROR);
+            context, "\${map.key2}");
     ve2.setValue(context, o1);
     expect(ve2.getValue(context), equals(o1));
 }
@@ -160,17 +156,16 @@ void testBug51177ObjectList() {
     list.add(o1);
     list.add(o2);
 
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(list, LIST_MIRROR);
+    ValueExpression var0 = elfactory.createVariable(list);
     context.getVariableMapper().setVariable("list", var0);
 
     ValueExpression ve1 = elfactory.createValueExpression(
-            context, "\${list[0]}", OBJECT_MIRROR);
+            context, "\${list[0]}");
     ve1.setValue(context, o2);
     expect(ve1.getValue(context), equals(o2));
 
     ValueExpression ve2 = elfactory.createValueExpression(
-            context, "\${list[1]}", OBJECT_MIRROR);
+            context, "\${list[1]}");
     ve2.setValue(context, o1);
     expect(ve2.getValue(context), equals(o1));
 }
@@ -187,8 +182,7 @@ void testBug51544Bean() {
     TesterBeanA beanA = new TesterBeanA();
     beanA.valList = new List();
 
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type);
+    ValueExpression var0 = elfactory.createVariable(beanA);
     context.getVariableMapper().setVariable("beanA", var0);
 
     ValueExpression ve = elfactory.createValueExpression(
@@ -209,8 +203,7 @@ void testBug51544Direct() {
 
     List list = new List();
 
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(list, LIST_MIRROR);
+    ValueExpression var0 = elfactory.createVariable(list);
     context.getVariableMapper().setVariable("list", var0);
 
     ValueExpression ve = elfactory.createValueExpression(
@@ -229,20 +222,18 @@ void testMapExpression() {
   Object o1 = "String value";
   Object o2 = 32;
 
-  ValueExpression o1ve =
-      elfactory.createValueExpressionByInstance(o1, STRING_MIRROR);
+  ValueExpression o1ve = elfactory.createVariable(o1);
   context.getVariableMapper().setVariable("o1", o1ve);
 
-  ValueExpression o2ve =
-      elfactory.createValueExpressionByInstance(o2, INT_MIRROR);
+  ValueExpression o2ve = elfactory.createVariable(o2);
   context.getVariableMapper().setVariable("o2", o2ve);
 
   ValueExpression ve1 = elfactory.createValueExpression(
-      context, "#{{'key1':o1,'key2':o2}.key1}", OBJECT_MIRROR);
+      context, "#{{'key1':o1,'key2':o2}.key1}");
   expect(ve1.getValue(context), equals(o1));
 
   ValueExpression ve2 = elfactory.createValueExpression(
-      context, "#{{'key1':o1,'key2':o2}.key2}", OBJECT_MIRROR);
+      context, "#{{'key1':o1,'key2':o2}.key2}");
   expect(ve2.getValue(context), equals(o2));
 
   //map is temporary created for each evaluation (setValue once, getValue another)
@@ -264,20 +255,18 @@ void testListExpression() {
     Object o1 = "String value";
     Object o2 = 32;
 
-    ValueExpression o1ve  =
-        elfactory.createValueExpressionByInstance(o1, STRING_MIRROR);
+    ValueExpression o1ve  = elfactory.createVariable(o1);
     context.getVariableMapper().setVariable("o1", o1ve);
 
-    ValueExpression o2ve  =
-        elfactory.createValueExpressionByInstance(o2, INT_MIRROR);
+    ValueExpression o2ve  = elfactory.createVariable(o2);
     context.getVariableMapper().setVariable("o2", o2ve);
 
     ValueExpression ve1 = elfactory.createValueExpression(
-            context, "#{[o1, o2][0]}", OBJECT_MIRROR);
+            context, "#{[o1, o2][0]}");
     expect(ve1.getValue(context), equals(o1));
 
     ValueExpression ve2 = elfactory.createValueExpression(
-        context, "\${[o1, o2][1]}", OBJECT_MIRROR);
+        context, "\${[o1, o2][1]}");
     expect(ve2.getValue(context), equals(o2));
 
     //list is temporary created for each evaluation (setValue once, getValue another)

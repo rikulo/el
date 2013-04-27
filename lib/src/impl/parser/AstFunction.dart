@@ -18,14 +18,6 @@ class AstFunction extends SimpleNode {
         return _localName;
     }
 
-    String getOutputName() {
-        if (_prefix == null) {
-            return _localName;
-        } else {
-            return "${_prefix}:${_localName}";
-        }
-    }
-
     String getPrefix() {
         return _prefix;
     }
@@ -49,13 +41,13 @@ class AstFunction extends SimpleNode {
         Function fn = fnMapper.resolveFunction(getFunctionName());
         if (fn == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [getOutputName()]));
+                    [getFunctionName()]));
         }
         ClosureMirror fnclosure = reflect(fn);
         MethodMirror m = fnclosure.function;
         if (m == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [getOutputName()]));
+                    [getFunctionName()]));
         }
         return m.returnType;
     }
@@ -72,13 +64,13 @@ class AstFunction extends SimpleNode {
         Function fn = fnMapper.resolveFunction(getFunctionName());
         if (fn == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [getOutputName()]));
+                    [getFunctionName()]));
         }
         ClosureMirror fnclosure = reflect(fn);
         MethodMirror m = fnclosure.function;
         if (m == null) {
             throw new ELException(MessageFactory.getString("error.fnMapper.method",
-                    [getOutputName()]));
+                    [getFunctionName()]));
         }
 
         List values = null;
@@ -91,7 +83,7 @@ class AstFunction extends SimpleNode {
                 }
             } on ELException catch (ele) {
                 throw new ELException(MessageFactory.getString("error.function", [this
-                        .getOutputName()]), ele);
+                        .getFunctionName()]), ele);
             }
         } else {
           values = new List(0);
@@ -104,11 +96,11 @@ class AstFunction extends SimpleNode {
 //            result = m.invoke(null, params);
 //        } on IllegalAccessException catch (iae) {
 //            throw new ELException(MessageFactory.getString("error.function", [this
-//                    .getOutputName()]), iae);
+//                    .getFunctionName()]), iae);
 //        } on InvocationTargetException catch (ite) {
 //            Throwable cause = ite.getCause();
 //            throw new ELException(MessageFactory.getString("error.function", [this
-//                    .getOutputName()]), cause);
+//                    .getFunctionName()]), cause);
 //        }
         return result;
     }
@@ -125,6 +117,6 @@ class AstFunction extends SimpleNode {
     //@Override
     String toString()
     {
-        return "${ELParserTreeConstants.jjtNodeName[id_]}[${getOutputName()}]";
+        return "${ELParserTreeConstants.jjtNodeName[id_]}[${getFunctionName()}]";
     }
 }

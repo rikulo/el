@@ -23,40 +23,40 @@ void setUp() {
     TesterBeanA beanA = new TesterBeanA();
     beanA.setName("A");
     _context.getVariableMapper().setVariable("beanA",
-            _elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type));
+            _elfactory.createVariable(beanA));
 
     TesterBeanAA beanAA = new TesterBeanAA();
     beanAA.setName("AA");
     _context.getVariableMapper().setVariable("beanAA",
-            _elfactory.createValueExpressionByInstance(beanAA, reflect(beanAA).type));
+            _elfactory.createVariable(beanAA));
 
     TesterBeanAAA beanAAA = new TesterBeanAAA();
     beanAAA.setName("AAA");
     _context.getVariableMapper().setVariable("beanAAA",
-            _elfactory.createValueExpressionByInstance(beanAAA, reflect(beanAAA).type));
+            _elfactory.createVariable(beanAAA));
 
     _beanB = new TesterBeanB();
     _beanB.setName("B");
     _context.getVariableMapper().setVariable("_beanB",
-            _elfactory.createValueExpressionByInstance(_beanB, reflect(_beanB).type));
+            _elfactory.createVariable(_beanB));
 
     TesterBeanBB beanBB = new TesterBeanBB();
     beanBB.setName("BB");
     _context.getVariableMapper().setVariable("beanBB",
-            _elfactory.createValueExpressionByInstance(beanBB, reflect(beanBB).type));
+            _elfactory.createVariable(beanBB));
 
     TesterBeanBBB beanBBB = new TesterBeanBBB();
     beanBBB.setName("BBB");
     _context.getVariableMapper().setVariable("beanBBB",
-            _elfactory.createValueExpressionByInstance(beanBBB, reflect(beanBBB).type));
+            _elfactory.createVariable(beanBBB));
 
     TesterBeanC beanC = new TesterBeanC();
     _context.getVariableMapper().setVariable("beanC",
-            _elfactory.createValueExpressionByInstance(beanC, reflect(beanC).type));
+            _elfactory.createVariable(beanC));
 
 //    TesterBeanEnum beanEnum = new TesterBeanEnum();
 //    _context.getVariableMapper().setVariable("beanEnum",
-//            _elfactory.createValueExpressionByInstance(beanEnum, reflect(beanEnum).type));
+//            _elfactory.createVariable(type));
 }
 
 //@Test
@@ -65,8 +65,7 @@ void testIsParametersProvided() {
 
     TesterBeanB _beanB = new TesterBeanB();
     _beanB.setName("Tomcat");
-    ValueExpression var0 =
-        _elfactory.createValueExpressionByInstance(_beanB, reflect(_beanB).type);
+    ValueExpression var0 = _elfactory.createVariable(_beanB);
     _context.getVariableMapper().setVariable("_beanB", var0);
 
     MethodExpression me1 = _elfactory.createMethodExpression(
@@ -85,7 +84,7 @@ void testInvoke() {
     TesterBeanB _beanB = new TesterBeanB();
     _beanB.setName("B");
     _context.getVariableMapper().setVariable("_beanB",
-            _elfactory.createValueExpressionByInstance(_beanB, reflect(_beanB).type));
+            _elfactory.createVariable(_beanB));
 
     MethodExpression me1 = _elfactory.createMethodExpression(
             _context, "\${_beanB.getName}", STRING_MIRROR);

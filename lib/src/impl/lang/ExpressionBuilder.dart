@@ -126,13 +126,13 @@ class ExpressionBuilder implements NodeVisitor {
             Function fn = _fnMapper.resolveFunction(funcNode.getFunctionName());
             if (fn == null) {
                 throw new ELException(MessageFactory.getString(
-                        "error.fnMapper.method", [funcNode.getOutputName()]));
+                        "error.fnMapper.method", [funcNode.getFunctionName()]));
             }
             ClosureMirror fnclosure = reflect(fn);
             MethodMirror m = fnclosure.function;
             if (m == null) {
                 throw new ELException(MessageFactory.getString(
-                        "error.fnMapper.method", [funcNode.getOutputName()]));
+                        "error.fnMapper.method", [funcNode.getFunctionName()]));
             }
             ParameterInfo pinfo = new ParameterInfo(m.parameters);
             int pCount = pinfo.positionals.length; //positinal count
@@ -140,7 +140,7 @@ class ExpressionBuilder implements NodeVisitor {
             int aCount = node.jjtGetNumChildren(); //given arguments
             if (aCount < pCount || aCount > (pCount + oCount)) {
                 throw new ELException(MessageFactory.getString(
-                        "error.fnMapper.paramcount", [funcNode.getOutputName(),
+                        "error.fnMapper.paramcount", [funcNode.getFunctionName(),
                         "$pCount", "$oCount", "$aCount"]));
             }
         } else if (node is AstIdentifier && this._varMapper != null) {

@@ -43,8 +43,7 @@ void testJavaKeyWordSuffix() {
 
     TesterBeanA beanA = new TesterBeanA();
     beanA.setInt("five");
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type);
+    ValueExpression var0 = elfactory.createVariable(beanA);
     context.getVariableMapper().setVariable("beanA", var0);
 
     // Should fail
@@ -65,8 +64,7 @@ void testJavaKeyWordIdentifier() {
 
     TesterBeanA beanA = new TesterBeanA();
     beanA.setInt("five");
-    ValueExpression var0 =
-        elfactory.createValueExpressionByInstance(beanA, reflect(beanA).type);
+    ValueExpression var0 = elfactory.createVariable(beanA);
     context.getVariableMapper().setVariable("this", var0);
 
     // Should fail

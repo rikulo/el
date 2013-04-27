@@ -59,6 +59,8 @@ Using Rikulo EL is straightforward.
       print(expr.getValue(ctx)); //'Hello, Rikulo!'
     }
 
+For more examples, please refer to [here](https://github.com/rikulo/el/blob/master/test/ValueExpressionImpl_test.dart), [here](https://github.com/rikulo/el/blob/master/test/MethodExpressionImpl_test.dart) and [here](https://github.com/rikulo/el/blob/master/test/ELEval_test.dart).
+
 ##Notes to Contributors
 
 ###Test and Debug
