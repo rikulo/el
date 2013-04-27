@@ -36,7 +36,6 @@ part 'src/ValueReference.dart';
 part 'src/VariableMapper.dart';
 
 part 'src/ClassELResolver.dart';
-part 'src/LibELResolver.dart';
 part 'src/MessageFormat.dart';
 part 'src/PropertiesBundle.dart';
 part 'src/ELUtil.dart';
