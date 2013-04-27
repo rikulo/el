@@ -57,7 +57,7 @@ Using Rikulo EL is straightforward.
     
       //Prepare an expression context.
       ELContext ctx = new ELContext();
-      ctx.variableResolver.setVariable('person',
+      ctx.variableMapper.setVariable('person',
           ef.createVariable(new Person('Rikulo')));
       
       //Parse the script and create a value expression which expect a String type
