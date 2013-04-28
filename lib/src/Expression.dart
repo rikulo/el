@@ -5,6 +5,7 @@
 
 part of rikulo_el;
 
+///An expression
 abstract class Expression {
     String get expressionString;
 

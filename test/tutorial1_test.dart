@@ -18,7 +18,7 @@ void main() {
 
   //Prepare an expression context.
   ELContext ctx = new ELContext(
-    variableMapper:
+    resolveVariable:
       (String name) => name == 'person' ? new Person('Rikulo'): null);
 
   //Parse the script and create a value expression which expect a String type

@@ -19,7 +19,7 @@ void main() {
   //Prepare an expression context.
   Person currentPerson() => new Person('Rikulo');
   ELContext ctx = new ELContext(
-    functionMapper:
+    resolveFunction:
       (String name) => name == "currentPerson" ? currentPerson: null);
 
   //Parse the script and create a value expression which expect a String type

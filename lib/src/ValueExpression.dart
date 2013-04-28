@@ -5,6 +5,16 @@
 
 part of rikulo_el;
 
+/**
+ * An `Expression` that can be evaluated and refer to an object.
+ *
+ * The [ExpressionFactory.createValueExpression] method
+ * can be used to parse an expression string and return a concrete instance
+ * of `ValueExpression` that encapsulates the parsed expression.
+ *
+ * Similarly, [ExpressionFactory.createVariable] can be used to
+ * create a value expression returing the given object.
+ */
 abstract class ValueExpression extends Expression {
 
   ClassMirror get expectedType;

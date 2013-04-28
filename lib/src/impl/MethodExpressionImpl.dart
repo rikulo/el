@@ -8,15 +8,14 @@ part of rikulo_elimpl;
 /**
  * An `Expression` that refers to a method on an object.
  *
- * <p>
  * The [ExpressionFactory.createMethodExpression] method
  * can be used to parse an expression string and return a concrete instance
  * of `MethodExpression` that encapsulates the parsed expression.
  * The [FunctionMapper] is used at parse time, not evaluation time,
  * so one is not needed to evaluate an expression using this class.
- * However, the [ELContext] is needed at evaluation time.</p>
+ * However, the [ELContext] is needed at evaluation time.
  *
- * <p>The [getMethodInfo] and [invoke] methods will evaluate the
+ * The [getMethodInfo] and [invoke] methods will evaluate the
  * expression each time they are called. The [ELResolver] in the
  * [ELContext] is used to resolve the top-level variables and to
  * determine the behavior of the `.` and `[]`
@@ -29,9 +28,9 @@ part of rikulo_elimpl;
  * which provides the name of the method to be found. A method matching the
  * name provided at parse time is found and it is
  * either queried or invoked (depending on the method called on this
- * [MethodExpression].</p>
+ * [MethodExpression].
  *
- * <p>See [Expression] for further notes about comparison and immutability.
+ * See [Expression] for further notes about comparison and immutability.
  *
  * + see [ELResolver]
  * + see [Expression]
@@ -62,18 +61,14 @@ class MethodExpressionImpl implements MethodExpression {
    * Returns the original String used to create this [Expression],
    * unmodified.
    *
-   * <p>
    * This is used for debugging purposes but also for the purposes of
    * comparison (e.g. to ensure the expression in a configuration file has not
    * changed).
-   * </p>
-   *
-   * <p>
+   * 
    * This method does not provide sufficient information to re-create an
    * expression. Two different expressions can have exactly the same
    * expression string but different function mappings.
-   * </p>
-   *
+   * 
    * + see [Expression.expressionString]
    */
   //@Override

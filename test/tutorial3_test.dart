@@ -27,7 +27,7 @@ void main() {
         return new Person('Mary');
     }
   }
-  ELContext ctx = new ELContext(variableMapper: getPerson);
+  ELContext ctx = new ELContext(resolveVariable: getPerson);
 
   //Parse the script and create a value expression which expect a String type
   ValueExpression ve = ef.createValueExpression(ctx, script, reflect('').type);

@@ -133,9 +133,13 @@ abstract class ELContext {
     new ELContextImpl(variableMapper: variableMapper, functionMapper: functionMapper);
   /** Create a new [ELContext] with the optional function and variable mapper.
    *
-   * Notice the value returned by [variableMapper] will be cached in the EL context.
-   * If the value might change among different retrieval, use
-   * [ELContext.mapper] or implement your own instead.
+   * If the value returned by [resolveVariable] is an expression ([ValueExpression]),
+   * it will be evaluated at run time to get the value.
+   *
+   * Notice the value returned by [resolveVariable] will be cached in the EL context.
+   * If the value might change among different retrieval, use an expression that will
+   * return a value dynamically. Alternatively, you can use [ELContext.mapper] or
+   * implement your own [ELContext] instead.
    *
    * By default, an instance of [ELContextImpl] will be returned.
    * Note you can configure the static field [ELContext.CREATOR]
@@ -150,9 +154,10 @@ abstract class ELContext {
    * ELContext.CREATOR is an [ELContextCreator] function that
    * should return an instance of ELContext.
    */
-  factory ELContext({Object variableMapper(String name), Function functionMapper(String name)})
-  => new ELContext.mapper(variableMapper: _toVMapper(variableMapper),
-      functionMapper: _toFMapper(functionMapper));
+  factory ELContext({Object resolveVariable(String name),
+      Function resolveFunction(String name)})
+  => new ELContext.mapper(variableMapper: _toVMapper(resolveVariable),
+      functionMapper: _toFMapper(resolveFunction));
 
   /** Constructor to be called by subclass */
   ELContext.init(): this._resolved = false;
@@ -178,17 +183,19 @@ typedef ELContext ELContextCreator(
   {VariableMapper variableMapper, FunctionMapper functionMapper});
 
 class _VMapper implements VariableMapper {
-  Function _mapper;
+  Function _resolve;
   Map<String, ValueExpression> _vars = new HashMap();
 
-  _VMapper(Object mapper(String name)): _mapper = mapper;
+  _VMapper(Object resolve(String name)): _resolve = resolve;
 
   ValueExpression resolveVariable(String name) {
     var val = _vars[name];
     if (val == null) {
-      val = _mapper(name);
+      val = _resolve(name);
       if (val != null) {
-        _vars[name] = val = _factory.createVariable(val);
+        if (val is! ValueExpression)
+          val = _factory.createVariable(val);
+        _vars[name] = val;
       }
     }
     return val;
@@ -202,9 +209,9 @@ VariableMapper _toVMapper(Object variableMapper(String name))
 => variableMapper != null ? new _VMapper(variableMapper): null;
 
 class _FMapper implements FunctionMapper {
-  Function _mapper;
-  _FMapper(Function mapper(String name)): _mapper = mapper;
-  Function resolveFunction(String name) => _mapper(name);
+  Function _resolve;
+  _FMapper(Function resolve(String name)): _resolve = resolve;
+  Function resolveFunction(String name) => _resolve(name);
 }
 FunctionMapper _toFMapper(Function functionMapper(String name))
 => functionMapper != null ? new _FMapper(functionMapper): null;
