@@ -112,7 +112,7 @@ abstract class ELContext {
 
   /**
    * Create a new [ELContext] from the optional [FunctionMapper]
-   * and [VariableResolver].
+   * and [VariableMapper].
    *
    * By default, an instance of [ELContextImpl] will be returned.
    * Note you can configure the static field [ELContext.CREATOR]

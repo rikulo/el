@@ -22,8 +22,8 @@ part of rikulo_el;
  * operators. For any of the two methods, the
  * [ELResolver.getValue] method is used to resolve all properties
  * up to but excluding the last one. This provides the `base` object
- * on which the method appears. If the `base` object is null, a
- * [NullPointerException] must be thrown. At the last resolution,
+ * on which the method appears. If the `base` object is null, an
+ * exception must be thrown. At the last resolution,
  * the final `property` is then coerced to a `String`,
  * which provides the name of the method to be found. A method matching the
  * name provided at parse time is found and it is
@@ -49,7 +49,7 @@ abstract class MethodExpression extends Expression {
    * result of the method invocation.
    *
    * + [context] - The context of this evaluation.
-   * + [params] - The positional arguments to be pass into the method, or
+   * + [positionalArgs] - The positional arguments to be pass into the method, or
    *             `null` if no arguments.
    * + [namedArgs] - optional named arguments to be passed into the method.
    */

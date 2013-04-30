@@ -46,7 +46,7 @@ abstract class ExpressionFactory {
    * + [context] - the ELContext used when create and parse the
    *               [MethodExpression].
    * + [expression] - the EL expression script to be parsed.
-   * + [expectedType] - the expected return type when evaluate the created
+   * + [expectedReturnType] - the expected return type when evaluate the created
    *                    [MethodExpression].
    */
   MethodExpression createMethodExpression(ELContext context,
