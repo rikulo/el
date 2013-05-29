@@ -17,7 +17,7 @@ class AstFloatingPoint extends SimpleNode {
           this._number = double.parse(this.image_);
 //            try {
 //                this._number = parseDouble(this.image_);
-//            } catch (ArithmeticException e0) {
+//            } on ArithmeticException catch (e0) {
 //                this._number = new BigDecimal(this.image_);
 //            }
         }

@@ -85,7 +85,7 @@ void testCoerceNullToNumber() {
 //    Object output = null;
 //    try {
 //        output = ELSupport.coerceToEnum(TestEnumA.VALA1, TestEnumB.class);
-//    } catch (ELException ele) {
+//    } on ELException catch (ele) {
 //        // Ignore
 //    }
 //    assertNull(output);
@@ -96,7 +96,7 @@ void testCoerceNullToNumber() {
 //    Object output = null;
 //    try {
 //        output = ELSupport.coerceToEnum(TestEnumA.VALA1, TestEnumC.class);
-//    } catch (ELException ele) {
+//    } on ELException catch (ele) {
 //        // Ignore
 //    }
 //    assertNull(output);

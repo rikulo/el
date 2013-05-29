@@ -45,7 +45,7 @@ public class ELParser
     {
         try {
             return (new ELParser(new StringReader(ref))).CompositeExpression();
-        } catch (ParseException pe) {
+        } on ParseException catch (pe) {
             throw new ELException(pe.getMessage());
         }
     }
