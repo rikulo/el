@@ -130,7 +130,7 @@ void testElSupportCompare(){
   try {
     compareBoth("Should not compare",0, new DateTime.now(), new Map());
     expect(false, isTrue, reason:"Expecting CastException");
-  } on ELException catch (expected) {
+  } catch (expected) {
     // Expected
   }
   expect(null, isNull);
