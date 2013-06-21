@@ -167,7 +167,7 @@ abstract class ELArithmetic {
 
   num mod_(num num0, num num1);
 
-  num coerceNumber_(num num);
+  num coerceNumber_(num value);
 
   num coerce_(Object obj) {
 
