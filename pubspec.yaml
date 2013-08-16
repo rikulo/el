@@ -8,6 +8,5 @@ authors:
 - Tom Yeh <tomyeh@rikulo.org>
 homepage: http://rikulo.org
 dependencies:
-  js: any
   unittest: any
   rikulo_commons: any

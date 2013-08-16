@@ -103,7 +103,10 @@ void testCoerceNullToNumber() {
 //}
 
 void _testIsSame(Object value) {
-    expect(ELSupport.coerceToNumber(value, reflect(value).type), equals(value));
+    expect(ELSupport.coerceToNumber(value,
+      value is int ? INT_MIRROR: DOUBLE_MIRROR), equals(value));
+    //use INT_MIRROR to avoid dart sdk inconsistency: 
+    //reflect(v1).type not always equals reflect(v2).type
 }
 
 //Enum is not supported yet
