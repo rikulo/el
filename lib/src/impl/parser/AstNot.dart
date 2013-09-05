@@ -13,7 +13,7 @@ class AstNot extends SimpleNode {
     ClassMirror getType(EvaluationContext ctx) => BOOL_MIRROR;
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         Object obj = this.children_[0].getValue(ctx);
         bool b = ELSupport.coerceToBoolean(obj);
         return !b;

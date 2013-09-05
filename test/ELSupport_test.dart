@@ -102,7 +102,7 @@ void testCoerceNullToNumber() {
 //    assertNull(output);
 //}
 
-void _testIsSame(Object value) {
+void _testIsSame(value) {
     expect(ELSupport.coerceToNumber(value,
       value is int ? INT_MIRROR: DOUBLE_MIRROR), equals(value));
     //use INT_MIRROR to avoid dart sdk inconsistency: 

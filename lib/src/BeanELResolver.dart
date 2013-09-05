@@ -13,7 +13,7 @@ class BeanELResolver extends ELResolver {
     BeanELResolver([bool readOnly = false]) : this._readOnly = readOnly;
 
     //@Override
-    Object getValue(ELContext context, Object base, Object property) {
+    getValue(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -26,7 +26,7 @@ class BeanELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getType(ELContext context, Object base, Object property) {
+    ClassMirror getType(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -39,7 +39,7 @@ class BeanELResolver extends ELResolver {
     }
 
     //@Override
-    void setValue(ELContext context, Object base, Object property, Object value) {
+    void setValue(ELContext context, base, property, value) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -50,7 +50,7 @@ class BeanELResolver extends ELResolver {
         context.isPropertyResolved = true;
 
         if (this._readOnly) {
-            throw new PropertyNotWritableException(message(context,
+            throw new PropertyNotWritableException(ELResolver.message(context,
                     "resolverNotWriteable", [reflect(base).type.qualifiedName]));
         }
 
@@ -58,7 +58,7 @@ class BeanELResolver extends ELResolver {
     }
 
     //@Override
-    bool isReadOnly(ELContext context, Object base, Object property) {
+    bool isReadOnly(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -72,7 +72,7 @@ class BeanELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getCommonPropertyType(ELContext context, Object base) {
+    ClassMirror getCommonPropertyType(ELContext context, base) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -84,7 +84,7 @@ class BeanELResolver extends ELResolver {
         return null;
     }
 
-    BeanProperty _property(ELContext ctx, Object base, Object property) {
+    BeanProperty _property(ELContext ctx, base, property) {
         ClassMirror type = reflect(base).type;
         String prop = property.toString();
 
@@ -101,8 +101,8 @@ class BeanELResolver extends ELResolver {
      * @since EL 2.2
      */
     //@Override
-    Object invoke(ELContext context, Object base, Object method,
-            List<Object> params, [Map<String, Object> namedArgs]) {
+    invoke(ELContext context, base, method,
+            List params, [Map<String, dynamic> namedArgs]) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }

@@ -24,16 +24,16 @@ abstract class ELResolver {
 
     static final String TYPE = "type";
 
-    Object getValue(ELContext context, Object base, Object property);
+    getValue(ELContext context, base, property);
 
-    ClassMirror getType(ELContext context, Object base, Object property);
+    ClassMirror getType(ELContext context, base, property);
 
-    void setValue(ELContext context, Object base, Object property, Object value);
+    void setValue(ELContext context, base, property, value);
 
-    bool isReadOnly(ELContext context, Object base, Object property);
+    bool isReadOnly(ELContext context, base, property);
 
-    ClassMirror getCommonPropertyType(ELContext context, Object base);
+    ClassMirror getCommonPropertyType(ELContext context, base);
 
-    Object invoke(ELContext context, Object base, Object method,
-                           List params, [Map<String, Object> namedArgs]);
+    invoke(ELContext context, base, method,
+                           List params, [Map<String, dynamic> namedArgs]);
 }

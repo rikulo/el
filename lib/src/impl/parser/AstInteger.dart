@@ -22,7 +22,7 @@ class AstInteger extends SimpleNode {
     ClassMirror getType(EvaluationContext ctx) => INT_MIRROR;
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return this.getInteger_();
     }
 }

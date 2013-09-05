@@ -7,8 +7,8 @@ part of rikulo_el;
 
 class ValueReference {
 
-  final Object base;
-  final Object property;
+  final base;
+  final property;
 
   ValueReference(this.base, this.property);
 }

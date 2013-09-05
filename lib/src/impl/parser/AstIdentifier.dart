@@ -28,7 +28,7 @@ class AstIdentifier extends SimpleNode {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         VariableMapper varMapper = ctx.variableMapper;
         if (varMapper != null) {
             ValueExpression expr = varMapper.resolveVariable(this.image_);
@@ -64,7 +64,7 @@ class AstIdentifier extends SimpleNode {
     }
 
     //@Override
-    void setValue(EvaluationContext ctx, Object value) {
+    void setValue(EvaluationContext ctx, value) {
         VariableMapper varMapper = ctx.variableMapper;
         if (varMapper != null) {
             ValueExpression expr = varMapper.resolveVariable(this.image_);
@@ -82,8 +82,8 @@ class AstIdentifier extends SimpleNode {
     }
 
     //@Override
-    Object invoke(EvaluationContext ctx,
-            List<Object> paramValues, [Map<String, Object> namedArgs]) {
+    invoke(EvaluationContext ctx,
+            List paramValues, [Map<String, dynamic> namedArgs]) {
         return this._getMethodExpression(ctx).invoke(ctx.elContext, paramValues);
     }
 

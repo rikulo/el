@@ -14,7 +14,7 @@ class AstArray extends SimpleNode {
   ClassMirror getType(EvaluationContext ctx) => LIST_MIRROR;
 
   //@Override
-  Object getValue(EvaluationContext ctx) {
+  getValue(EvaluationContext ctx) {
     List values = null;
     int numItems = this.jjtGetNumChildren();
     if (numItems > 0) {

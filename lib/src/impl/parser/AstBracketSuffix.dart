@@ -10,7 +10,7 @@ class AstBracketSuffix extends SimpleNode {
         : super(id);
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return this.children_[0].getValue(ctx);
     }
 }

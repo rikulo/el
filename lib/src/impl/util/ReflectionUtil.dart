@@ -88,7 +88,7 @@ class ReflectionUtil {
    * + [base] - the object
    * + [property] - the method name
    */
-  static MethodMirror getMethod(Object base, Object property) {
+  static MethodMirror getMethod(base, property) {
     if (base == null || property == null)
       throw new MethodNotFoundException(
           MessageFactory.getString("error.method.notfound", [base, property, ""]));
@@ -112,7 +112,7 @@ class ReflectionUtil {
 //  static bool _isAssignableFrom(ClassMirror src, ClassMirror target)
 //    => ClassUtil.isAssignableFrom(target, src);
 
-//  static bool _isCoercibleFrom(Object src, ClassMirror target) {
+//  static bool _isCoercibleFrom(src, ClassMirror target) {
 //    // TODO: This isn't pretty but it works. Significant refactoring would
 //    //       be required to avoid the exception.
 //    try {

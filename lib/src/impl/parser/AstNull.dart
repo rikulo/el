@@ -15,7 +15,7 @@ class AstNull extends SimpleNode {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return null;
     }
 }

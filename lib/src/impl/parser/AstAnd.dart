@@ -10,7 +10,7 @@ class AstAnd extends BooleanNode {
         : super(id);
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         Object obj = children_[0].getValue(ctx);
         bool b = ELSupport.coerceToBoolean(obj);
         if (!b) {

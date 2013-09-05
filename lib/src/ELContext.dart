@@ -10,7 +10,7 @@ part of rikulo_el;
  */
 abstract class ELContext {
   String _locale;
-  Map<ClassMirror, Object> _map;
+  Map<ClassMirror, dynamic> _map;
   bool _resolved;
 
   /**
@@ -18,7 +18,7 @@ abstract class ELContext {
    *
    * + [key] - the ClassMirror as a key.
    */
-  Object getContext(ClassMirror key) {
+  getContext(ClassMirror key) {
       if (this._map == null) {
           return null;
       }
@@ -31,7 +31,7 @@ abstract class ELContext {
    * + [key] - the ClassMirror as a key.
    * + [contextObject] - the associated object of the class.
    */
-  void putContext(ClassMirror key, Object contextObject) {
+  void putContext(ClassMirror key, contextObject) {
       if (key == null) {
         throw new ArgumentError("key cannot be null");
       }
@@ -108,7 +108,7 @@ abstract class ELContext {
    * + [key] - the key
    * + [val] - the value
    */
-  setAttribute(var key, Object val);
+  setAttribute(var key, val);
 
   /**
    * Create a new [ELContext] from the optional [FunctionMapper]
@@ -154,7 +154,7 @@ abstract class ELContext {
    * ELContext.CREATOR is an [ELContextCreator] function that
    * should return an instance of ELContext.
    */
-  factory ELContext({Object resolveVariable(String name),
+  factory ELContext({resolveVariable(String name),
       Function resolveFunction(String name)})
   => new ELContext.mapper(variableMapper: _toVMapper(resolveVariable),
       functionMapper: _toFMapper(resolveFunction));
@@ -186,7 +186,7 @@ class _VMapper implements VariableMapper {
   Function _resolve;
   Map<String, ValueExpression> _vars = new HashMap();
 
-  _VMapper(Object resolve(String name)): _resolve = resolve;
+  _VMapper(resolve(String name)): _resolve = resolve;
 
   ValueExpression resolveVariable(String name) {
     var val = _vars[name];
@@ -205,7 +205,7 @@ class _VMapper implements VariableMapper {
   }
 }
 final ExpressionFactory _factory = new ExpressionFactory();
-VariableMapper _toVMapper(Object variableMapper(String name))
+VariableMapper _toVMapper(variableMapper(String name))
 => variableMapper != null ? new _VMapper(variableMapper): null;
 
 class _FMapper implements FunctionMapper {

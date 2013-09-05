@@ -13,7 +13,7 @@ class MapELResolver extends ELResolver {
         : this._readOnly = readOnly;
 
     //@Override
-    Object getValue(ELContext context, Object base, Object property) {
+    getValue(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -28,7 +28,7 @@ class MapELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getType(ELContext context, Object base, Object property) {
+    ClassMirror getType(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -42,8 +42,8 @@ class MapELResolver extends ELResolver {
     }
 
     //@Override
-    void setValue(ELContext context, Object base, Object property,
-            Object value) {
+    void setValue(ELContext context, base, property,
+            value) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -52,7 +52,7 @@ class MapELResolver extends ELResolver {
             context.isPropertyResolved = true;
 
             if (this._readOnly) {
-                throw new PropertyNotWritableException(message(context,
+                throw new PropertyNotWritableException(ELResolver.message(context,
                         "resolverNotWriteable", [reflect(base).type.qualifiedName]));
             }
 
@@ -66,7 +66,7 @@ class MapELResolver extends ELResolver {
     }
 
     //@Override
-    bool isReadOnly(ELContext context, Object base, Object property) {
+    bool isReadOnly(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -80,7 +80,7 @@ class MapELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getCommonPropertyType(ELContext context, Object base) {
+    ClassMirror getCommonPropertyType(ELContext context, base) {
         if (base is Map) {
             return OBJECT_MIRROR;
         }
@@ -91,7 +91,7 @@ class MapELResolver extends ELResolver {
      * @since EL 2.2
      */
     //@Override
-    Object invoke(ELContext context, Object base, Object method,
-                  List params, [Map<String, Object> namedArgs]) => null;
+    invoke(ELContext context, base, method,
+                  List params, [Map<String, dynamic> namedArgs]) => null;
 
 }

@@ -33,14 +33,14 @@ abstract class Node {
 
   String getImage();
 
-  Object getValue(EvaluationContext ctx);
-  void setValue(EvaluationContext ctx, Object value);
+  getValue(EvaluationContext ctx);
+  void setValue(EvaluationContext ctx, value);
   ClassMirror getType(EvaluationContext ctx);
   bool isReadOnly(EvaluationContext ctx);
   void accept(NodeVisitor visitor, int index, int level);
   MethodInfo getMethodInfo(EvaluationContext ctx);
-  Object invoke(EvaluationContext ctx,
-          List<Object> paramValues, [Map<String, Object> namedArgs]);
+  invoke(EvaluationContext ctx,
+          List paramValues, [Map<String, dynamic> namedArgs]);
 
   /**
    * @since EL 2.2

@@ -10,7 +10,7 @@ class AstFalse extends BooleanNode {
     	: super(id);
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return false;
     }
 }

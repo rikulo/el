@@ -11,17 +11,17 @@ class ValueExpressionLiteral implements ValueExpression {
 
   ClassMirror _expectedType;
 
-  ValueExpressionLiteral(Object value, ClassMirror expectedType)
+  ValueExpressionLiteral(value, ClassMirror expectedType)
       : this._value = value,
         this._expectedType = expectedType;
 
   //@Override
-  Object getValue(ELContext context)
+  getValue(ELContext context)
     => this._expectedType != null ?
          ELSupport.coerceToType(this._value, this._expectedType) : this._value;
 
   //@Override
-  void setValue(ELContext context, Object value) {
+  void setValue(ELContext context, value) {
     throw new PropertyNotWritableException(MessageFactory.getString(
               "error.value.literal.write", [this._value]));
   }

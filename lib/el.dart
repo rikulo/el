@@ -40,9 +40,9 @@ part 'src/MessageFormat.dart';
 part 'src/PropertiesBundle.dart';
 
 ///Converts a map of named parameters to Symbol for synchronous invocation
-Map<Symbol, Object> _toNamedParams(Map<String, Object> namedArgs) {
+Map<Symbol, dynamic> _toNamedParams(Map<String, dynamic> namedArgs) {
   if (namedArgs != null) {
-    Map<Symbol, Object> nargs = new HashMap();
+    Map<Symbol, dynamic> nargs = new HashMap();
     namedArgs.forEach((k,v) => nargs[new Symbol(k)] = v);
     return nargs;
   }

@@ -16,7 +16,7 @@ class AstChoice extends SimpleNode {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         Object obj0 = this.children_[0].getValue(ctx);
         bool b0 = ELSupport.coerceToBoolean(obj0);
         return this.children_[b0 ? 1 : 2].getValue(ctx);

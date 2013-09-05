@@ -10,7 +10,7 @@ class AstDotSuffix extends SimpleNode {
         : super(id);
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return this.image_;
     }
 

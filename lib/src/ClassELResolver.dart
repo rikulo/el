@@ -15,7 +15,7 @@ class ClassELResolver implements ELResolver {
       : this._readOnly = readOnly;
 
   //@Override
-  Object getValue(ELContext context, Object base, Object property) {
+  getValue(ELContext context, base, property) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -32,7 +32,7 @@ class ClassELResolver implements ELResolver {
   }
 
   //@Override
-  TypeMirror getType(ELContext context, Object base, Object property) {
+  TypeMirror getType(ELContext context, base, property) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -49,7 +49,7 @@ class ClassELResolver implements ELResolver {
   }
 
   //@Override
-  void setValue(ELContext context, Object base, Object property, Object value) {
+  void setValue(ELContext context, base, property, value) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -64,14 +64,14 @@ class ClassELResolver implements ELResolver {
     context.isPropertyResolved = true;
 
     if (this._readOnly)
-      throw new PropertyNotWritableException(message(context,
+      throw new PropertyNotWritableException(ELResolver.message(context,
                "resolverNotWriteable", [property]));
 
     ClassUtil.invokeByMirror(cm, setter, [value]);
   }
 
   //@Override
-  bool isReadOnly(ELContext context, Object base, Object property) {
+  bool isReadOnly(ELContext context, base, property) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -83,14 +83,14 @@ class ClassELResolver implements ELResolver {
     return this._readOnly || !_hasSetter(base, property);
   }
 
-  bool _hasSetter(Object base, Object property) {
+  bool _hasSetter(base, property) {
     ClassMirror cm = base;
     MethodMirror setter = cm.setters[new Symbol("${property}=")];
     return setter != null && setter.isStatic;
   }
 
   //@Override
-  ClassMirror getCommonPropertyType(ELContext context, Object base) {
+  ClassMirror getCommonPropertyType(ELContext context, base) {
     if (context == null)
       throw new ArgumentError("context: null");
 
@@ -98,8 +98,8 @@ class ClassELResolver implements ELResolver {
   }
 
   //@Override
-  Object invoke(ELContext context, Object base, Object method,
-                List params, [Map<String, Object> namedArgs]) {
+  invoke(ELContext context, base, method,
+                List params, [Map<String, dynamic> namedArgs]) {
     if (context == null)
       throw new ArgumentError("context: null");
 

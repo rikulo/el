@@ -63,7 +63,7 @@ class Token {
    * Any subclass of Token that actually wants to return a non-null value can
    * override this method as appropriate.
    */
-  Object getValue() {
+  getValue() {
     return null;
   }
 

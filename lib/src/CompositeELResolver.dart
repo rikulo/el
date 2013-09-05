@@ -28,10 +28,10 @@ class CompositeELResolver extends ELResolver {
     }
 
     //@Override
-    Object getValue(ELContext context, Object base, Object property) {
+    getValue(ELContext context, base, property) {
         context.isPropertyResolved = false;
         int sz = this._size;
-        Object result = null;
+        var result;
 
         for (int i = 0; i < sz; i++) {
             result = this._resolvers[i].getValue(context, base, property);
@@ -43,7 +43,7 @@ class CompositeELResolver extends ELResolver {
     }
 
     //@Override
-    void setValue(ELContext context, Object base, Object property, Object value) {
+    void setValue(ELContext context, base, property, value) {
         context.isPropertyResolved = false;
         int sz = this._size;
         for (int i = 0; i < sz; i++) {
@@ -55,7 +55,7 @@ class CompositeELResolver extends ELResolver {
     }
 
     //@Override
-    bool isReadOnly(ELContext context, Object base, Object property) {
+    bool isReadOnly(ELContext context, base, property) {
         context.isPropertyResolved = false;
         int sz = this._size;
         bool readOnly = false;
@@ -69,7 +69,7 @@ class CompositeELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getCommonPropertyType(ELContext context, Object base) {
+    ClassMirror getCommonPropertyType(ELContext context, base) {
         int sz = this._size;
         ClassMirror commonType = null, type = null;
         for (int i = 0; i < sz; i++) {
@@ -83,7 +83,7 @@ class CompositeELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getType(ELContext context, Object base, Object property) {
+    ClassMirror getType(ELContext context, base, property) {
         context.isPropertyResolved = false;
         int sz = this._size;
         ClassMirror type;
@@ -100,8 +100,8 @@ class CompositeELResolver extends ELResolver {
      * @since EL 2.2
      */
     //@Override
-    Object invoke(ELContext context, Object base, Object method,
-        List params, [Map<String, Object> namedArgs]) {
+    invoke(ELContext context, base, method,
+        List params, [Map<String, dynamic> namedArgs]) {
         context.isPropertyResolved = false;
         int sz = this._size;
         Object obj;

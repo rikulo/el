@@ -53,7 +53,7 @@ class AstFunction extends SimpleNode {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
 
         FunctionMapper fnMapper = ctx.functionMapper;
 

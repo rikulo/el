@@ -13,7 +13,7 @@ class ArrayELResolver extends ELResolver {
         : this._readOnly = readOnly;
 
     //@Override
-    Object getValue(ELContext context, Object base, Object property) {
+    getValue(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -33,7 +33,7 @@ class ArrayELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getType(ELContext context, Object base, Object property) {
+    ClassMirror getType(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -49,8 +49,8 @@ class ArrayELResolver extends ELResolver {
     }
 
     //@Override
-    void setValue(ELContext context, Object base, Object property,
-            Object value) {
+    void setValue(ELContext context, base, property,
+            value) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -59,7 +59,7 @@ class ArrayELResolver extends ELResolver {
             context.isPropertyResolved = true;
 
             if (this._readOnly) {
-                throw new PropertyNotWritableException(message(context,
+                throw new PropertyNotWritableException(ELResolver.message(context,
                         "resolverNotWriteable", [reflect(base).type.qualifiedName]));
             }
 
@@ -75,7 +75,7 @@ class ArrayELResolver extends ELResolver {
     }
 
     //@Override
-    bool isReadOnly(ELContext context, Object base, Object property) {
+    bool isReadOnly(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
         }
@@ -90,7 +90,7 @@ class ArrayELResolver extends ELResolver {
     }
 
     //@Override
-    ClassMirror getCommonPropertyType(ELContext context, Object base) {
+    ClassMirror getCommonPropertyType(ELContext context, base) {
         if (base != null && base is List) {
             return INT_MIRROR;
         }
@@ -101,16 +101,16 @@ class ArrayELResolver extends ELResolver {
      * @since EL 2.2
      */
     //@Override
-    Object invoke(ELContext context, Object base, Object method,
-                  List params, [Map<String, Object> namedArgs]) => null;
+    invoke(ELContext context, base, method,
+                  List params, [Map<String, dynamic> namedArgs]) => null;
 
-    static void _checkBounds(Object base, int idx) {
+    static void _checkBounds(base, int idx) {
         if (idx < 0 || idx >= (base as List).length) {
             throw new PropertyNotFoundException(new RangeError(idx).toString());
         }
     }
 
-    static int _coerce(Object property) {
+    static int _coerce(property) {
         if (property is num) {
             return property.toInt();
         }

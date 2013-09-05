@@ -22,7 +22,7 @@ class AstString extends SimpleNode {
     ClassMirror getType(EvaluationContext ctx) => STRING_MIRROR;
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return this.getString();
     }
 

@@ -53,7 +53,7 @@ abstract class MethodExpression extends Expression {
    *             `null` if no arguments.
    * + [namedArgs] - optional named arguments to be passed into the method.
    */
-    Object invoke(ELContext context, List<Object> positionalArgs, [Map<String, Object> namedArgs]);
+    invoke(ELContext context, List positionalArgs, [Map<String, dynamic> namedArgs]);
 
     bool get isParametersProvided;
 }

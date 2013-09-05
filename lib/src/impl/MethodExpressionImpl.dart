@@ -123,7 +123,7 @@ class MethodExpressionImpl implements MethodExpression {
    * + see [MethodExpression.invoke]
    */
   //@Override
-  Object invoke(ELContext context, List<Object> params, [Map<String, Object> namedArgs]) {
+  invoke(ELContext context, List params, [Map<String, dynamic> namedArgs]) {
     EvaluationContext ctx =
         new EvaluationContext(context, this._fnMapper, this._varMapper);
     return this._getNode().invoke(ctx, params, namedArgs);

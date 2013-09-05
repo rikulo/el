@@ -15,7 +15,7 @@ abstract class ExpressionFactory {
    * + [obj] - the object
    * + [expectedType] - ClassMirror of a specified class
    */
-  Object coerceToType(Object obj, ClassMirror expectedType);
+  coerceToType(obj, ClassMirror expectedType);
 
   /**
    * Create a [ValueExpression] of the specified EL script.
@@ -38,7 +38,7 @@ abstract class ExpressionFactory {
    *                    [ValueExpression].
    * If omitted, it is the instance's type.
    */
-  ValueExpression createVariable(Object instance, [ClassMirror expectedType]);
+  ValueExpression createVariable(instance, [ClassMirror expectedType]);
 
   /**
    * Create a [MethodExpression] of the specified EL script.

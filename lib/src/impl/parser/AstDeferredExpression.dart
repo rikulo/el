@@ -15,7 +15,7 @@ class AstDeferredExpression extends SimpleNode {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         return this.children_[0].getValue(ctx);
     }
 
@@ -25,7 +25,7 @@ class AstDeferredExpression extends SimpleNode {
     }
 
     //@Override
-    void setValue(EvaluationContext ctx, Object value) {
+    void setValue(EvaluationContext ctx, value) {
         this.children_[0].setValue(ctx, value);
     }
 }

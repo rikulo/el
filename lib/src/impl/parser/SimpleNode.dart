@@ -94,7 +94,7 @@ abstract class SimpleNode implements Node {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         throw new UnsupportedError("getValue");
     }
 
@@ -104,7 +104,7 @@ abstract class SimpleNode implements Node {
     }
 
     //@Override
-    void setValue(EvaluationContext ctx, Object value) {
+    void setValue(EvaluationContext ctx, value) {
         throw new PropertyNotWritableException(MessageFactory.getString("error.syntax.set"));
     }
 
@@ -120,7 +120,7 @@ abstract class SimpleNode implements Node {
     }
 
     //@Override
-    Object invoke(EvaluationContext ctx, List<Object> paramValues, [Map<String, Object> namedArgs]) {
+    invoke(EvaluationContext ctx, List paramValues, [Map<String, dynamic> namedArgs]) {
         throw new UnsupportedError("invoke");
     }
 

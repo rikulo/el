@@ -26,7 +26,7 @@ class AstValue extends SimpleNode {
 
     Target_ _getTarget(EvaluationContext ctx) {
         // evaluate expr-a to value-a
-        Object base = this.children_[0].getValue(ctx);
+        var base = this.children_[0].getValue(ctx);
 
         // if our base is null (we know there are more properties to evaluate)
         if (base == null) {
@@ -35,7 +35,7 @@ class AstValue extends SimpleNode {
         }
 
         // set up our start/end
-        Object property = null;
+        var property = null;
         int propCount = this.jjtGetNumChildren();
 
         int i = 1;
@@ -46,7 +46,7 @@ class AstValue extends SimpleNode {
                     this.children_[i + 1] is AstMethodParameters) {
                 // Method call not at end of expression
               //TODO(henri): namedArgs is not supported yet
-                Map<String, Object> namedArgs = null;
+                Map<String, dynamic> namedArgs = null;
                 base = resolver.invoke(ctx, base,
                         this.children_[i].getValue(ctx),
                         (this.children_[i + 1] as AstMethodParameters).getParameters(ctx), namedArgs);
@@ -93,11 +93,11 @@ class AstValue extends SimpleNode {
     }
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
-        Object base = this.children_[0].getValue(ctx);
+    getValue(EvaluationContext ctx) {
+        var base = this.children_[0].getValue(ctx);
         int propCount = this.jjtGetNumChildren();
         int i = 1;
-        Object suffix = null;
+        var suffix;
         ELResolver resolver = ctx.resolver;
         while (base != null && i < propCount) {
             suffix = this.children_[i].getValue(ctx);
@@ -141,7 +141,7 @@ class AstValue extends SimpleNode {
     }
 
     //@Override
-    void setValue(EvaluationContext ctx, Object value)
+    void setValue(EvaluationContext ctx, value)
             {
         Target_ t = _getTarget(ctx);
         ctx.isPropertyResolved = false;
@@ -162,7 +162,7 @@ class AstValue extends SimpleNode {
         }
     }
 
-    bool _isAssignable(Object value, ClassMirror targetClass) {
+    bool _isAssignable(value, ClassMirror targetClass) {
         if (targetClass == null) {
             return false;
         // } else if (value != null && targetClass.isPrimitive()) {
@@ -186,12 +186,12 @@ class AstValue extends SimpleNode {
 
     //@Override
     // Interface el.parser.Node uses a raw type (and is auto-generated)
-    Object invoke(EvaluationContext ctx,
-            List<Object> paramValues, [Map<String, Object> namedArgs]) {
+    invoke(EvaluationContext ctx,
+            List paramValues, [Map<String, dynamic> namedArgs]) {
 
         Target_ t = _getTarget(ctx);
-        MethodMirror m = null;
-        List<Object> values = null;
+        MethodMirror m;
+        List values;
         //List<ClassMirror> types = null;
         if (isParametersProvided()) {
             values = (this.jjtGetChild(this.jjtGetNumChildren() - 1) as AstMethodParameters)
@@ -204,7 +204,7 @@ class AstValue extends SimpleNode {
         m = ReflectionUtil.getMethod(t.base_, t.property_);
         // Handle varArgs and any co-ercion required
         values = ELSupport.convertArgs(values, m, this);
-        Object result = null;
+        var result = null;
         result = ClassUtil.invoke(t.base_, m, values, namedArgs);
 //        try {
 //            result = ClassUtil.invoke(t.base_, m, values, namedArgs);
@@ -219,7 +219,7 @@ class AstValue extends SimpleNode {
         return result;
     }
 
-//    List<ClassMirror> _getTypesFromValues(List<Object> values) {
+//    List<ClassMirror> _getTypesFromValues(List values) {
 //        if (values == null) {
 //            return null;
 //        }
@@ -270,8 +270,7 @@ class AstValue extends SimpleNode {
 }
 
 class Target_ {
-    Object base_;
-
-    Object property_;
+    var base_;
+    var property_;
 }
 

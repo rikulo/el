@@ -38,7 +38,7 @@ class ELSupport {
      * @throws ELException if neither object is Comparable
      * @throws ClassCastException if the objects are not mutually comparable
      */
-    static int compare(Object obj0, Object obj1) {
+    static int compare(obj0, obj1) {
         if (obj0 == obj1 || areEqual(obj0, obj1)) {
             return 0;
         }
@@ -128,7 +128,7 @@ class ELSupport {
     // keeps them all in one place. There might be a neater / better solution
     // but I couldn't find it
 //TODO(henri): we don't support Enum yet.
-//    static Enum coerceToEnum(Object obj, ClassMirror type) {
+//    static Enum coerceToEnum(obj, ClassMirror type) {
 //        if (obj == null || "" == obj) {
 //            return null;
 //        }
@@ -218,7 +218,7 @@ class ELSupport {
                 [number, reflect(number).type.qualifiedName, type]));
     }
 
-    static num coerceToNumber(Object obj,
+    static num coerceToNumber(obj,
             ClassMirror type) {
         if (obj == null || "" == obj) {
             return coerceNumberToNumber_(0, type);
@@ -274,7 +274,7 @@ class ELSupport {
         }
     }
 
-    static Object coerceToType(Object obj,
+    static coerceToType(obj,
             ClassMirror type) {
         if (type == null || type == OBJECT_MIRROR ||
                 (obj != null && ClassUtil.isAssignableFrom(type, reflect(obj).type))) {

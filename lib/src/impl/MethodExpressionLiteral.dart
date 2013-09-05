@@ -20,8 +20,8 @@ class MethodExpressionLiteral implements MethodExpression {
     => new MethodInfo(new Symbol(this._expr), this._expectedType);
 
   //@Override
-  Object invoke(ELContext context, List<Object> params,
-                [Map<String, Object> namedArgs])
+  invoke(ELContext context, List params,
+                [Map<String, dynamic> namedArgs])
     => this._expectedType != null ?
        ELSupport.coerceToType(this._expr, this._expectedType) : this._expr;
 

@@ -12,7 +12,7 @@ class AstMapEntry extends SimpleNode {
     Object getKey(EvaluationContext ctx)
       => _getValue(ctx, 0);
 
-    Object getValue(EvaluationContext ctx)
+    getValue(EvaluationContext ctx)
       => _getValue(ctx, 1);
 
     ClassMirror getKeyType(EvaluationContext ctx)

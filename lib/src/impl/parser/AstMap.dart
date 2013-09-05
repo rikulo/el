@@ -14,7 +14,7 @@ class AstMap extends SimpleNode {
   ClassMirror getType(EvaluationContext ctx) => MAP_MIRROR;
 
   //@Override
-  Object getValue(EvaluationContext ctx) {
+  getValue(EvaluationContext ctx) {
     Map values = new HashMap();
     int numItems = this.jjtGetNumChildren();
     if (numItems > 0) {

@@ -23,9 +23,9 @@ abstract class ValueExpression extends Expression {
 
   bool isReadOnly(ELContext context);
 
-  void setValue(ELContext context, Object value);
+  void setValue(ELContext context, value);
 
-  Object getValue(ELContext context);
+  getValue(ELContext context);
 
   ValueReference getValueReference(ELContext context);
 }

@@ -8,7 +8,7 @@ part of rikulo_elimpl;
 class ExpressionFactoryImpl implements ExpressionFactory {
 
     //@Override
-    Object coerceToType(Object obj, ClassMirror type) {
+    coerceToType(obj, ClassMirror type) {
         return ELSupport.coerceToType(obj, type);
     }
 
@@ -31,7 +31,7 @@ class ExpressionFactoryImpl implements ExpressionFactory {
     }
 
     //@Override
-    ValueExpression createVariable(Object instance, [ClassMirror expectedType]) {
+    ValueExpression createVariable(instance, [ClassMirror expectedType]) {
         if (expectedType == null) {
             expectedType = instance != null ? reflect(instance).type: OBJECT_MIRROR;
         }

@@ -10,7 +10,7 @@ class AstMod extends ArithmeticNode {
         : super(id);
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         Object obj0 = this.children_[0].getValue(ctx);
         Object obj1 = this.children_[1].getValue(ctx);
         return ELArithmetic.mod(obj0, obj1);

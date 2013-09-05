@@ -13,8 +13,8 @@ class AstNegative extends SimpleNode {
     ClassMirror getType(EvaluationContext ctx) => NUM_MIRROR;
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
-        Object obj = this.children_[0].getValue(ctx);
+    getValue(EvaluationContext ctx) {
+        var obj = this.children_[0].getValue(ctx);
 
         if (obj == null) {
             return 0;

@@ -50,7 +50,7 @@ class ValueExpressionImpl implements ValueExpression {
   }
 
   //@Override
-  Object getValue(ELContext context) {
+  getValue(ELContext context) {
     EvaluationContext ctx =
       new EvaluationContext(context, this._fnMapper, this._varMapper);
     Object value = this._getNode().getValue(ctx);
@@ -79,7 +79,7 @@ class ValueExpressionImpl implements ValueExpression {
   }
 
   //@Override
-  void setValue(ELContext context, Object value) {
+  void setValue(ELContext context, value) {
     EvaluationContext ctx =
         new EvaluationContext(context, this._fnMapper, this._varMapper);
     this._getNode().setValue(ctx, value);

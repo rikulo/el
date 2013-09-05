@@ -14,7 +14,7 @@ class AstCompositeExpression extends SimpleNode {
     ClassMirror getType(EvaluationContext ctx) => STRING_MIRROR;
 
     //@Override
-    Object getValue(EvaluationContext ctx) {
+    getValue(EvaluationContext ctx) {
         StringBuffer sb = new StringBuffer();
         Object obj = null;
         if (this.children_ != null) {
