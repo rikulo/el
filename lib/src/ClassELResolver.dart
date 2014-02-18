@@ -23,7 +23,7 @@ class ClassELResolver implements ELResolver {
       return null;
 
     ClassMirror cm = base;
-    MethodMirror getter = cm.getters[new Symbol(property)];
+    MethodMirror getter = cm.declarations[new Symbol(property)];
     if (getter == null || !getter.isStatic)
       return null;
 
@@ -40,7 +40,7 @@ class ClassELResolver implements ELResolver {
       return null;
 
     ClassMirror cm = base;
-    MethodMirror getter = cm.getters[new Symbol(property)];
+    MethodMirror getter = cm.declarations[new Symbol(property)];
     if (getter == null || !getter.isStatic)
       return null;
 
@@ -57,7 +57,7 @@ class ClassELResolver implements ELResolver {
       return;
 
     ClassMirror cm = base;
-    MethodMirror setter = cm.setters[new Symbol(property)];
+    MethodMirror setter = cm.declarations[new Symbol("$property=")];
     if (setter == null  || !setter.isStatic)
       return;
 
@@ -85,7 +85,7 @@ class ClassELResolver implements ELResolver {
 
   bool _hasSetter(base, property) {
     ClassMirror cm = base;
-    MethodMirror setter = cm.setters[new Symbol("${property}=")];
+    MethodMirror setter = cm.declarations[new Symbol("$property=")];
     return setter != null && setter.isStatic;
   }
 
@@ -108,7 +108,7 @@ class ClassELResolver implements ELResolver {
 
     String methodName = method.toString();
     ClassMirror cm = base;
-    MethodMirror m = cm.methods[new Symbol(methodName)];
+    MethodMirror m = cm.declarations[new Symbol(methodName)];
     if (m == null || !m.isStatic)
       return null;
 

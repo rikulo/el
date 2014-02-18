@@ -70,15 +70,11 @@ class ReflectionUtil {
   static MethodMirror _getMethod0(ClassMirror owner, String methodName) {
     ClassMirror clz = owner;
     final methodSymbol = new Symbol(methodName);
-    MethodMirror m = clz.methods[methodSymbol];
-    if (m == null)
-      m = clz.getters[methodSymbol];
+    MethodMirror m = clz.declarations[methodSymbol];
 
     while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
       clz = owner.superclass;
-      m = clz.methods[methodSymbol];
-      if (m == null)
-        m = clz.getters[methodSymbol];
+      m = clz.declarations[methodSymbol];
     }
     return m == null || m.isPrivate ? null : m;
   }

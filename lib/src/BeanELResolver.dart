@@ -12,7 +12,7 @@ class BeanELResolver extends ELResolver {
 
     BeanELResolver([bool readOnly = false]) : this._readOnly = readOnly;
 
-    //@Override
+    @override
     getValue(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
@@ -25,7 +25,7 @@ class BeanELResolver extends ELResolver {
         return reflect(base).getField(new Symbol(property)).reflectee;
     }
 
-    //@Override
+    @override
     ClassMirror getType(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
@@ -38,7 +38,7 @@ class BeanELResolver extends ELResolver {
         return this._property(context, base, property).propertyType;
     }
 
-    //@Override
+    @override
     void setValue(ELContext context, base, property, value) {
         if (context == null) {
             throw new ArgumentError("context: null");
@@ -54,10 +54,10 @@ class BeanELResolver extends ELResolver {
                     "resolverNotWriteable", [reflect(base).type.qualifiedName]));
         }
 
-        return reflect(base).setField(new Symbol(property), value).reflectee;
+        reflect(base).setField(new Symbol(property), value);
     }
 
-    //@Override
+    @override
     bool isReadOnly(ELContext context, base, property) {
         if (context == null) {
             throw new ArgumentError("context: null");
@@ -71,7 +71,7 @@ class BeanELResolver extends ELResolver {
                 || _property(context, base, property).isReadOnly;
     }
 
-    //@Override
+    @override
     ClassMirror getCommonPropertyType(ELContext context, base) {
         if (context == null) {
             throw new ArgumentError("context: null");
@@ -100,7 +100,7 @@ class BeanELResolver extends ELResolver {
     /**
      * @since EL 2.2
      */
-    //@Override
+    @override
     invoke(ELContext context, base, method,
             List params, [Map<String, dynamic> namedArgs]) {
         if (context == null) {
@@ -185,20 +185,20 @@ class BeanProperty {
 
     MethodMirror _getWriteMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
-        MethodMirror m = clz.setters[new Symbol(propertyName)];
+        MethodMirror m = clz.declarations[new Symbol("$propertyName=")];
         while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
-            m = clz.setters[new Symbol(propertyName)];
+            m = clz.declarations[new Symbol("$propertyName=")];
         }
         return m == null || m.isPrivate ? null : m;
     }
 
     MethodMirror _getReadMethod0(ClassMirror owner, String propertyName) {
         ClassMirror clz = owner;
-        MethodMirror m = clz.getters[new Symbol(propertyName)];
+        MethodMirror m = clz.declarations[new Symbol(propertyName)];
         while(!ClassUtil.isTopClass(clz) && (m == null || m.isPrivate)) {
             clz = owner.superclass;
-            m = clz.getters[new Symbol(propertyName)];
+            m = clz.declarations[new Symbol(propertyName)];
         }
         return m == null || m.isPrivate ? null : m;
     }
