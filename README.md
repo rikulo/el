@@ -5,7 +5,7 @@
  specification plus enhancements for and in Dart. 
 
 * [Home](http://rikulo.org)
-* [Tutorial](http://blog.rikulo.org/posts/2012/Sep/Tutorial/rikulo-el-an-expression-language-for-and-in-dart/)
+* [Tutorial](http://blog.rikulo.org/posts/2012/Sep/tutorial/rikulo-el-an-expression-language-for-and-in-dart/)
 * [API Reference](http://api.rikulo.org/el/latest/)
 * [Discussion](http://stackoverflow.com/questions/tagged/rikulo)
 * [Issues](https://github.com/rikulo/el/issues)
